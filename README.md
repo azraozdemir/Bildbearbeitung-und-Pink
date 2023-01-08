@@ -12,5 +12,5 @@ Wir wollen wir oben erwaent die Farbe Pink praeziser vorstellen.
 Fotografie vor allem Bildbearbeitung interessiert uns. Die Farbe Pink finden wir attraktiv und anziehend, deswegen wollen wir auch die Farbe detaliert bearbeiten. 
 
 4. Ist es Dynamisch oder Statisch?
-Unsere Website wird Statisch sein. 
+Unsere Website wird Statisch sein und etwas dynamisch
 
