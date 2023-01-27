@@ -71,7 +71,7 @@ p {
     border-color: rgb(255, 233, 241);
     border-width: 1px;
     border-style: solid;
-    font-size: 2.5vw;
+    font-size: 2vw;
 }
 .navbar a:hover {
     color: rgb(255, 255, 255);
@@ -99,28 +99,19 @@ p {
 }
 /*header*/
 .text {
-    background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
+    background-color: rgb(255, 211, 218);;
+    color: rgb(250, 250, 250);
     font-size:4vw;
-    mix-blend-mode:screen;
     position: absolute;
-    text-align: center;
+    text-align:left;
     font-family: UWU2;
     width: 100%;
     font-weight: bold;
     height: 4vw;
     vertical-align: middle;
     padding-bottom: 0.5vw;
+    margin : 1 1;
     }
-.text-background{
-    background-color: rgb(255, 211, 218);
-    color: rgba(255, 255, 255, 0);
-    mix-blend-mode:darken;
-    position: absolute;
-    width: 100%;
-    height: 4.5vw;
-    vertical-align: middle;
-}
 /*backgrounds*/
 .background-1{
     background-image: url("pics/uwu.jpg");
@@ -190,4 +181,8 @@ input:checked + .slider:before {
 -webkit-transform: translateX(26px);
 -ms-transform: translateX(26px);
 transform: translateX(26px);
+}
+.display-felx{
+    display: flex;
+    justify-content: center;
 }
