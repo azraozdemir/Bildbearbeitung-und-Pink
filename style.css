@@ -27,6 +27,11 @@ img{
     padding: 0 15px;
     margin: 0 30px;
 }
+.row{
+    display:flex;
+    justify-content:center;
+    padding: 5vm;
+}
 .uwu {
     padding: 250px 0;
 }
@@ -41,6 +46,16 @@ h2 {
     font-size: 3vw;
     color: pink;
     text-align: center;
+}
+h4 {
+    font-family: UWU;
+    font-size: 3vw;
+    color: pink;
+    text-align: center;
+}
+a{
+    text-align: center;
+    font-size: 1.0vw;    
 }
 p {
     text-align: center;
@@ -190,4 +205,23 @@ input:checked + .slider:before {
 -webkit-transform: translateX(26px);
 -ms-transform: translateX(26px);
 transform: translateX(26px);
+}
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+.social-links {
+    display: flex;
+}
+
+.instagram-links, .discord-links {
+    width: 60%;    
+    padding: 10px;
 }
