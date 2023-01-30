@@ -53,10 +53,6 @@ h4 {
     color: pink;
     text-align: center;
 }
-a{
-    text-align: center;
-    font-size: 1.0vw;    
-}
 p {
     text-align: center;
     font-size: 1.5vw;
@@ -86,7 +82,7 @@ p {
     border-color: rgb(255, 233, 241);
     border-width: 1px;
     border-style: solid;
-    font-size: 2.5vw;
+    font-size: 2vw;
 }
 .navbar a:hover {
     color: rgb(255, 255, 255);
@@ -133,7 +129,7 @@ p {
     mix-blend-mode:darken;
     position: absolute;
     width: 100%;
-    height: 4.5vw;
+    height: 10%;
     vertical-align: middle;
 }
 /*backgrounds*/
