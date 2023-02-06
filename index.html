@@ -4,15 +4,25 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <div>
-            <div class="text">Picture-editing and Pink</div> 
+        <div class="autor">Azra und Lina</div>
+        <div class="sticky">
             <div class="text-background"id=myDIV2>Picture-editing and Pink</div>
-            
-            <a href="index.html"><img src="pics/logo.png" width="60px" style="position: absolute;left:25%" ></a>
+
+            <a href="index.html"><img src="pics/logo.png" class="resp_img" style="position: relative;left:10vw" ></a>
             <label class="switch" style="float: left;">
-                <input type="checkbox" onclick="changecolor()">
+                <input type="checkbox" id="toggle-mode"onclick="changecolor()">
                 <span class="slider"></span>
-            </label>
+              </label>
+              
+              <input id="menu__toggle" type="checkbox" />
+              <label class="menu__btn" for="menu__toggle">
+                  <span></span>
+              </label>
+              <ul class="menu__box">
+                  <li><a class="menu__item neon" href="pinkgallery.html">Pink Gallery</a></li>
+                  <li><a class="menu__item neon" href="grafikdesign.html">Grafikdesign</a></li>
+                  <li><a class="menu__item neon" href="photoshop.html">Photoshop</a></li>
+              </ul>
         </div>
 
 
@@ -33,8 +43,8 @@
             <h1><b style="font-weight: bold;">ˏ 𓏧 𓏲 𓏲 𓏲 𓋒</b>Pink<b style="font-weight: bolder;">𓋒 𓏲 𓏲 𓏲 𓏲 𓏧 ˎ</b></h1>
             <p>The first part of this Websit is all about the color Pink. Pink is a pale shade of red that is often associated with love, compassion, and kindness. It is often used to represent femininity ,associated with the celebration of Valentine's Day, and is often used in wedding themes and floral arrangements. In some parts of the world, the color pink is associated with good luck and prosperity.</p>
             <h2>The Meaning of Pink</h2>
-            <img style="float: left;padding: 20px;"width="70px" src="pics/coconutgirl.png">
-            <img style="float: right;padding: 15px;"width="70px" src="pics/seashell.png">
+            <img style="float: left;padding: 20px;"width="70vw" src="pics/coconutgirl.png">
+            <img style="float: right;padding: 15px;"width="70vw" src="pics/seashell.png">
             <p>Pink is seen as a calming and peaceful color and is used in hospitals and other calming environments, also pink is used to represent the fight against breast cancer. Some studies have even shown that the color pink can have a physical effect on the body, such as lowering blood pressure and slowing respiration.</p>
             <h2>The History of Pink</h2>
 
@@ -43,12 +53,12 @@
         </div>
         <div class="background-2"id=myDIV4></div>
         <div class="main-content ">
-            <h1><b style="font-weight: bold;">ˏ 𓏧 𓏲 𓏲 𓏲 𓋒</b>Pink<b style="font-weight: bolder;">𓋒 𓏲 𓏲 𓏲 𓏲 𓏧 ˎ</b></h1>
+            <h1><b style="font-weight: bold;">ˏ 𓏧 𓏲 𓏲 𓏲 𓋒 𓏲 𓏲 𓏲 𓏲 𓏧 ˎ</b></h1>
             <h2>The Psychology of Pink</h2>
             <p>The color pink is often associated with feelings of love, warmth, and comfort. It makes a calming and peaceful atmosphere and is often used in hospitals,kindergardens etc. Pink is also associated with femininity and is often seen in marketing of products targeted towards a female audience. This is criticised often some as being limiting and stereotype-reinforcing.</p>
             <h2>Pink in Art</h2>
-            <img style="float: right;padding-right: 15px;"width="70px" src="pics/coconut.png">
-            <img style="float: left;padding-left: 15px;"width="70px" src="pics/lisa-fish.png">
+            <img style="float: right;padding-right: 15px;"width="70vw" src="pics/coconut.png">
+            <img style="float: left;padding-left: 15px;"width="70vw" src="pics/lisa-fish.png">
             <p>In art and design, pink is often used to add a sense of romance and nostalgia to a piece. It is a delicate and subtle color that can add a lighthearted touch to a composition. This is especially true when used in abstract art, where the color pink can be used to evoke a sense of dreamlike or surrealist imagery.</p>
             <h2>Pink in Fashion</h2>
             <p>In fashion, pink is often associated with femininity and delicate, girly style. It is also seen as a playful and fun color and is a popular choice for casual clothing and accessories. In recent years, pink has also been embraced as a symbol of empowerment and strength. Pink in hair is popular these days, it is often seen as a way to express individuality and creativity, and can be a fun and bold statement. </p>
@@ -56,7 +66,7 @@
         </div>
         <div class="background-3"id="myDIV5"></div>
         <div class="main-content">
-            <h1><b style="font-weight: bold;">ˏ 𓏧 𓏲 𓏲 𓏲 𓋒</b>Pink<b style="font-weight: bolder;">𓋒 𓏲 𓏲 𓏲 𓏲 𓏧 ˎ</b></h1>
+            <h1><b style="font-weight: bold;">ˏ 𓏧 𓏲 𓏲 𓏲 𓋒 𓏲 𓏲 𓏲 𓏲 𓏧 ˎ</b></h1>
             <h2>Pink in nature</h2>
             <p>In nature, the color pink can be found in the delicate petals of certain flowers and in the soft hues of sunsets and sunrises.</p>
             <p class="quote"id=myDIV1>Ariana Grande:"I love pink. It's always been my favorite color. It's just so bright and happy and feminine. I love wearing pink and incorporating it into my music and my style."</p>
@@ -84,14 +94,27 @@
             element.classList.toggle("quote-dark");
             element = document.getElementById("myDIV2");
             element.classList.toggle("text-dark");
-            element.classList.toggle("text-background");
             element = document.getElementById("myDIV3");
             element.classList.toggle("background-1-dark");
             element = document.getElementById("myDIV4");
             element.classList.toggle("background-2-dark");
             element = document.getElementById("myDIV5");
             element.classList.toggle("background-3-dark");
+
+
+
+
+            localStorage.setItem('mode', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+
         }
+        window.onload = function() {
+            const toggle = document.getElementById('toggle-mode');
+            const mode = localStorage.getItem('mode');
+            toggle.checked = mode === 'dark';
+            if (mode === 'dark') {
+                changecolor();
+            }
+        };
     </script>
 </html>
 

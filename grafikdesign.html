@@ -4,13 +4,32 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <div class="text display-felx">Picture-editing and Pink</div> 
-        <div class="text-background"></div>
-        <a href="index.html" ><img src="pics/logo.png" width="60px" style="position: absolute;left:25%" ></a>
-        <label class="switch" style="float: left;">
-            <input type="checkbox" onclick="changecolor()">
-            <span class="slider"></span>
-        </label>
-        <div class="background-1"id=myDIV3></div>
+        <div class="sticky">
+            <div class="text-background"id=myDIV2>Picture-editing and Pink</div>
+            
+            <a href="index.html"><img src="pics/logo.png" class="resp_img" style="position: relative;left:10vw" ></a>
+            <label class="switch" style="float: left;">
+                <input type="checkbox" id="toggle-mode"onclick="changecolor()">
+                <span class="slider"></span>
+              </label>
+        </div>
+        <div class="background-other"id=myDIV1>
     </body>
+    <script>
+        function changecolor(){
+            document.body.classList.toggle("dark-mode");
+
+            localStorage.setItem('mode', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+
+        }
+        window.onload = function() {
+            const toggle = document.getElementById('toggle-mode');
+            const mode = localStorage.getItem('mode');
+
+            if (mode === 'dark') {
+                toggle.checked = mode === 'dark';
+                changecolor();
+            }
+        };
+    </script>
 </html>
