@@ -1,4 +1,3 @@
-
 /*fonts*/
 @font-face {
     font-family: UWU;
@@ -18,4 +17,47 @@ body {
 .container {
     padding: 0 15px;
     margin: 0 30px;
+}
+body {
+display: flex;
+flex-direction: column;
+align-items: center;
+font-family: sans-serif;
+}
+
+h1 {
+color: rgb(255, 215, 221);
+font-family: UWU2;
+font-size: 3vw;
+text-align: center;
+}
+
+.circle-container {
+display: flex;
+justify-content: space-between;
+width: 70%;
+margin-top: 2px;
+}
+
+.circle {
+width: 450px;
+height: 225px;
+border-radius: 100px;
+background-color: rgb(255, 211, 218);
+transition: background-color 2.0s ease;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.circle:hover {
+background-color: rgb(186, 97, 127);
+border-color: rgb(186, 97, 127);
+transform: scale(1.1);
+}
+p {
+font-family: UWU;
+font-size: 5vw;
+color: #e886a2;
+text-align: center;
 }
