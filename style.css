@@ -139,18 +139,10 @@ background-attachment: fixed;
 min-height: 37vw;
 }
 .background-other{
-<<<<<<< HEAD
-    background-image: url("pics/background1.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100%;
-
-=======
 background-image: url("pics/background1.png");
 background-repeat: no-repeat;
 background-size: cover;
 min-height: 100vm;
->>>>>>> b600545d823c7efff1434e860a88cf5a98dc05c0
 }
 .background-1-dark{
 background-image: url("pics/background1-dark.png")
@@ -329,10 +321,6 @@ border-radius: 1.9vw 1.9vw 0px 0px;
 .resp_img{
 width: 5.5vw;
 }
-
-<<<<<<< HEAD
-  }
-  
   .flip-card-back {
     background-color: #f9f8f8;
     color: #bbb;
@@ -422,96 +410,3 @@ width: 5.5vw;
 
 
   
-=======
-/*menü*/
-#menu__toggle {
-opacity: 0;
-}
-#menu__toggle:checked+.menu__btn>span {
-transform: rotate(45deg);
-}
-#menu__toggle:checked+.menu__btn>span::before {
-top: 0;
-transform: rotate(0deg);
-}
-#menu__toggle:checked+.menu__btn>span::after {
-top: 0;
-transform: rotate(90deg);
-}
-#menu__toggle:checked~.menu__box {
-right: 0 !important;
-}
-.menu__btn {
-position: fixed;
-top: 2.6vw;
-right: 1.5vw;
-width: 2vw;
-height: 2vw;
-z-index: 30;
-}
-.menu__btn>span,
-.menu__btn>span::before,
-.menu__btn>span::after {
-display: block;
-position: absolute;
-width: 100%;
-height: 1.5px;
-background-color: white;
-transition-duration: .25s;
-}
-.menu__btn>span::before {
-content: '';
-top: -8px;
-}
-.menu__btn>span::after {
-content: '';
-top: 8px;
-}
-.menu__box {
-display: block;
-position: fixed;
-top: 0;
-right: -100%;
-width: 20vw;
-height: 70vw;
-margin: 0;
-padding: 80px 0;
-list-style: none;
-background: #fedee3;
-box-shadow: white;
-transition-duration: .25s;
-z-index: 25;
-}
-.menu__item {
-display: block;
-padding: 22px 24px;
-color: white;
-font-size: 20px;
-font-weight: 1.5px;
-transition-duration: .25s;
-position: relative;
-}
-.menu__item::before,
-.menu__item::after {
-content: "";
-width: 100%;
-height: 2px;
-background-color: white;
-position: absolute;
-right: 0;
-transform: scaleX(0);
-transition: transform 0.5s;
-}
-.menu__item::after {
-bottom: 0;
-transform-origin: left;
-}
-.menu__item::before {
-top: 0;
-transform-origin: rigt;
-}
-.menu__item:hover::before,
-.menu__item:hover::after {
-transform: scaleX(1);
-}
->>>>>>> b600545d823c7efff1434e860a88cf5a98dc05c0
