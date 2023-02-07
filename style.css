@@ -375,14 +375,14 @@ height: 100px;
     top: 0;
     right: -100%;
     width: 20vw;
-    height: 70vw;
-    margin: 0;
-    padding: 80px 0;
+    height: 10vw;
     list-style: none;
+    padding: 80px 0;
     background: #fedee3;
     box-shadow: white;
     transition-duration: .25s;
     z-index: 25;
+    border-radius: 0 0 0 5vw;
   }
   .menu__item {
     display: block;
