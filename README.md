@@ -1,5 +1,6 @@
 1. Mitglieder
-Caroline Hornhuber, Azra Nohut
+Caroline Hornhuber, Azra Nohut, Lejla Music
+
 
 2. Thema
 Wir wollen eine Website erstellen die einen Schwerpunkt auf Bildbearbeitung, verschiedene Farbtoene der Farbe Pink hat. 
