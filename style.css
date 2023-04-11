@@ -43,6 +43,10 @@
   text-align: left;
   }
 
+  .card{
+    padding-bottom: 57px;
+    padding-top: 10px;
+  }
   /*navbars*/
   .navbar {
   display: flex;
@@ -83,14 +87,13 @@
   /*header*/
   .text-background{
   color:rgb(255, 255, 255);
-  font-size:5vw;
+  font-size:60px;
   text-align: center;
   font-family: UWU2;
   font-weight: bolds;
   background-color: rgb(255, 211, 218);
   position: absolute;
   width: 100%;
-  height: 5vw;
   vertical-align:text-bottom;
   padding-bottom: 0.5vw;
   }
@@ -379,22 +382,24 @@
   *{
   margin:0;
   padding:0;
-  box-sizing: border-box;
   }
-  .footer-container{
-  max-width: 117px;
-  margin:auto;
+
+  .content{
+    padding: 40px;
+    margin-left: 50px;
   }
+
   .row{
   display: flex;
   flex-wrap: wrap;
+    justify-content: center;
   }
+
   ul{
   list-style: none;
   }
   .footer{
   background-color: #eb9ac7;
-  padding: 70px 0;
   }
   .footer-col{
   width: 25%;
@@ -450,6 +455,10 @@
   .footer-col .sozial-links a:hover{
   color: #fedee3;
   background-color: #C58699;
+  }
+
+  .fab {
+    padding-top: 12px;
   }
 
   /*responsive*/
