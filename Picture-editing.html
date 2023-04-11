@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Drawing App</title>
+        <style>
+            /*general*/
+.text-background{
+color:rgb(255, 255, 255);
+font-size:3vw;
+text-align: center;
+font-family: UWU2;
+font-weight: bolds;
+background-color: rgb(255, 211, 218);
+position: absolute;
+width: 100%;
+height: 3vw;
+vertical-align:text-bottom;
+padding-bottom: 0.5vw;
+}
+body {
+font-family: Arial, sans-serif;
+margin: 0vw;
+color: palevioletred;
+}
+            @font-face {
+                font-family: UWU2;
+                src: url(HashedBrowns-WyJgn.ttf);
+            }
+            .resp_img{
+width: 3.5vw;
+}
+/*switch*/
+.switch {
+position: relative;
+display: inline-block;
+width:5vw;
+height: 2.5vw;
+border-radius: 34px;
+margin: 0.4vw;
+right:3vw;
+}
+.switch input { 
+opacity: 0;
+width: 0;
+height: 0;
+}
+.slider {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #FDF1F4;
+-webkit-transition: .4s;
+transition: .4s;
+border-radius: 2vw;
+}
+.slider:before {
+position: absolute;
+content: "";
+height: 2vw;
+width: 2vw;
+left: 0.25vw;
+bottom:0.25vw;
+background-color: white;
+-webkit-transition: .4s;
+transition: .4s;
+border-radius: 50%;
+}
+input:checked + .slider {
+background-color: pink;
+}
+input:focus + .slider {
+box-shadow: 0 0 1px pink;
+}
+input:checked + .slider:before {
+-webkit-transform: translateX(2.5vw);
+-ms-transform: translateX(2.5vw);
+transform: translateX(2.5vw);
+}
+/*menue*/
+#menu__toggle {
+    opacity: 0;
+  }
+  #menu__toggle:checked+.menu__btn>span {
+    transform: rotate(45deg);
+  }
+  #menu__toggle:checked+.menu__btn>span::before {
+    top: 0;
+    transform: rotate(0deg);
+  }
+  #menu__toggle:checked+.menu__btn>span::after {
+    top: 0;
+    transform: rotate(90deg);
+  }
+  #menu__toggle:checked~.menu__box {
+    left: 0 !important;
+  }
+  .menu__btn {
+    position: fixed;
+    top: 1.7vw;
+    left: 1.7vw;
+    width: 2vw;
+    height: 2vw;
+    z-index: 30;
+  }
+  .menu__btn>span,
+  .menu__btn>span::before,
+  .menu__btn>span::after {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 1.5px;
+    background-color: white;
+    transition-duration: .25s;
+  }
+  .menu__btn>span::before {
+    content: '';
+    top: -8px;
+  }
+  .menu__btn>span::after {
+    content: '';
+    top: 8px;
+  }
+  .menu__box {
+    display: block;
+    position: fixed;
+    top: 2.25vw;
+    left: -100%;
+    width: 20vw;
+    height: 24vw;
+    list-style: none;
+    padding: 0 0;
+    background: #fedee3;
+    box-shadow: white;
+    transition-duration: .25s;
+
+  }
+  .cont{
+    padding: -4vw 0;
+  }
+  .menu__item {
+    display: block;
+    padding: 2vw 2vw;
+    top:1vw;
+    color: white;
+    font-size: 20px;
+    font-weight: 1.5px;
+    transition-duration: .25s;
+    position: relative;
+    font-size: 1.5vw;
+  }
+        </style>
+    </head>
+    <body>
+        <div>
+            <div class="text-background"id=myDIV2>Editing</div>
+
+            <a href="index.html"><img src="pics/logo.png" class="resp_img" style="position: relative;left:36vw" ></a>
+
+            <label class="switch" style="float: right;">
+                <input type="checkbox" id="toggle-mode"onclick="changecolor()">
+                <span class="slider"></span>
+              </label>
+              
+              <input id="menu__toggle" type="checkbox" />
+              <label class="menu__btn" for="menu__toggle">
+                  <span></span>
+              </label>
+              <ul class="menu__box">
+                <div class="cont">
+                    <li><a class="menu__item" href="index.html">Home</a></li>
+                    <li><a class="menu__item" href="pinkgallery.html">Pink Gallery</a></li>
+                    <li><a class="menu__item" href="grafikdesign.html">Grafikdesign</a></li>
+                    <li><a class="menu__item" href="photoshop.html">Photoshop</a></li>
+                </div>
+
+              </ul>
+
+        </div>
+
+
+        <script>
+
+        </script>
+    </body>
+</html>
