@@ -1,5 +1,6 @@
 1. Mitglieder
-Caroline Hornhuber, Azra Nohut
+Caroline Hornhuber, Azra Nohut, Lejla Music
+
 
 2. Thema
 Wir wollen eine Website erstellen die einen Schwerpunkt auf Bildbearbeitung, verschiedene Farbtoene der Farbe Pink hat. 
@@ -8,7 +9,7 @@ Hier wird die Grafiksoftware angesprochen. Bei Computergrafiken untescheidet man
 Jedoch wird beide Bildarten auf unsere verfuegbar sein. 
 Wir wollen wir oben erwaent die Farbe Pink praeziser vorstellen.
 
-2.1 Dynamischer Teil
+2. 1 Dynamischer Teil
 Um die Programmierung unserer Website fortzusetzen, planen wir, sie in verschiedene Teile zu unterteilen und diese entsprechend zu erfüllen. 
 Hier sind einige Vorschläge:
 
