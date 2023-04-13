@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Drawing App</title>
+        <style>
+          /*general*/
+            .text-background{
+              color:rgb(255, 255, 255);
+              font-size:3vw;
+              text-align: center;
+              font-family: UWU2;
+              font-weight: bolds;
+              background-color: rgb(255, 211, 218);
+              position: absolute;
+              width: 100%;
+              height: 3vw;
+              vertical-align:text-bottom;
+              padding-bottom: 0.5vw;
+            }
+            body {
+              font-family: Arial, sans-serif;
+              margin: 0vw;
+              color: palevioletred;
+            }
+            @font-face {
+                font-family: UWU2;
+                src: url(HashedBrowns-WyJgn.ttf);
+            }
+            .resp_img{
+              width: 3.5vw;
+            }
+          /*switch*/
+            .switch {
+              position: relative;
+              display: inline-block;
+              width:5vw;
+              height: 2.5vw;
+              border-radius: 34px;
+              margin: 0.4vw;
+              right:3vw;
+            }
+            .switch input { 
+              opacity: 0;
+              width: 0;
+              height: 0;
+            }
+            .slider {
+              position: absolute;
+              cursor: pointer;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background-color: #FDF1F4;
+              -webkit-transition: .4s;
+              transition: .4s;
+              border-radius: 2vw;
+            }
+            .slider:before {
+              position: absolute;
+              content: "";
+              height: 2vw;
+              width: 2vw;
+              left: 0.25vw;
+              bottom:0.25vw;
+              background-color: white;
+              -webkit-transition: .4s;
+              transition: .4s;
+              border-radius: 50%;
+            }
+            input:checked + .slider {
+              background-color: pink;
+            }
+            input:focus + .slider {
+              box-shadow: 0 0 1px pink;
+            }
+            input:checked + .slider:before {
+              -webkit-transform: translateX(2.5vw);
+              -ms-transform: translateX(2.5vw);
+              transform: translateX(2.5vw);
+            }
+          /*menue*/
+            .menu__box {
+              position: fixed;
+              top:3.4vw;
+              left: 0;
+              width: 16vw;
+              height: 34vw;
+              list-style: none;
+              padding:0vw;
+              background: #fedee3;
+              box-shadow: white;
+              margin :0;
+              border-radius: 0 0 2vw 0;
+            }
+            .menu__item {
+              display: block;
+              padding: 2vw 2vw;
+              top:0vw;
+              color: white;
+              font-size: 20px;
+              font-weight: 1.5px;
+              position: relative;
+              font-size: 1.5vw;
+              border:none;
+              background-color:#fdf1f400;
+              cursor: pointer;
+            }
+            .menu_item_selected{
+              color:rgb(255, 73, 170);
+              font-weight: bold;
+              text-decoration: underline;
+            }
+          /*options*/
+            .opt__box {
+              position: fixed;
+              top:3.4vw;
+              right: 0;
+              width: 22vw;
+              height: 40vw;
+              list-style: none;
+              padding:0vw;
+              background: #fedee3;
+              box-shadow: white;
+              margin :0;
+              border-radius: 0 0 0 2vw;
+            }
+          /*info*/
+            .info{
+              background-color: rgb(255, 194, 218);
+              bottom:0;
+              position: fixed;
+              width: 100%;
+              text-align: center;
+            }
+          /*canvas*/
+            #canvas {
+              border: 1px solid black;
+              margin: 0 auto;
+              display: block;
+              top:5vw;
+
+              position: absolute;
+            }
+            #tempcanvas{
+              border: 1px solid black;
+              margin: 0 auto;
+              display: block;
+              top:5vw;
+              position: absolute;
+            }
+            .left30{
+              left:30%;
+            }
+            .left-100{
+              left:-100%;
+            }
+            .undoButton{
+              margin:0.3vw;
+              width: 4vw;
+              height: 2vw;
+              background-color: #ffbccd;
+              border: none;
+              border-radius: 15%;
+              font-size: 1vw;
+              color:#fff;
+              cursor: pointer;
+            }
+            .redoButton{
+              margin:0.3vw;
+              width: 4vw;
+              height: 2vw;
+              background-color: #ffbccd;
+              border: none;
+              border-radius: 15%;
+              font-size: 1vw;
+              color:#fff;
+              cursor: pointer;
+            }
+            .clearButton{
+              margin:0.3vw;
+              width: 4vw;
+              height: 2vw;
+              background-color: #ffbccd;
+              border: none;
+              border-radius: 15%;
+              font-size: 1vw;
+              color:#fff;
+              cursor: pointer;
+            }
+            .createButton{
+              margin:0.3vw;
+              width: 4vw;
+              height: 2vw;
+              background-color: #ffbccd;
+              border: none;
+              border-radius: 15%;
+              font-size: 1vw;
+              color:#fff;
+              cursor: pointer;
+            }
+            .cancelButton{
+              margin:0.3vw;
+              width: 4vw;
+              height: 2vw;
+              background-color: #ffbccd;
+              border: none;
+              border-radius: 15%;
+              font-size: 1vw;
+              color:#fff;
+              cursor: pointer;
+            }
+            .undoButton:disabled{
+              background-color: #ea9fb4;
+            }
+            .redoButton:disabled{
+              background-color: #ea9fb4;
+            }
+            .clearButton:disabled{
+              background-color: #ea9fb4;
+            }
+            .menuButtons{
+              display: flex;
+              justify-content: center;
+            }
+            .color {
+              width: 2.5vw;
+              height: 2.5vw;
+              cursor: pointer;
+              border: 1px solid rgb(255, 255, 255);
+              margin:0.3vw;
+              border-radius: 0.3vw;
+            }
+            .color:hover {
+              opacity: 0.7;
+            }
+            #standardColors{
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: center;
+            }
+            .opt_slider {
+              -webkit-appearance: none;
+              width: 80%;
+              height: 1vw;
+              border-radius: 5px;  
+              background: #fffafa;
+              outline: none;
+              opacity: 0.7;
+              margin:1vw;
+            }
+            .opt_slider::-webkit-slider-thumb {
+              -webkit-appearance: none;
+              appearance: none;
+              width: 1.3vw;
+              height: 1.3vw;
+              border-radius: 50%; 
+              background: #ff83b5;
+              cursor: pointer;
+            }
+            label{
+              font-size: 1.3vw;
+              margin:1vw
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <div class="text-background"id=myDIV2>Editing</div>
+            <a href="index.html"><img src="pics/logo.png" class="resp_img" style="position: relative;left:42vw" ></a>
+            <label class="switch" style="float: right;">
+                <input type="checkbox" id="toggle-mode"onclick="changecolor()">
+                <span class="slider"></span>
+            </label>
+        </div><!--navbar*/ -->
+        <div>
+            <ul class="menu__box">
+                <li><input type="button" class="menu__item menu_item_selected"id="menu_draw" onclick="selectMenuDraw()" value="Draw"></li>
+                <li><input type="button" class="menu__item" id="menu_filters" onclick="selectMenuFilters()" value="Filters"></li>
+                <li><input type="button" class="menu__item" id="menu_forms" onclick="selectMenuFroms()" value="Forms"></li>
+                <li><input type="button" class="menu__item" id="menu_text" onclick="selectMenuText()" value="Text"></li>
+                <li><input type="button" class="menu__item" id="menu_load" onclick="selectMenuLoad()" value="Image"></li>
+                <li class="menuButtons"><button class="undoButton"id="undoButton">Undo</button><button class="redoButton"id="redoButton">Redo</button><button class="clearButton"id="clearButton">Clear</button></li>
+          </ul>
+        </div><!--menubox -->
+        <div>
+            <canvas id="canvas" width="500" height="500"></canvas>
+            <canvas id="tempcanvas" width="500" height="500"></canvas>
+        </div><!--canvas -->
+        <div>
+            <ul class="opt__box">
+                <div id="opt_draw">
+                  <br><br>
+                  <div id="standardColors">
+                    <input  class="color" type="color" id="colorPicker" value="#000000">
+                    <div class="color rbw"id="rainbowButton" style="width: 2.5vw; height: 2.5vw; background: linear-gradient( to bottom right,rgb(255, 122, 122),rgb(255, 255, 26),rgb(141, 255, 141),rgb(112, 112, 255),rgb(215, 160, 255),violet); cursor: pointer;"></div>
+                    <div class="color" style="background-color: #000000;"></div>
+                    <div class="color" style="background-color: #FF0000;"></div>
+                    <div class="color" style="background-color: #00FF00;"></div>
+                    <div class="color" style="background-color: #0000FF;"></div>
+                    <div class="color" style="background-color: #FFFF00;"></div>
+                    <div class="color" style="background-color: #FF00FF;"></div>
+                    <div class="color" style="background-color: #00FFFF;"></div>
+                    <div class="color" style="background-color: #FFFFFF;"></div>
+                    <div class="color" style="background-color: #FFA500;"></div>
+                    <div class="color" style="background-color: #8c00ff;"></div>
+                    <img src="pics/eraser.png" class="color ers" id="eraser" width="2.5vw"height="2.5vw">
+                    <img src="pics/bucket.png" class="color fill" id="fill" width="2.5vw"height="2.5vw">
+                  </div>
+                  <br>
+                  <label for="brushSize">Brush Size:</label>
+                  <input class="opt_slider" type="range" id="brushSize" min="1" max="150" value="10">
+                  <label for="brushOpacity">Opacity:</label>
+                  <input class="opt_slider" type="range" id="brushOpacity" min="1" max = "255" value="255">
+                </div>
+                <div id="opt_filters"  hidden="true">
+                  <label for="hue">Hue:</label>
+                  <input class="opt_slider"type="range" id="hue" min="-180" max="180" value="0">
+                  <label for="blur">Blur:</label>
+                  <input class="opt_slider"type="range" id="blur" min="0" max="25" step="0.1" value="0">
+                  <label for="contrast">Contrast:</label>
+                  <input class="opt_slider"type="range" id="contrast" min="0" max="200"  value="100">
+                  <label for="exposure">Exposure:</label>
+                  <input class="opt_slider"type="range" id="exposure" min="-5" max="5" step="0.1" value="0">
+                  <label for="brightness">Brightness:</label>
+                  <input class="opt_slider"type="range" id="brightness" min="0" max="200" value="100">
+                  <label for="saturation">Saturation:</label>
+                  <input class="opt_slider"type="range" id="saturation" min="0" max="200" value="100">
+                  <label for="grayscale">Gray-scale:</label>
+                  <input class="opt_slider"type="range" id="grayscale" min="0" max="100" value="0">
+                  <label for="invert">Invert</label>
+                  <input class="opt_slider"type="range" id="invert" min="0" max="100" value="0">
+                  <div class="menuButtons"><button class="cancelButton"id="cancelButton_filters">Cancel</button><button id="createButton_filters"class="createButton">Create</button></div>
+                </div>
+                <div id="opt_forms"  hidden="true">
+                  <div class="menuButtons"><button class="cancelButton"id="cancelButton_forms">Cancel</button><button id="createButton_forms"class="createButton">Create</button></div>
+                </div>
+                <div id="opt_text"  hidden="true">
+                  <div class="menuButtons"><button class="cancelButton"id="cancelButton_text">Cancel</button><button id="createButton_text"class="createButton">Create</button></div>
+                </div>
+                <div id="opt_load"  hidden="true">
+                  <button id="downloadButton">Download</button>
+                </div>
+            </ul>
+        </div><!--option box -->
+        <div class="info">
+            <div id="info_draw">
+                <b>*Hier kommen die beschreibungen der einzelnen optinen hin /draw*</b>
+            </div>
+            <div id="info_filters" hidden="true">
+                <b>*Hier kommen die beschreibungen der einzelnen optinen hin /filters*</b>
+            </div>
+            <div id="info_forms" hidden="true">
+                <b>*Hier kommen die beschreibungen der einzelnen optinen hin /forms*</b>
+            </div>
+            <div id="info_text" hidden="true">
+                <b>*Hier kommen die beschreibungen der einzelnen optinen hin /text*</b>
+            </div>
+            <div id="info_load" hidden="true">
+                <b>*Hier kommen die beschreibungen der einzelnen optinen hin /load*</b>
+            </div>
+        </div><!--info box/footer -->
+        <script>
+/*------------------------------------------script----------------------------------------*/
+          /*static management*/
+            function unselectAllMenu(){
+                var element = document.getElementById("menu_draw");
+                element.classList.remove("menu_item_selected");
+                element = document.getElementById("menu_filters");
+                element.classList.remove("menu_item_selected");
+                element = document.getElementById("menu_forms");
+                element.classList.remove("menu_item_selected");
+                element = document.getElementById("menu_text");
+                element.classList.remove("menu_item_selected");
+                element = document.getElementById("menu_load");
+                element.classList.remove("menu_item_selected");
+                document.getElementById("undoButton").disabled = false;
+                document.getElementById("redoButton").disabled = false;
+                document.getElementById("clearButton").disabled = false;
+                modeDraw=false;
+                modeFilters = false;
+                modeForms = false;
+                modeText = false;
+                modeLoad = false;
+                isDrawing=false;
+                element=document.getElementById("tempcanvas");
+                element.classList.add("left-100");
+                element.classList.remove("left30");
+                element=document.getElementById("canvas");
+                element.classList.add("left30");
+                element.classList.remove("left-100");
+            }
+            function unloadAllOptions(){
+                var element = document.getElementById("opt_draw");
+                element.hidden=true;
+                element = document.getElementById("opt_filters");
+                element.hidden=true;
+                element = document.getElementById("opt_forms");
+                element.hidden=true;
+                element = document.getElementById("opt_text");
+                element.hidden=true;
+                element = document.getElementById("opt_load");
+                element.hidden=true;
+            }
+            function unloadAllInfo(){
+                var element = document.getElementById("info_draw");
+                element.hidden=true;
+                element = document.getElementById("info_filters");
+                element.hidden=true;
+                element = document.getElementById("info_forms");
+                element.hidden=true;
+                element = document.getElementById("info_text");
+                element.hidden=true;
+                element = document.getElementById("info_load");
+                element.hidden=true;
+            }
+            function loadTempCanVas(){
+              document.getElementById("undoButton").disabled = true;
+              document.getElementById("redoButton").disabled = true;
+              document.getElementById("clearButton").disabled = true;
+              element=document.getElementById("canvas");
+              element.classList.add("left-100");
+              element.classList.remove("left30");
+              element=document.getElementById("tempcanvas");
+              element.classList.add("left30");
+              element.classList.remove("left-100");
+              const img = new Image();
+              img.src = screenshot;
+              img.onload = function() {
+                tempCtx.drawImage(img, 0, 0, canvas.width, canvas.height);
+              };
+              tempCtx.drawImage(canvas, 0, 0);
+            }
+            function selectMenuDraw(){
+                unselectAllMenu();
+                unloadAllOptions();
+                unloadAllInfo();
+                var element = document.getElementById("menu_draw");
+                element.classList.add("menu_item_selected");
+                element = document.getElementById("opt_draw");
+                element.hidden=false;
+                element = document.getElementById("info_draw");
+                element.hidden=false;
+                modeDraw=true;
+            }
+            function selectMenuFilters(){
+                unselectAllMenu();
+                unloadAllOptions();
+                unloadAllInfo();
+                var element = document.getElementById("menu_filters");
+                element.classList.add("menu_item_selected");
+                element = document.getElementById("opt_filters");
+                element.hidden=false;
+                element = document.getElementById("info_filters");
+                element.hidden=false;
+                document.getElementById("undoButton").disabled = true;
+                document.getElementById("redoButton").disabled = true;
+                document.getElementById("clearButton").disabled = true;
+                modeFilters=true;
+                loadTempCanVas();
+            }
+            function selectMenuFroms(){
+                unselectAllMenu();
+                unloadAllOptions();
+                unloadAllInfo();
+                var element = document.getElementById("menu_forms");
+                element.classList.add("menu_item_selected");
+                element = document.getElementById("opt_forms");
+                element.hidden=false;
+                element = document.getElementById("info_forms");
+                element.hidden=false;
+                modeForms = true;
+                loadTempCanVas()
+            }
+            function selectMenuText(){
+                unselectAllMenu();
+                unloadAllOptions();
+                unloadAllInfo();
+                var element = document.getElementById("menu_text");
+                element.classList.add("menu_item_selected");
+                element = document.getElementById("opt_text");
+                element.hidden=false;
+                element = document.getElementById("info_text");
+                element.hidden=false;
+                modeText=true;
+                loadTempCanVas()
+            }
+            function selectMenuLoad(){
+                unselectAllMenu();
+                unloadAllOptions();
+                unloadAllInfo();
+                var element = document.getElementById("menu_load");
+                element.classList.add("menu_item_selected");
+                element = document.getElementById("opt_load");
+                element.hidden=false;
+                element = document.getElementById("info_load");
+                element.hidden=false;
+                modeLoad=true;
+            }
+  /*-----------------here all functinsfor canvas begin------------------*/
+          /*initialisation*/
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            const tempCanvas= document.getElementById('tempcanvas');
+            const tempCtx= tempcanvas.getContext('2d');
+            let isDrawing = false;
+            let lastX = 0;
+            let lastY = 0;
+            let brushSize = 10;
+            let brushOpacity=255;
+            let selectedColor = '#000000';
+            let actions = [];
+            let pointer = 0;
+            let isRainbowMode = false;
+            let isEraseMode=false;
+            let isFillMode=false;
+            let modeDraw=true;
+            let modeFilters = false;
+            let modeForms = false;
+            let modeText = false;
+            let modeLoad = false;
+            let image;
+            let screenshot;
+            let cWidth=500;
+            let cHeight=500;
+
+            const clearButton = document.getElementById('clearButton');
+            const undoButton = document.getElementById('undoButton');
+            const redoButton = document.getElementById('redoButton');
+            const colorPicker = document.getElementById('colorPicker');
+            const standardColors = document.getElementById('standardColors');
+            const brushSizeInput = document.getElementById('brushSize');
+            const brushOpacityInput = document.getElementById('brushOpacity');
+            const downloadButton = document.getElementById('downloadButton');
+            const cancelButton_filter = document.getElementById('cancelButton_filters');
+            const createButton_filter = document.getElementById('createButton_filters');
+            const cancelButton_forms = document.getElementById('cancelButton_forms');
+            const createButton_forms = document.getElementById('createButton_forms');
+            const cancelButton_text = document.getElementById('cancelButton_text');
+            const createButton_text = document.getElementById('createButton_text');
+            const hueSlider = document.getElementById("hue");
+            const blurSlider = document.getElementById("blur");
+            const contrastSlider = document.getElementById("contrast");
+            const brightnessSlider = document.getElementById("brightness");
+            const saturationSlider = document.getElementById("saturation");
+            const showHideButton = document.getElementById("showHideButton");
+            const sliderWrapper = document.getElementById("sliderWrapper");
+            const exposureSlider = document.getElementById("exposure");
+            const grayscaleSlider = document.getElementById("grayscale");
+            const invertSlider=document.getElementById("invert");
+            const fill =document.getElementById("fill");
+          /*startfunctions*/
+            addAction();
+            selectMenuDraw();
+          /*eventlisterns*/
+            clearButton.addEventListener('click', clearCanvas);
+            undoButton.addEventListener('click', undo);
+            redoButton.addEventListener('click', redo);
+            downloadButton.addEventListener('click', downloadCanvas);
+            canvas.addEventListener('mousemove', draw);
+            cancelButton_filter.addEventListener('click',cancel);
+            createButton_filter.addEventListener('click',create);
+            cancelButton_forms.addEventListener('click',cancel);
+            createButton_forms.addEventListener('click',create);
+            cancelButton_text.addEventListener('click',cancel);
+            createButton_text.addEventListener('click',create);
+            exposureSlider.addEventListener("input", applyFilters);
+            grayscaleSlider.addEventListener("input",applyFilters);
+            invertSlider.addEventListener("input",applyFilters);
+            hueSlider.addEventListener("input", applyFilters);
+            blurSlider.addEventListener("input", applyFilters);
+            contrastSlider.addEventListener("input", applyFilters);
+            brightnessSlider.addEventListener("input", applyFilters);
+            saturationSlider.addEventListener("input", applyFilters);
+            canvas.addEventListener('mousedown', (e) => {
+              if(modeDraw){
+                isDrawing = true;
+              [lastX, lastY] = [e.offsetX, e.offsetY];
+                  }
+              if(isFillMode){
+                flood_fill(lastX,lastY,color_to_rgba(selectedColor));
+              }
+              });
+            canvas.addEventListener('mouseup', () => {
+              if(modeDraw){
+                isDrawing = false;
+              addAction();
+              }
+            });
+            colorPicker.addEventListener('change', () => {
+              selectedColor = colorPicker.value;
+            });
+            standardColors.addEventListener('click', (e) => {
+              if (e.target.classList.contains('color')) {
+                isRainbowMode=false;
+                  isEraseMode=false;
+                  isFillMode=false;
+                if (e.target.classList.contains('rbw')){
+                  isRainbowMode=true
+                }
+                else if (e.target.classList.contains('ers')){
+                  isEraseMode=true;
+
+                }
+                else if (e.target.classList.contains('fill')){
+                  isFillMode=true;
+                }
+                else{
+
+                  
+                  selectedColor = e.target.style.backgroundColor;
+                  colorPicker.value = selectedColor;
+                }
+
+              }
+            });
+            brushSizeInput.addEventListener('input', () => {
+              brushSize = brushSizeInput.value;
+            });
+            brushOpacityInput.addEventListener('input', () => {
+
+              brushOpacity = brushOpacityInput.value;
+            });
+
+
+          /*functions*/
+            function addAction() {
+              if(pointer<actions.length){
+                for (let i = pointer-1; i < actions.length; i++) {
+                  actions.pop();
+                }
+              }
+              const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+              const currentState = {
+                data: imageData,
+                width: canvas.width,
+                height: canvas.height
+              };
+              actions.push(currentState);
+              pointer++;
+            }
+
+            function clearCanvas() {
+              ctx.putImageData(actions[0].data, 0, 0);
+              addAction();
+            }
+
+            function draw(e) {
+              if (!isDrawing) return;
+              if(isEraseMode){
+                ctx.save(); // Save the current state of the context
+                ctx.beginPath();
+                ctx.arc(e.offsetX, e.offsetY, brushSize/2, 0, 2*Math.PI); // Draw a circle path
+                ctx.clip(); // Clip all future drawing operations to the inside of the circle
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the entire canvas, but only the clipped circle will be cleared
+                ctx.restore(); // Restore the saved state of the context
+              }
+              else{
+                if (isRainbowMode) {
+                  const hue = Math.atan2(e.offsetY - lastY, e.offsetX - lastX) / (2 * Math.PI) + 0.5;
+                  ctx.strokeStyle = `hsl(${hue * 360}, 100%, 50%)`;
+                }
+                else {
+                  ctx.strokeStyle = selectedColor;
+                }
+                ctx.lineJoin = 'round';
+                ctx.lineCap = 'round';
+                ctx.lineWidth = brushSize;
+                ctx.globalAlpha = brushOpacity/255;
+                if (lastX !== 0 && lastY !== 0) {
+                  ctx.beginPath();
+                  ctx.moveTo(lastX, lastY);
+                  ctx.lineTo(e.offsetX, e.offsetY);
+                  ctx.stroke();
+                }
+                [lastX, lastY] = [e.offsetX, e.offsetY];
+              }
+            }
+
+            function undo() {
+              if (pointer > 0) {
+                pointer--;
+                const state = actions[pointer-1];
+                canvas.width = state.width;
+                canvas.height = state.height;
+                ctx.putImageData(state.data, 0, 0);
+              }
+            }
+
+            function redo() {
+              if (pointer === actions.length ) return;
+              pointer++;
+              const state = actions[pointer-1];
+              canvas.width = state.width;
+              canvas.height = state.height;
+              ctx.putImageData(state.data, 0, 0);
+            }
+
+            function cancel(){
+              selectMenuDraw();
+              ctx.putImageData(actions[pointer],0,0);
+              resetFilters();
+            }
+
+            function create(){
+              ctx.clearRect(0, 0, canvas.width, canvas.height);
+              ctx.drawImage(tempCanvas,0,0);
+              addAction();
+              selectMenuDraw();
+              resetFilters();
+            }
+
+            function resetFilters(){
+              hueSlider.value = 0;
+              blurSlider.value = 0;
+              contrastSlider.value = 100;
+              exposureSlider.value = 0;
+              brightnessSlider.value = 100;
+              saturationSlider.value = 100;
+              grayscaleSlider.value=0;
+              tempCtx.clearRect(0, 0, canvas.width, canvas.height);
+              tempCtx.filter='none';
+              ctx.filter='none';
+            }
+
+            function applyFilters() {
+              const hue = document.getElementById("hue").value;
+              const blur = document.getElementById("blur").value;
+              const grayscale = document.getElementById("grayscale").value;
+              const invert = document.getElementById("invert").value;
+              const exposure = document.getElementById("exposure").value;
+              const saturation = document.getElementById("saturation").value;
+              const brightness = document.getElementById("brightness").value;
+              const contrast = document.getElementById("contrast").value;
+              const adjustedBrightness = brightness * Math.pow(2, exposure);
+              const adjustedContrast = parseInt(contrast) + (exposure * 10);
+              tempCtx.clearRect(0, 0, canvas.width, canvas.height);
+              tempcanvas.width=cWidth;
+              tempcanvas.height=cHeight;
+              tempCtx.filter = `hue-rotate(${hue}deg) saturate(${saturation}%) brightness(${adjustedBrightness}%) contrast(${adjustedContrast}%) blur(${blur}px) grayscale(${grayscale}%) invert(${invert}%)`;
+              tempCtx.drawImage(canvas, 0, 0);
+            }
+
+            function downloadCanvas() {
+              const link = document.createElement('a');
+              link.download = 'canvas.png';
+              link.href = canvas.toDataURL();
+              link.click();
+            }
+            //algorithm from https://ben.akrin.com/an-html5-canvas-flood-fill-that-doesnt-kill-the-browser/  #4 
+            function flood_fill( original_x, original_y, color ) {
+                original_color = ctx.getImageData( original_x, original_y, 1, 1 ).data ;
+                original_color = { r:original_color[0],
+                                   g:original_color[1],
+                                   b:original_color[2],
+                                   a:original_color[3] } ;
+                x = original_x ;
+                y = original_y ;
+                boundary_pixels = ctx.getImageData( 0, 0, canvas.width, canvas.height ) ;
+                linear_cords = (y * canvas.width + x) * 4 ;
+                var done = false ;
+                while( y>=0 && !done ) {
+                    var new_linear_cords = ( (y-1) * canvas.width + x ) * 4 ;
+                    if( boundary_pixels.data[new_linear_cords]==original_color.r &&
+                        boundary_pixels.data[new_linear_cords+1]==original_color.g &&
+                        boundary_pixels.data[new_linear_cords+2]==original_color.b &&
+                        boundary_pixels.data[new_linear_cords+3]==original_color.a ) {
+                        y = y - 1 ;
+                        linear_cords = new_linear_cords ;
+                    } else {
+                        done = true ;
+                    }
+                }
+                var path = [{x:x, y:y}] ;
+                var first_iteration = true ;
+                var iteration_count = 0 ;
+                var orientation = 1 ; // 0:^, 1:<-, 2:v, 3:->
+                while( !(path[path.length-1].x==path[0].x && path[path.length-1].y==path[0].y) || first_iteration ) {
+                    iteration_count++ ;
+                    first_iteration = false ;
+                    var got_it = false ;
+                    if( path.length>=2 ) {
+                        if( path[path.length-1].y-path[path.length-2].y<0 ) {
+                            orientation = 0 ;
+                        } else if( path[path.length-1].x-path[path.length-2].x<0 ) {
+                            orientation = 1 ;
+                        } else if( path[path.length-1].y-path[path.length-2].y>0 ) {
+                            orientation = 2 ;
+                        } else if( path[path.length-1].x-path[path.length-2].x>0 ) {
+                            orientation = 3 ;
+                        } else {
+                        }
+                    }
+                    for( var look_at=0 ; !got_it && look_at<=3 ; look_at++ ) {
+                        var both = (orientation + look_at) % 4 ;
+                        if( both==0 ) {
+                            if( !got_it && (x+1)<canvas.width ) {
+                                linear_cords = (y * canvas.width + (x+1)) * 4 ;
+                                if( boundary_pixels.data[linear_cords]==original_color.r &&
+                                    boundary_pixels.data[linear_cords+1]==original_color.g &&
+                                    boundary_pixels.data[linear_cords+2]==original_color.b &&
+                                    boundary_pixels.data[linear_cords+3]==original_color.a ) {
+                                    got_it = true ;
+                                    x = x + 1 ;
+                                }
+                            }
+                        } else if( both==1 ) {
+                            if( !got_it && (y-1)>=0 ) {
+                                linear_cords = ((y-1) * canvas.width + x) * 4 ;
+                                if( boundary_pixels.data[linear_cords]==original_color.r &&
+                                    boundary_pixels.data[linear_cords+1]==original_color.g &&
+                                    boundary_pixels.data[linear_cords+2]==original_color.b &&
+                                    boundary_pixels.data[linear_cords+3]==original_color.a ) {
+                                    got_it = true ;
+                                    y = y - 1 ;
+                                }
+                            }
+                        } else if( both==2 ) {
+                            if( !got_it && (x-1)>=0 ) {
+                                linear_cords = (y * canvas.width + (x-1)) * 4 ;
+                                if( boundary_pixels.data[linear_cords]==original_color.r &&
+                                    boundary_pixels.data[linear_cords+1]==original_color.g &&
+                                    boundary_pixels.data[linear_cords+2]==original_color.b &&
+                                    boundary_pixels.data[linear_cords+3]==original_color.a ) {
+                                    got_it = true ;
+                                    x = x - 1 ;
+                                }
+                            }
+                        } else if( both==3 ) {
+                            if( !got_it && (y+1)<canvas.height ) {
+                                linear_cords = ((y+1) * canvas.width + x) * 4 ;
+                                if( boundary_pixels.data[linear_cords]==original_color.r &&
+                                    boundary_pixels.data[linear_cords+1]==original_color.g &&
+                                    boundary_pixels.data[linear_cords+2]==original_color.b &&
+                                    boundary_pixels.data[linear_cords+3]==original_color.a ) {
+                                    got_it = true ;
+                                    y = y + 1 ;
+                                }
+                            }
+                        }
+                    }
+                    if( got_it ) {
+                        path.push( {x:x, y:y} ) ;
+                    }
+                }
+                draw_quadratic_curve( path, ctx, color, 1, color ) ;
+            }
+            function draw_quadratic_curve( path, ctx, color, thickness, fill_color ) {
+                color = "rgba( " + color.r + "," + color.g + ","+ color.b + ","+ color.a + ")" ;
+                fill_color = "rgba( " + fill_color.r + "," + fill_color.g + ","+ fill_color.b + ","+ fill_color.a + ")" ;
+                ctx.strokeStyle = color ;
+                ctx.fillStyle = fill_color ;
+                ctx.lineWidth = thickness ;
+                ctx.lineJoin = "round" ;
+                ctx.lineCap = "round" ;
+                if( path.length>0 ) { // just in case
+                    if( path.length<3 ) {
+                        var b = path[0] ;
+                        ctx.beginPath() ;
+                        ctx.arc( b.x, b.y, ctx.lineWidth / 2, 0, Math.PI * 2, !0 ) ;
+                        ctx.fill() ;
+                        ctx.closePath();
+                    } else {
+                        ctx.beginPath() ;
+                        ctx.moveTo( path[0].x, path[0].y ) ;
+                        for( var i = 1; i<path.length-2; i++ ) {
+                            var c = (path[i].x + path[i + 1].x) / 2 ;
+                            var d = (path[i].y + path[i + 1].y) / 2 ;
+                            ctx.quadraticCurveTo( path[i].x, path[i].y, c, d ) ;
+                        }
+                        ctx.quadraticCurveTo( path[i].x, path[i].y, path[i + 1].x, path[i + 1].y ) ;
+                        ctx.stroke() ;
+                    }
+                }
+                if( fill_color!==false ) {
+                    ctx.fill() ;
+                }
+            }
+            function color_to_rgba( color ) {
+                if( color[0]=="#" ) { // hex notation
+                    color = color.replace( "#", "" ) ;
+                    var bigint = parseInt(color, 16);
+                    var r = (bigint >> 16) & 255;
+                    var g = (bigint >> 8) & 255;
+                    var b = bigint & 255;
+                    return {r:r,
+                            g:g,
+                            b:b,
+                            a:255} ;
+                } else if( color.indexOf("rgba(")==0 ) { // already in rgba notation
+                    color = color.replace( "rgba(", "" ).replace( " ", "" ).replace( ")", "" ).split( "," ) ;
+                    return {r:color[0],
+                            g:color[1],
+                            b:color[2],
+                            a:color[3]*255} ;
+                }else if(color.indexOf("rgb(")==0){//in rgb notation
+                  color = color.replace( "rgb(", "" ).replace( " ", "" ).replace( ")", "" ).split( "," ) ;
+                  return {r:color[0],
+                            g:color[1],
+                            b:color[2],
+                            a:255} ;
+                } else {
+                    console.error( "warning: can't convert color to rgba: " + color ) ;
+                    return {r:0,
+                            g:0,
+                            b:0,
+                            a:0} ;
+                }
+            }
+        </script>
+    </body>
+</html>
