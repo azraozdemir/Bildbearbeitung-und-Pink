@@ -149,6 +149,30 @@
               top:5vw;
               position: absolute;
             }
+            #cursercanvas{
+              border: 1px solid black;
+              margin: 0 auto;
+              display: block;
+              top:5vw;
+              position: absolute;
+            }
+            #textinput{
+              width: 20vw;
+              height: 2vw;
+              padding: 2px 2px;
+              margin:1vw;
+              box-sizing: border-box;
+              border: 2px solid #fccce2;
+              border-radius: 4px;
+              background-color: #ffefef;
+              resize: none;
+            }
+            input[type=text], select {
+
+              border-color: #1900ff;
+
+            }
+
             .left30{
               left:30%;
             }
@@ -239,6 +263,11 @@
               flex-wrap: wrap;
               justify-content: center;
             }
+            #standardColorsText{
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: center;
+            }
             .opt_slider {
               -webkit-appearance: none;
               width: 80%;
@@ -262,6 +291,32 @@
               font-size: 1.3vw;
               margin:1vw
             }
+            .box{
+              width: 2px;
+              height: 20px;
+
+              background-color: #000000;
+              animation-name: example;
+              animation-duration: 1s;
+              animation-iteration-count: infinite;
+              }
+              @keyframes example {
+                0%   {background-color:rgb(0, 0, 0);}
+                100% {background-color:rgba(0, 0, 0, 0);}
+              }
+              #font-selector {
+                  margin: 20px;
+              }
+              #text {
+                margin: 20px;
+                font-size: 24px;
+              }
+              .font-option {
+                display: inline-block;
+                font-size: 16px;
+                padding: 4px;
+              }
+
         </style>
     </head>
     <body>
@@ -286,6 +341,9 @@
         <div>
             <canvas id="canvas" width="500" height="500"></canvas>
             <canvas id="tempcanvas" width="500" height="500"></canvas>
+            <canvas id="cursercanvas" width="500"height="500"></canvas>
+
+            <div class="box" hidden="true" id="textcursor"></div><!--cursor-->
         </div><!--canvas -->
         <div>
             <ul class="opt__box">
@@ -333,9 +391,53 @@
                   <div class="menuButtons"><button class="cancelButton"id="cancelButton_filters">Cancel</button><button id="createButton_filters"class="createButton">Create</button></div>
                 </div>
                 <div id="opt_forms"  hidden="true">
+                  <div id="forms-selector">
+                    <label >Form:</label>
+                    <select id="forms-select" size="1">
+                      <option value="Rectangle" class="forms-option">Rectangle</option>
+                    </select>
+                  </div>
+                
                   <div class="menuButtons"><button class="cancelButton"id="cancelButton_forms">Cancel</button><button id="createButton_forms"class="createButton">Create</button></div>
                 </div>
                 <div id="opt_text"  hidden="true">
+                  <div id="standardColorsText">
+                    <input  class="color pik" type="color" id="colorPickerText" value="#000000">
+                    <div class="color" style="background-color: #000000;"></div>
+                    <div class="color" style="background-color: #FF0000;"></div>
+                    <div class="color" style="background-color: #00FF00;"></div>
+                    <div class="color" style="background-color: #0000FF;"></div>
+                    <div class="color" style="background-color: #FFFF00;"></div>
+                    <div class="color" style="background-color: #FF00FF;"></div>
+                    <div class="color" style="background-color: #00FFFF;"></div>
+                    <div class="color" style="background-color: #FFFFFF;"></div>
+                    <div class="color" style="background-color: #FFA500;"></div>
+                    <div class="color" style="background-color: #8c00ff;"></div>
+                  </div>
+                  <label for="Textsize">Size:</label>
+                  <input class="opt_slider"type="range" id="Textsize" min="10" max="200" value="20">
+                  <div id="font-selector">
+                    <label >Font:</label>
+                    <select id="font-select" size="1">
+                      <option style="font-family:Arial;" value="Arial" class="font-option">Arial</option>
+                      <option style="font-family:Verdana;" value="Verdana" class="font-option">Verdana</option>
+                      <option style="font-family:Tahoma;" value="Tahoma" class="font-option">Tahoma</option>
+                      <option style="font-family:Trebuchet MS;" value="Trebuchet MS" class="font-option">Trebuchet MS</option>
+                      <option style="font-family:Impact;" value="Impact" class="font-option">Impact</option>
+                      <option style="font-family:Comic Sans MS;" value="Comic Sans MS" class="font-option">Comic Sans MS</option>
+                      <option style="font-family:Georgia;" value="Georgia" class="font-option">Georgia</option>
+                      <option style="font-family:Times New Roman;" value="Times New Roman" class="font-option">Times New Roman</option>
+                      <option style="font-family:Courier New;" value="Courier New" class="font-option">Courier New</option>
+                      <option style="font-family:Lucida Console;" value="Lucida Console" class="font-option">Lucida Console</option>
+                      <option style="font-family:Tahoma;" value="Tahoma" class="font-option">Tahoma</option>
+                      <option style="font-family:Arial Black;" value="Arial Black" class="font-option">Arial Black</option>
+                    </select>
+                  </div>
+
+
+
+                  <label for="textinput">Text:</label><br>
+                  <textarea id="textinput"></textarea>
                   <div class="menuButtons"><button class="cancelButton"id="cancelButton_text">Cancel</button><button id="createButton_text"class="createButton">Create</button></div>
                 </div>
                 <div id="opt_load"  hidden="true">
@@ -359,7 +461,10 @@
             <div id="info_load" hidden="true">
                 <b>*Hier kommen die beschreibungen der einzelnen optinen hin /load*</b>
             </div>
-        </div><!--info box/footer -->
+        </div><!--info box -->
+
+        <!--@lela hier footer einfügen-->
+
         <script>
 /*------------------------------------------script----------------------------------------*/
           /*static management*/
@@ -386,9 +491,16 @@
                 element=document.getElementById("tempcanvas");
                 element.classList.add("left-100");
                 element.classList.remove("left30");
+                element=document.getElementById("cursercanvas");
+                element.classList.add("left-100");
+                element.classList.remove("left30");
                 element=document.getElementById("canvas");
                 element.classList.add("left30");
                 element.classList.remove("left-100");
+                tempCtx.putImageData(actions[0].data, 0, 0);
+                element=document.getElementById("textcursor");
+                element.hidden=true;
+                resetFilters();
             }
             function unloadAllOptions(){
                 var element = document.getElementById("opt_draw");
@@ -424,11 +536,6 @@
               element=document.getElementById("tempcanvas");
               element.classList.add("left30");
               element.classList.remove("left-100");
-              const img = new Image();
-              img.src = screenshot;
-              img.onload = function() {
-                tempCtx.drawImage(img, 0, 0, canvas.width, canvas.height);
-              };
               tempCtx.drawImage(canvas, 0, 0);
             }
             function selectMenuDraw(){
@@ -483,7 +590,13 @@
                 element = document.getElementById("info_text");
                 element.hidden=false;
                 modeText=true;
-                loadTempCanVas()
+                loadTempCanVas();
+                element=document.getElementById("cursercanvas");
+                element.classList.add("left30");
+                element.classList.remove("left-100");
+                drawTextCurser();
+                element=document.getElementById("textcursor");
+                element.hidden=false;
             }
             function selectMenuLoad(){
                 unselectAllMenu();
@@ -503,9 +616,14 @@
             const ctx = canvas.getContext('2d');
             const tempCanvas= document.getElementById('tempcanvas');
             const tempCtx= tempcanvas.getContext('2d');
+            const curserCanvas = document.getElementById('cursercanvas');
+            const curserCtx=curserCanvas.getContext('2d');
+
             let isDrawing = false;
             let lastX = 0;
             let lastY = 0;
+            let curserX=0;
+            let curserY=0;
             let brushSize = 10;
             let brushOpacity=255;
             let selectedColor = '#000000';
@@ -520,15 +638,20 @@
             let modeText = false;
             let modeLoad = false;
             let image;
-            let screenshot;
             let cWidth=500;
             let cHeight=500;
+            let mouse_Down=false;
+            let selectedFont= "Arial";
 
+          /*consts*/
+            const fontSelect = document.getElementById("font-select");
             const clearButton = document.getElementById('clearButton');
             const undoButton = document.getElementById('undoButton');
             const redoButton = document.getElementById('redoButton');
             const colorPicker = document.getElementById('colorPicker');
+            const colorPickerText = document.getElementById('colorPickerText');
             const standardColors = document.getElementById('standardColors');
+            const standardColorsText = document.getElementById('standardColorsText');
             const brushSizeInput = document.getElementById('brushSize');
             const brushOpacityInput = document.getElementById('brushOpacity');
             const downloadButton = document.getElementById('downloadButton');
@@ -538,6 +661,8 @@
             const createButton_forms = document.getElementById('createButton_forms');
             const cancelButton_text = document.getElementById('cancelButton_text');
             const createButton_text = document.getElementById('createButton_text');
+            const TextSizeSlider = document.getElementById("Textsize");
+            const TextInput = document.getElementById("textinput");
             const hueSlider = document.getElementById("hue");
             const blurSlider = document.getElementById("blur");
             const contrastSlider = document.getElementById("contrast");
@@ -549,9 +674,11 @@
             const grayscaleSlider = document.getElementById("grayscale");
             const invertSlider=document.getElementById("invert");
             const fill =document.getElementById("fill");
+
           /*startfunctions*/
             addAction();
             selectMenuDraw();
+
           /*eventlisterns*/
             clearButton.addEventListener('click', clearCanvas);
             undoButton.addEventListener('click', undo);
@@ -564,6 +691,7 @@
             createButton_forms.addEventListener('click',create);
             cancelButton_text.addEventListener('click',cancel);
             createButton_text.addEventListener('click',create);
+            TextSizeSlider.addEventListener("input",drawTextCurser);
             exposureSlider.addEventListener("input", applyFilters);
             grayscaleSlider.addEventListener("input",applyFilters);
             invertSlider.addEventListener("input",applyFilters);
@@ -571,6 +699,7 @@
             blurSlider.addEventListener("input", applyFilters);
             contrastSlider.addEventListener("input", applyFilters);
             brightnessSlider.addEventListener("input", applyFilters);
+            TextInput.addEventListener("input",drawTextCurser);
             saturationSlider.addEventListener("input", applyFilters);
             canvas.addEventListener('mousedown', (e) => {
               if(modeDraw){
@@ -586,6 +715,36 @@
                 isDrawing = false;
               addAction();
               }
+            });
+            curserCanvas.addEventListener('mousedown',(e)=>{
+              if(modeText){
+                [lastX, lastY] = [e.offsetX, e.offsetY];
+                [curserX,curserY]=[e.x,e.y];
+                drawTextCurser(e);
+                mouse_Down=true;
+              }
+            });
+            curserCanvas.addEventListener('mouseup',(e)=>{
+              if(modeText){
+
+                mouse_Down=false;
+              }
+            });
+            curserCanvas.addEventListener('mouseout',(e)=>{
+              if(modeText){
+                mouse_Down=false;
+              }
+            });
+            curserCanvas.addEventListener('mousemove',(e)=>{
+              
+              if(mouse_Down){
+                if(modeText){
+                  [lastX, lastY] = [e.offsetX, e.offsetY];
+                  [curserX,curserY]=[e.x,e.y];
+                  drawTextCurser(e);
+                }
+              }
+
             });
             colorPicker.addEventListener('change', () => {
               selectedColor = colorPicker.value;
@@ -614,6 +773,30 @@
 
               }
             });
+            colorPickerText.addEventListener('change', () => {
+              selectedColor = colorPickerText.value;
+
+              drawTextCurser(null);
+            });
+            standardColorsText.addEventListener('click', (e) => {
+              if (e.target.classList.contains('color')) {
+                if (e.target.classList.contains('pik')) {
+                  selectedColor = colorPickerText.value;
+                }
+                else{
+                  selectedColor = e.target.style.backgroundColor;
+                  colorPicker.value = selectedColor;
+                }
+                drawTextCurser(null);
+              }
+            });
+            standardColorsText.addEventListener('click', (e) => {
+              if (e.target.classList.contains('color')) {
+
+                  selectedColor = e.target.style.backgroundColor;
+
+              }
+            });
             brushSizeInput.addEventListener('input', () => {
               brushSize = brushSizeInput.value;
             });
@@ -621,7 +804,10 @@
 
               brushOpacity = brushOpacityInput.value;
             });
-
+            fontSelect.addEventListener("change", function() {
+			        selectedFont = fontSelect.value;
+              drawTextCurser(null);
+		        });
 
           /*functions*/
             function addAction() {
@@ -645,36 +831,52 @@
               addAction();
             }
 
+            function drawTextCurser(e){
+             curserCtx.putImageData(actions[0].data, 0, 0);
+              var d = document.getElementById("textcursor");
+              d.style.position = "absolute";
+              let cordstrg =  curserX+"px";
+              d.style.left = cordstrg;
+              cordstrg = curserY-TextSizeSlider.value+"px";
+              d.style.top = cordstrg;
+              cordstrg= TextSizeSlider.value+"px";
+              d.style.height= cordstrg;
+              let strg = TextSizeSlider.value +"px "+selectedFont;
+              curserCtx.font= strg;
+              curserCtx.fillStyle =selectedColor;
+              curserCtx.fillText(TextInput.value, lastX, lastY);
+            }
+
             function draw(e) {
-              if (!isDrawing) return;
-              if(isEraseMode){
-                ctx.save(); // Save the current state of the context
-                ctx.beginPath();
-                ctx.arc(e.offsetX, e.offsetY, brushSize/2, 0, 2*Math.PI); // Draw a circle path
-                ctx.clip(); // Clip all future drawing operations to the inside of the circle
-                ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the entire canvas, but only the clipped circle will be cleared
-                ctx.restore(); // Restore the saved state of the context
-              }
-              else{
-                if (isRainbowMode) {
-                  const hue = Math.atan2(e.offsetY - lastY, e.offsetX - lastX) / (2 * Math.PI) + 0.5;
-                  ctx.strokeStyle = `hsl(${hue * 360}, 100%, 50%)`;
-                }
-                else {
-                  ctx.strokeStyle = selectedColor;
-                }
-                ctx.lineJoin = 'round';
-                ctx.lineCap = 'round';
-                ctx.lineWidth = brushSize;
-                ctx.globalAlpha = brushOpacity/255;
-                if (lastX !== 0 && lastY !== 0) {
+                if (!isDrawing) return;
+                if(isEraseMode){
+                  ctx.save(); 
                   ctx.beginPath();
-                  ctx.moveTo(lastX, lastY);
-                  ctx.lineTo(e.offsetX, e.offsetY);
-                  ctx.stroke();
+                  ctx.arc(e.offsetX, e.offsetY, brushSize/2, 0, 2*Math.PI); 
+                  ctx.clip();
+                  ctx.clearRect(0, 0, canvas.width, canvas.height); 
+                  ctx.restore(); 
                 }
-                [lastX, lastY] = [e.offsetX, e.offsetY];
-              }
+                else{
+                  if (isRainbowMode) {
+                    const hue = Math.atan2(e.offsetY - lastY, e.offsetX - lastX) / (2 * Math.PI) + 0.5;
+                    ctx.strokeStyle = `hsl(${hue * 360}, 100%, 50%)`;
+                  }
+                  else {
+                    ctx.strokeStyle = selectedColor;
+                  }
+                  ctx.lineJoin = 'round';
+                  ctx.lineCap = 'round';
+                  ctx.lineWidth = brushSize;
+                  ctx.globalAlpha = brushOpacity/255;
+                  if (lastX !== 0 && lastY !== 0) {
+                    ctx.beginPath();
+                    ctx.moveTo(lastX, lastY);
+                    ctx.lineTo(e.offsetX, e.offsetY);
+                    ctx.stroke();
+                  }
+                  [lastX, lastY] = [e.offsetX, e.offsetY];
+                }
             }
 
             function undo() {
@@ -705,6 +907,7 @@
             function create(){
               ctx.clearRect(0, 0, canvas.width, canvas.height);
               ctx.drawImage(tempCanvas,0,0);
+              ctx.drawImage(curserCanvas,0,0);
               addAction();
               selectMenuDraw();
               resetFilters();
@@ -719,6 +922,8 @@
               saturationSlider.value = 100;
               grayscaleSlider.value=0;
               tempCtx.clearRect(0, 0, canvas.width, canvas.height);
+              TextSizeSlider.value=20;
+              TextInput.value="";
               tempCtx.filter='none';
               ctx.filter='none';
             }
@@ -747,6 +952,7 @@
               link.href = canvas.toDataURL();
               link.click();
             }
+            
             //algorithm from https://ben.akrin.com/an-html5-canvas-flood-fill-that-doesnt-kill-the-browser/  #4 
             function flood_fill( original_x, original_y, color ) {
                 original_color = ctx.getImageData( original_x, original_y, 1, 1 ).data ;
