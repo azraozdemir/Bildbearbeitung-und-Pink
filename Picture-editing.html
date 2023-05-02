@@ -302,7 +302,7 @@
               }
               @keyframes example {
                 0%   {background-color:rgb(0, 0, 0);}
-                100% {background-color:rgba(0, 0, 0, 0);}
+                100% {background-color:#00000000;}
               }
               #font-selector {
                   margin: 20px;
@@ -407,29 +407,40 @@
                       <option value="forms_heart" class="forms-option">Heart</option>
                     </select>
                   </div>
-                
+
+                  <div id="forms-type-selector">
+                    <label >DrawMode:</label>
+                    <select id="forms-type-select" size="1">
+                      <option value="o" class="forms-option">Outline</option>
+                      <option value="f" class="forms-option">Fill</option>
+                      <option value="of" class="forms-option">OutLine+Fill</option>
+                    </select>
+                  </div>
+                  <input  class="color" type="color" id="colorPicker_f1" value="#000000">
+                  <input  class="color" type="color" id="colorPicker_f2" value="#000000">
+
 
 
                   <div id="forms_line"hidden=true>
-                    <p>line</p>
                   </div>
                   <div id="forms_tri"hidden=true>
-                    <p>tri</p>
+                    <label >Rectangular:</label>
+                    <input type="checkbox" id="f_tri_bx">
                   </div>
                   <div id="forms_rect"hidden=true>
-                      <p>rect</p>
+                    <label >f_corners:</label>
+                    <input class="opt_slider" type="range" id="f_corners" min="0" max = "50" value="0">
                   </div>
                   <div id="forms_circle"hidden=true>
-                    <p>circle</p>
                   </div>
                   <div id="forms_elypse"hidden=true>
-                    <p>elipse</p>
                   </div>
                   <div id="forms_anygon"hidden=true>
-                    <p>anygon</p>
                   </div>
                   <div id="forms_polygon"hidden=true>
-                    <p>polygon</p>
+
+                    <input class="opt_slider" type="range" id="f_pcorners" min="2" max = "16" value="6">
+                    <p id ="f_p_txt"></p>
                   </div>
                   <div id="forms_heart"hidden=true>
                     <p>heart</p>
@@ -442,7 +453,7 @@
 
 
 
-                  <div class="menuButtons"><button class="cancelButton"id="cancelButton_forms">Cancel</button><button id="createButton_forms"class="createButton">Create</button></div>
+                <div class="menuButtons"><button class="cancelButton"id="cancelButton_forms">Cancel</button><button id="createButton_forms"class="createButton">Create</button></div>
                 </div>
 
 
@@ -478,6 +489,11 @@
                       <option style="font-family:Lucida Console;" value="Lucida Console" class="font-option">Lucida Console</option>
                       <option style="font-family:Tahoma;" value="Tahoma" class="font-option">Tahoma</option>
                       <option style="font-family:Arial Black;" value="Arial Black" class="font-option">Arial Black</option>
+                      <option style="font-family:Garamond;" value="Garamond" class="font-option">Garamond</option>
+                      <option style="font-family:Helvetica;" value="Helvetica" class="font-option">Helvetica</option>
+                      <option style="font-family:Wide Latin;" value="Wide Latin" class="font-option">Wide Latin</option>
+                      <option style="font-family:Cooper Black;" value="Cooper Black" class="font-option">Cooper Black</option>
+                      <option style="font-family:Mistral;" value="Mistral" class="font-option">Mistral</option>
                     </select>
                   </div>
 
@@ -697,22 +713,29 @@
             let x = 50;
 		        let y = 50;
 		        let isResizing = false;
-            let isrectangular = false;
+            let isrectangular = true;
             let clicks = [];
-            let corners=8;
+            let corners=f_pcorners.value;
             let forms_c1='#000000';
-            let forms_c2='';
+            let forms_c2='#dddddd';
+            let form_type="o";
+            let f_x2=0;
+            let f_y2=0;
+            
 
 
 
           /*consts*/
 
             const fontSelect = document.getElementById("font-select");
-            const formSelect = document.getElementById("forms-select")
+            const formSelect = document.getElementById("forms-select");
+            const formtypeSelect = document.getElementById("forms-type-select");
             const clearButton = document.getElementById('clearButton');
             const undoButton = document.getElementById('undoButton');
             const redoButton = document.getElementById('redoButton');
             const colorPicker = document.getElementById('colorPicker');
+            const colorPicker_f1 = document.getElementById('colorPicker_f1');
+            const colorPicker_f2 = document.getElementById('colorPicker_f2');
             const colorPickerText = document.getElementById('colorPickerText');
             const standardColors = document.getElementById('standardColors');
             const standardColorsText = document.getElementById('standardColorsText');
@@ -736,6 +759,8 @@
             const sliderWrapper = document.getElementById("sliderWrapper");
             const exposureSlider = document.getElementById("exposure");
             const grayscaleSlider = document.getElementById("grayscale");
+            const f_cornersSlider = document.getElementById("f_corners");
+            const f_pcornersSlider = document.getElementById("f_pcorners");
             const invertSlider=document.getElementById("invert");
             const fill =document.getElementById("fill");
             const form_Line = document.getElementById("forms_line");
@@ -746,6 +771,7 @@
             const form_Anygon = document.getElementById("forms_anygon");
             const form_Polygon = document.getElementById("forms_polygon");
             const form_Heart = document.getElementById("forms_heart");
+            const checkBox = document.getElementById("f_tri_bx");
 
 
           /*startfunctions*/
@@ -753,6 +779,9 @@
             selectMenuDraw();
 
           /*eventlisterns*/
+            checkBox.addEventListener('change',function(){
+              isrectangular=!isrectangular;
+            });
             clearButton.addEventListener('click', clearCanvas);
             undoButton.addEventListener('click', undo);
             redoButton.addEventListener('click', redo);
@@ -822,6 +851,12 @@
             colorPicker.addEventListener('change', () => {
               selectedColor = colorPicker.value;
             });
+            colorPicker_f1.addEventListener('change', () => {
+              forms_c1 = colorPicker_f1.value;
+            });
+            colorPicker_f2.addEventListener('change', () => {
+              forms_c2 = colorPicker_f2.value;
+            });
             standardColors.addEventListener('click', (e) => {
               if (e.target.classList.contains('color')) {
                 isRainbowMode=false;
@@ -883,12 +918,15 @@
 		        });
             formSelect.addEventListener("change",function(){
               selectedform=formSelect.value;
-              const forms =["forms_line","forms_tri","forms_rect","forms_circle","forms_elypse","forms_anygon","forms_polygon","forms_heart","forms_star"];
+              const forms =["forms_line","forms_tri","forms_rect","forms_circle","forms_elypse","forms_anygon","forms_polygon","forms_heart"];
               for(var i=0; i < forms.length; i++) { 
                 var element = document.getElementById(forms[i]);
                 if(selectedform==forms[i]) element.hidden=false;
                 else element.hidden=true;
               }
+            });
+            formtypeSelect.addEventListener("change",function(){
+              form_type=formtypeSelect.value;
             });
             tempCanvas.addEventListener("mousedown", function(event) {
               if(modeForms){
@@ -902,8 +940,18 @@
                   });
                   tempCtx.clearRect(0, 0, canvas.width, canvas.height);
                   tempCtx.drawImage(canvas, 0, 0);
-                  tempCtx.fillStyle = 'rgba(100,100,100,0.5)';
-                  tempCtx.strokeStyle = "#000000";
+                  if(form_type=="f"){
+                    tempCtx.strokeStyle='#00000000';
+                    tempCtx.fillStyle =forms_c2;
+                  }
+                  else if(form_type=="o"){
+                    tempCtx.strokeStyle=forms_c1;
+                    tempCtx.fillStyle ='#00000000';
+                  }
+                  else if(form_type=="of"){
+                    tempCtx.strokeStyle=forms_c1;
+                    tempCtx.fillStyle =forms_c2;
+                  }
                   tempCtx.lineWidth = 1;
                   tempCtx.beginPath();
                   tempCtx.moveTo(clicks[0].x, clicks[0].y);
@@ -922,103 +970,15 @@
               }
             });
             tempCanvas.addEventListener("mousemove", function(event) {
-              if(modeForms){
-                if(selectedform=="forms_line"){
-                  var mouseX = event.clientX - tempCanvas.offsetLeft;
-                  var mouseY = event.clientY - tempCanvas.offsetTop;
-                  if (isResizing) {
+              drawforms(event);
+            });
+            f_pcorners.addEventListener("change",function(){
+              corners=f_pcorners.value;
+              var mouseX = f_x2;
+                  var mouseY = f_y2;
+                    changecornerswoe(event);
                     tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
                     tempCtx.drawImage(canvas, 0, 0);
-                    tempCtx.fillStyle = "red";
-                    tempCtx.beginPath();
-                    tempCtx.moveTo(x, y);
-                    tempCtx.lineTo(mouseX, mouseY);
-                    tempCtx.stroke();
-                  }
-                }
-                else if(selectedform=="forms_tri"){
-                  var mouseX = event.clientX - tempCanvas.offsetLeft;
-                  var mouseY = event.clientY - tempCanvas.offsetTop;
-                  if (isResizing) {
-                    width = mouseX - x;
-                    height = mouseY - y;
-                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
-                    tempCtx.fillStyle = "red";
-                    tempCtx.fillStyle = 'rgba(100,100,100,0.5)';
-                    tempCtx.drawImage(canvas, 0, 0);
-                    tempCtx.beginPath();
-                    if(isrectangular){
-                      tempCtx.moveTo(x, y);
-                      tempCtx.lineTo(x, mouseY);
-                      tempCtx.lineTo(mouseX, mouseY);
-                    }
-                    else{
-                      tempCtx.moveTo((x+mouseX)/2, y);
-                      tempCtx.lineTo(x, mouseY);
-                      tempCtx.lineTo(mouseX, mouseY);
-                    }
-                    tempCtx.closePath();
-                    tempCtx.stroke();
-                  }
-                }
-                else if(selectedform=="forms_rect"){
-                  var mouseX = event.clientX - tempCanvas.offsetLeft;
-                  var mouseY = event.clientY - tempCanvas.offsetTop;
-                  if (isResizing) {
-                    width = mouseX - x;
-                    height = mouseY - y;
-                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
-                    tempCtx.drawImage(canvas, 0, 0);
-                    tempCtx.beginPath();
-                    tempCtx.fillStyle = "red";
-                    tempCtx.roundRect(x, y, width, height,0);//(0°rounded corners)
-                    tempCtx.stroke();
-                  }
-                }
-                else if(selectedform=="forms_circle"){
-                  var mouseX = event.clientX - tempCanvas.offsetLeft;
-                  var mouseY = event.clientY - tempCanvas.offsetTop;
-                  if (isResizing) {
-                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
-                    tempCtx.drawImage(canvas, 0, 0);
-                    tempCtx.fillStyle = 'rgba(100,100,100,0.5)';
-                    tempCtx.beginPath();
-                    //mathe abvoten?
-                    var a = mouseX-x;
-                    var b = mouseY-y;
-                    if(a<0)a=a*(-1);
-                    if(b<0)b=b*(-1);
-                    var r= Math.max(a,b)/2;
-                    tempCtx.arc((x+mouseX)/2, (y+mouseY)/2, r, 0, 360,false);//(clockwise)
-                    tempCtx.stroke();
-                  }
-                }
-                else if(selectedform=="forms_elypse"){
-                  var mouseX = event.clientX - tempCanvas.offsetLeft;
-                  var mouseY = event.clientY - tempCanvas.offsetTop;
-                  if (isResizing) {
-                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
-                    tempCtx.drawImage(canvas, 0, 0);
-                    tempCtx.fillStyle = 'rgba(100,100,100,0.5)';
-                    tempCtx.beginPath();
-                    //mathe abschaffen?
-                    var a = mouseX-x;
-                    var b = mouseY-y;
-                    if(a<0)a=a*(-1);
-                    if(b<0)b=b*(-1);
-                    tempCtx.ellipse((x+mouseX)/2, (y+mouseY)/2, a/2, b/2, 0, 0, 360);
-                    tempCtx.stroke();
-                  }
-                }
-                else if(selectedform=="forms_polygon"){
-                  var mouseX = event.clientX - tempCanvas.offsetLeft;
-                  var mouseY = event.clientY - tempCanvas.offsetTop;
-                  if (isResizing) {
-                    changecorners(event);
-                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
-                    tempCtx.drawImage(canvas, 0, 0);
-                    tempCtx.strokeStyle="red";
-                    tempCtx.fillStyle = 'rgba(100,100,100,0.5)';
                     var a = mouseX-x;
                     var b = mouseY-y;
                     if(a<0)a=a*(-1);
@@ -1029,42 +989,33 @@
                     for(var i=1; i < clicks.length; i++) { 
                       tempCtx.lineTo(clicks[i]._x,clicks[i]._y);
                     }
-                    tempCtx.closePath();
-                    tempCtx.stroke();
-                  }
-                }
-                else if(selectedform=="forms_heart"){
-                  var mouseX = event.clientX - tempCanvas.offsetLeft;
-                  var mouseY = event.clientY - tempCanvas.offsetTop;
-                  if (isResizing) {
+                    f_x2=mouseX;
+                    f_y2=mouseY;
+                  
+                  tempCtx.closePath();
+                tempCtx.fill();
+                tempCtx.stroke();
+            });
+            f_cornersSlider.addEventListener("change",function(){
+              var mouseX = f_x2;
+                  var mouseY =f_y2;
+
+                    width = mouseX - x;
+                    height = mouseY - y;
                     tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
                     tempCtx.drawImage(canvas, 0, 0);
-                    tempCtx.strokeStyle="red";
-                    tempCtx.fillStyle = 'rgba(100,100,100,0.5)';
-                    var a = mouseX-x;
-                    var b = mouseY-y;
-                    var k =x;
-                    var d=b;//height
-                    var v = a;//width
                     tempCtx.beginPath();
-                    tempCtx.moveTo(k, k + d / 4);
-                    tempCtx.quadraticCurveTo(k        , k        , k + v / 4  , k);
-                    tempCtx.quadraticCurveTo(k + v / 2, k        , k + v / 2  , k + d / 4);
-                    tempCtx.quadraticCurveTo(k + v / 2, k        , k + v * 3/4, k);
-                    tempCtx.quadraticCurveTo(k + v    , k        , k + v      , k + d / 4);
-                    tempCtx.quadraticCurveTo(k + v    , k + d / 2, k + v * 3/4, k + d * 3/4);
-                    tempCtx.lineTo(			 k + v / 2, k + d);
-                    tempCtx.lineTo(			 k + v / 4, k + d * 3/4);
-                    tempCtx.quadraticCurveTo(k        , k + d / 2, k          , k + d / 4);
+                    tempCtx.roundRect(x, y, width, height,f_cornersSlider.value);//(0°rounded corners)
+                    f_x2=mouseX;
+                    f_y2=mouseY;
                     tempCtx.closePath();
-                    tempCtx.stroke();
-                  }
-                }
-              }
+                tempCtx.fill();
+                tempCtx.stroke();
+
             });
 
           /*functions*/
-          function changecorners(event){
+            function changecorners(event){
             var mouseX = event.clientX - tempCanvas.offsetLeft;
             var mouseY = event.clientY - tempCanvas.offsetTop;
             var a = mouseX-x;
@@ -1080,6 +1031,27 @@
                 _x: (mouseX+x)/2  +  Math.cos(i*alpha * Math.PI / 180)*r,
                 _y: (mouseY+y)/2  +  Math.sin(i*alpha * Math.PI / 180)*r
               });
+            }
+          }
+          function changecornerswoe(event){
+            var mouseX = f_x2;
+            var mouseY = f_y2;
+            var a = mouseX-x;
+            var b = mouseY-y;
+            if(a<0)a=a*(-1);
+            if(b<0)b=b*(-1);
+            var r= Math.max(a,b)/2;
+            var alpha = 360/corners;
+            clicks = null;
+            clicks = [];
+            for(var i=0; i < corners+1; i++) { 
+              if(i<corners+1){
+                clicks.push({
+                _x: (mouseX+x)/2  +  Math.cos(i*alpha * Math.PI / 180)*r,
+                _y: (mouseY+y)/2  +  Math.sin(i*alpha * Math.PI / 180)*r
+              });     
+              }
+
             }
           }
 
@@ -1118,6 +1090,148 @@
               curserCtx.font= strg;
               curserCtx.fillStyle =selectedColor;
               curserCtx.fillText(TextInput.value, lastX, lastY);
+            }
+
+            function drawforms(event){
+              if(modeForms){
+                if(form_type=="f"){
+                  tempCtx.strokeStyle='#00000000';
+                  tempCtx.fillStyle =forms_c2;
+                }
+                else if(form_type=="o"){
+                  tempCtx.strokeStyle=forms_c1;
+                  tempCtx.fillStyle ='#00000000';
+                }
+                else if(form_type=="of"){
+                  tempCtx.strokeStyle=forms_c1;
+                  tempCtx.fillStyle =forms_c2;
+                }
+                if(selectedform=="forms_line"){
+                  var mouseX = event.clientX - tempCanvas.offsetLeft;
+                  var mouseY = event.clientY - tempCanvas.offsetTop;
+                  if (isResizing) {
+                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+                    tempCtx.drawImage(canvas, 0, 0);
+                    tempCtx.beginPath();
+                    tempCtx.moveTo(x, y);
+                    tempCtx.lineTo(mouseX, mouseY);
+                  }
+                }
+                else if(selectedform=="forms_tri"){
+                  var mouseX = event.clientX - tempCanvas.offsetLeft;
+                  var mouseY = event.clientY - tempCanvas.offsetTop;
+                  if (isResizing) {
+                    width = mouseX - x;
+                    height = mouseY - y;
+                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+                    tempCtx.drawImage(canvas, 0, 0);
+                    tempCtx.beginPath();
+                    if(isrectangular){
+                      tempCtx.moveTo(x, y);
+                      tempCtx.lineTo(x, mouseY);
+                      tempCtx.lineTo(mouseX, mouseY);
+                    }
+                    else{
+                      tempCtx.moveTo((x+mouseX)/2, y);
+                      tempCtx.lineTo(x, mouseY);
+                      tempCtx.lineTo(mouseX, mouseY);
+                    }
+                  }
+                }
+                else if(selectedform=="forms_rect"){
+                  var mouseX = event.clientX - tempCanvas.offsetLeft;
+                  var mouseY = event.clientY - tempCanvas.offsetTop;
+                  if (isResizing) {
+                    width = mouseX - x;
+                    height = mouseY - y;
+                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+                    tempCtx.drawImage(canvas, 0, 0);
+                    tempCtx.beginPath();
+                    tempCtx.roundRect(x, y, width, height,f_cornersSlider.value);//(0°rounded corners)
+                    f_x2=mouseX;
+                    f_y2=mouseY;
+                  }
+                }
+                else if(selectedform=="forms_circle"){
+                  var mouseX = event.clientX - tempCanvas.offsetLeft;
+                  var mouseY = event.clientY - tempCanvas.offsetTop;
+                  if (isResizing) {
+                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+                    tempCtx.drawImage(canvas, 0, 0);
+                    tempCtx.beginPath();
+                    //mathe abvoten?
+                    var a = mouseX-x;
+                    var b = mouseY-y;
+                    if(a<0)a=a*(-1);
+                    if(b<0)b=b*(-1);
+                    var r= Math.max(a,b)/2;
+                    tempCtx.arc((x+mouseX)/2, (y+mouseY)/2, r, 0, 360,false);//(clockwise)
+                  }
+                }
+                else if(selectedform=="forms_elypse"){
+                  var mouseX = event.clientX - tempCanvas.offsetLeft;
+                  var mouseY = event.clientY - tempCanvas.offsetTop;
+                  if (isResizing) {
+                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+                    tempCtx.drawImage(canvas, 0, 0);
+                    tempCtx.beginPath();
+                    //mathe abschaffen?
+                    var a = mouseX-x;
+                    var b = mouseY-y;
+                    if(a<0)a=a*(-1);
+                    if(b<0)b=b*(-1);
+                    tempCtx.ellipse((x+mouseX)/2, (y+mouseY)/2, a/2, b/2, 0, 0, 360);
+                  }
+                }
+                else if(selectedform=="forms_polygon"){
+                  var mouseX = event.clientX - tempCanvas.offsetLeft;
+                  var mouseY = event.clientY - tempCanvas.offsetTop;
+                  if (isResizing) {
+                    changecorners(event);
+                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+                    tempCtx.drawImage(canvas, 0, 0);
+                    var a = mouseX-x;
+                    var b = mouseY-y;
+                    if(a<0)a=a*(-1);
+                    if(b<0)b=b*(-1);
+                    var r= Math.max(a,b)/2;
+                    tempCtx.beginPath();
+                    tempCtx.moveTo(clicks[0]._x,clicks[0]._y);//(clockwise)
+                    for(var i=1; i < clicks.length; i++) { 
+                      tempCtx.lineTo(clicks[i]._x,clicks[i]._y);
+                    }
+                    f_x2=mouseX;
+                    f_y2=mouseY;
+                  }
+                }
+                else if(selectedform=="forms_heart"){
+                  var mouseX = event.clientX - tempCanvas.offsetLeft;
+                  var mouseY = event.clientY - tempCanvas.offsetTop;
+                  if (isResizing) {
+                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+                    tempCtx.drawImage(canvas, 0, 0);
+                    var a = mouseX-x;
+                    var b = mouseY-y;
+                    var k =x;
+                    var d=b;//height
+                    var v = a;//width
+                    tempCtx.beginPath();
+                    tempCtx.moveTo(k, k + d / 4);
+                    tempCtx.quadraticCurveTo(k        , k        , k + v / 4  , k);
+                    tempCtx.quadraticCurveTo(k + v / 2, k        , k + v / 2  , k + d / 4);
+                    tempCtx.quadraticCurveTo(k + v / 2, k        , k + v * 3/4, k);
+                    tempCtx.quadraticCurveTo(k + v    , k        , k + v      , k + d / 4);
+                    tempCtx.quadraticCurveTo(k + v    , k + d / 2, k + v * 3/4, k + d * 3/4);
+                    tempCtx.lineTo(			     k + v / 2, k + d);
+                    tempCtx.lineTo(			     k + v / 4, k + d * 3/4);
+                    tempCtx.quadraticCurveTo(k        , k + d / 2, k          , k + d / 4);
+                  }
+                }
+                
+                tempCtx.closePath();
+                tempCtx.fill();
+                tempCtx.stroke();
+              }
             }
 
             function draw(e) {
