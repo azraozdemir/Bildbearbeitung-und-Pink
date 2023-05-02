@@ -443,7 +443,6 @@
                     <p id ="f_p_txt"></p>
                   </div>
                   <div id="forms_heart"hidden=true>
-                    <p>heart</p>
                   </div>
 
 
@@ -709,7 +708,6 @@
             let mouse_Down=false;
             let selectedFont= "Arial";
             let selectedform="forms_line";
-
             let x = 50;
 		        let y = 50;
 		        let isResizing = false;
@@ -1033,27 +1031,28 @@
               });
             }
           }
-          function changecornerswoe(event){
-            var mouseX = f_x2;
-            var mouseY = f_y2;
-            var a = mouseX-x;
-            var b = mouseY-y;
-            if(a<0)a=a*(-1);
-            if(b<0)b=b*(-1);
-            var r= Math.max(a,b)/2;
-            var alpha = 360/corners;
-            clicks = null;
-            clicks = [];
-            for(var i=0; i < corners+1; i++) { 
-              if(i<corners+1){
-                clicks.push({
-                _x: (mouseX+x)/2  +  Math.cos(i*alpha * Math.PI / 180)*r,
-                _y: (mouseY+y)/2  +  Math.sin(i*alpha * Math.PI / 180)*r
-              });     
-              }
 
+            function changecornerswoe(event){
+              var mouseX = f_x2;
+              var mouseY = f_y2;
+              var a = mouseX-x;
+              var b = mouseY-y;
+              if(a<0)a=a*(-1);
+              if(b<0)b=b*(-1);
+              var r= Math.max(a,b)/2;
+              var alpha = 360/corners;
+              clicks = null;
+              clicks = [];
+              for(var i=0; i < corners+1; i++) { 
+                if(i<corners+1){
+                  clicks.push({
+                  _x: (mouseX+x)/2  +  Math.cos(i*alpha * Math.PI / 180)*r,
+                  _y: (mouseY+y)/2  +  Math.sin(i*alpha * Math.PI / 180)*r
+                });     
+                }
+
+              }
             }
-          }
 
             function addAction() {
               if(pointer<actions.length){
@@ -1297,12 +1296,9 @@
             function create(){
               ctx.clearRect(0, 0, canvas.width, canvas.height);
               ctx.drawImage(tempCanvas,0,0);
-              tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
               addAction();
               selectMenuDraw();
               resetFilters();
-              clicks = null;
-			        clicks = [];
             }
 
             function resetFilters(){
