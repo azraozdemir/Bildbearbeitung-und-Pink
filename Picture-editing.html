@@ -390,16 +390,63 @@
                   <input class="opt_slider"type="range" id="invert" min="0" max="100" value="0">
                   <div class="menuButtons"><button class="cancelButton"id="cancelButton_filters">Cancel</button><button id="createButton_filters"class="createButton">Create</button></div>
                 </div>
+
+
+                
                 <div id="opt_forms"  hidden="true">
                   <div id="forms-selector">
                     <label >Form:</label>
                     <select id="forms-select" size="1">
-                      <option value="Rectangle" class="forms-option">Rectangle</option>
+                      <option value="forms_line" class="forms-option">Line</option>
+                      <option value="forms_tri" class="forms-option">Triangle</option>
+                      <option value="forms_rect" class="forms-option">Rectangle</option>
+                      <option value="forms_circle" class="forms-option">Circle</option>
+                      <option value="forms_elypse" class="forms-option">Elipse</option>
+                      <option value="forms_anygon" class="forms-option">Any-Gon</option>
+                      <option value="forms_polygon" class="forms-option">Polygon</option>
+                      <option value="forms_heart" class="forms-option">Heart</option>
                     </select>
                   </div>
                 
+
+
+                  <div id="forms_line"hidden=true>
+                    <p>line</p>
+                  </div>
+                  <div id="forms_tri"hidden=true>
+                    <p>tri</p>
+                  </div>
+                  <div id="forms_rect"hidden=true>
+                      <p>rect</p>
+                  </div>
+                  <div id="forms_circle"hidden=true>
+                    <p>circle</p>
+                  </div>
+                  <div id="forms_elypse"hidden=true>
+                    <p>elipse</p>
+                  </div>
+                  <div id="forms_anygon"hidden=true>
+                    <p>anygon</p>
+                  </div>
+                  <div id="forms_polygon"hidden=true>
+                    <p>polygon</p>
+                  </div>
+                  <div id="forms_heart"hidden=true>
+                    <p>heart</p>
+                  </div>
+
+
+
+
+
+
+
+
                   <div class="menuButtons"><button class="cancelButton"id="cancelButton_forms">Cancel</button><button id="createButton_forms"class="createButton">Create</button></div>
                 </div>
+
+
+
                 <div id="opt_text"  hidden="true">
                   <div id="standardColorsText">
                     <input  class="color pik" type="color" id="colorPickerText" value="#000000">
@@ -446,6 +493,7 @@
             </ul>
         </div><!--option box -->
         <div class="info">
+          <!-- @azra hier info dazutuhen bei jedem-->
             <div id="info_draw">
                 <b>*Hier kommen die beschreibungen der einzelnen optinen hin /draw*</b>
             </div>
@@ -577,7 +625,9 @@
                 element = document.getElementById("info_forms");
                 element.hidden=false;
                 modeForms = true;
-                loadTempCanVas()
+                loadTempCanVas();
+                element = document.getElementById("forms_line");
+                element.hidden=false;
             }
             function selectMenuText(){
                 unselectAllMenu();
@@ -642,9 +692,23 @@
             let cHeight=500;
             let mouse_Down=false;
             let selectedFont= "Arial";
+            let selectedform="forms_line";
+
+            let x = 50;
+		        let y = 50;
+		        let isResizing = false;
+            let isrectangular = false;
+            let clicks = [];
+            let corners=8;
+            let forms_c1='#000000';
+            let forms_c2='';
+
+
 
           /*consts*/
+
             const fontSelect = document.getElementById("font-select");
+            const formSelect = document.getElementById("forms-select")
             const clearButton = document.getElementById('clearButton');
             const undoButton = document.getElementById('undoButton');
             const redoButton = document.getElementById('redoButton');
@@ -674,6 +738,15 @@
             const grayscaleSlider = document.getElementById("grayscale");
             const invertSlider=document.getElementById("invert");
             const fill =document.getElementById("fill");
+            const form_Line = document.getElementById("forms_line");
+            const form_Tri = document.getElementById("forms_tri");
+            const form_Rect = document.getElementById("forms_rect");
+            const form_Circle = document.getElementById("forms_circle");
+            const form_Elypse = document.getElementById("forms_elypse");
+            const form_Anygon = document.getElementById("forms_anygon");
+            const form_Polygon = document.getElementById("forms_polygon");
+            const form_Heart = document.getElementById("forms_heart");
+
 
           /*startfunctions*/
             addAction();
@@ -808,8 +881,208 @@
 			        selectedFont = fontSelect.value;
               drawTextCurser(null);
 		        });
+            formSelect.addEventListener("change",function(){
+              selectedform=formSelect.value;
+              const forms =["forms_line","forms_tri","forms_rect","forms_circle","forms_elypse","forms_anygon","forms_polygon","forms_heart","forms_star"];
+              for(var i=0; i < forms.length; i++) { 
+                var element = document.getElementById(forms[i]);
+                if(selectedform==forms[i]) element.hidden=false;
+                else element.hidden=true;
+              }
+            });
+            tempCanvas.addEventListener("mousedown", function(event) {
+              if(modeForms){
+                x= event.clientX - tempCanvas.offsetLeft;
+                y= event.clientY - tempCanvas.offsetTop;
+                isResizing = true;
+                if(selectedform=="forms_anygon"){
+                  clicks.push({
+                  x: event.offsetX,
+                  y: event.offsetY
+                  });
+                  tempCtx.clearRect(0, 0, canvas.width, canvas.height);
+                  tempCtx.drawImage(canvas, 0, 0);
+                  tempCtx.fillStyle = 'rgba(100,100,100,0.5)';
+                  tempCtx.strokeStyle = "#000000";
+                  tempCtx.lineWidth = 1;
+                  tempCtx.beginPath();
+                  tempCtx.moveTo(clicks[0].x, clicks[0].y);
+                  for(var i=1; i < clicks.length; i++) { 
+                    tempCtx.lineTo(clicks[i].x,clicks[i].y);
+                  }
+                  tempCtx.closePath();
+                  tempCtx.fill();
+                  tempCtx.stroke();
+                }
+              }
+            });
+            tempCanvas.addEventListener("mouseup", function(event) {
+              if(modeForms){
+                isResizing = false;
+              }
+            });
+            tempCanvas.addEventListener("mousemove", function(event) {
+              if(modeForms){
+                if(selectedform=="forms_line"){
+                  var mouseX = event.clientX - tempCanvas.offsetLeft;
+                  var mouseY = event.clientY - tempCanvas.offsetTop;
+                  if (isResizing) {
+                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+                    tempCtx.drawImage(canvas, 0, 0);
+                    tempCtx.fillStyle = "red";
+                    tempCtx.beginPath();
+                    tempCtx.moveTo(x, y);
+                    tempCtx.lineTo(mouseX, mouseY);
+                    tempCtx.stroke();
+                  }
+                }
+                else if(selectedform=="forms_tri"){
+                  var mouseX = event.clientX - tempCanvas.offsetLeft;
+                  var mouseY = event.clientY - tempCanvas.offsetTop;
+                  if (isResizing) {
+                    width = mouseX - x;
+                    height = mouseY - y;
+                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+                    tempCtx.fillStyle = "red";
+                    tempCtx.fillStyle = 'rgba(100,100,100,0.5)';
+                    tempCtx.drawImage(canvas, 0, 0);
+                    tempCtx.beginPath();
+                    if(isrectangular){
+                      tempCtx.moveTo(x, y);
+                      tempCtx.lineTo(x, mouseY);
+                      tempCtx.lineTo(mouseX, mouseY);
+                    }
+                    else{
+                      tempCtx.moveTo((x+mouseX)/2, y);
+                      tempCtx.lineTo(x, mouseY);
+                      tempCtx.lineTo(mouseX, mouseY);
+                    }
+                    tempCtx.closePath();
+                    tempCtx.stroke();
+                  }
+                }
+                else if(selectedform=="forms_rect"){
+                  var mouseX = event.clientX - tempCanvas.offsetLeft;
+                  var mouseY = event.clientY - tempCanvas.offsetTop;
+                  if (isResizing) {
+                    width = mouseX - x;
+                    height = mouseY - y;
+                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+                    tempCtx.drawImage(canvas, 0, 0);
+                    tempCtx.beginPath();
+                    tempCtx.fillStyle = "red";
+                    tempCtx.roundRect(x, y, width, height,0);//(0°rounded corners)
+                    tempCtx.stroke();
+                  }
+                }
+                else if(selectedform=="forms_circle"){
+                  var mouseX = event.clientX - tempCanvas.offsetLeft;
+                  var mouseY = event.clientY - tempCanvas.offsetTop;
+                  if (isResizing) {
+                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+                    tempCtx.drawImage(canvas, 0, 0);
+                    tempCtx.fillStyle = 'rgba(100,100,100,0.5)';
+                    tempCtx.beginPath();
+                    //mathe abvoten?
+                    var a = mouseX-x;
+                    var b = mouseY-y;
+                    if(a<0)a=a*(-1);
+                    if(b<0)b=b*(-1);
+                    var r= Math.max(a,b)/2;
+                    tempCtx.arc((x+mouseX)/2, (y+mouseY)/2, r, 0, 360,false);//(clockwise)
+                    tempCtx.stroke();
+                  }
+                }
+                else if(selectedform=="forms_elypse"){
+                  var mouseX = event.clientX - tempCanvas.offsetLeft;
+                  var mouseY = event.clientY - tempCanvas.offsetTop;
+                  if (isResizing) {
+                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+                    tempCtx.drawImage(canvas, 0, 0);
+                    tempCtx.fillStyle = 'rgba(100,100,100,0.5)';
+                    tempCtx.beginPath();
+                    //mathe abschaffen?
+                    var a = mouseX-x;
+                    var b = mouseY-y;
+                    if(a<0)a=a*(-1);
+                    if(b<0)b=b*(-1);
+                    tempCtx.ellipse((x+mouseX)/2, (y+mouseY)/2, a/2, b/2, 0, 0, 360);
+                    tempCtx.stroke();
+                  }
+                }
+                else if(selectedform=="forms_polygon"){
+                  var mouseX = event.clientX - tempCanvas.offsetLeft;
+                  var mouseY = event.clientY - tempCanvas.offsetTop;
+                  if (isResizing) {
+                    changecorners(event);
+                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+                    tempCtx.drawImage(canvas, 0, 0);
+                    tempCtx.strokeStyle="red";
+                    tempCtx.fillStyle = 'rgba(100,100,100,0.5)';
+                    var a = mouseX-x;
+                    var b = mouseY-y;
+                    if(a<0)a=a*(-1);
+                    if(b<0)b=b*(-1);
+                    var r= Math.max(a,b)/2;
+                    tempCtx.beginPath();
+                    tempCtx.moveTo(clicks[0]._x,clicks[0]._y);//(clockwise)
+                    for(var i=1; i < clicks.length; i++) { 
+                      tempCtx.lineTo(clicks[i]._x,clicks[i]._y);
+                    }
+                    tempCtx.closePath();
+                    tempCtx.stroke();
+                  }
+                }
+                else if(selectedform=="forms_heart"){
+                  var mouseX = event.clientX - tempCanvas.offsetLeft;
+                  var mouseY = event.clientY - tempCanvas.offsetTop;
+                  if (isResizing) {
+                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+                    tempCtx.drawImage(canvas, 0, 0);
+                    tempCtx.strokeStyle="red";
+                    tempCtx.fillStyle = 'rgba(100,100,100,0.5)';
+                    var a = mouseX-x;
+                    var b = mouseY-y;
+                    var k =x;
+                    var d=b;//height
+                    var v = a;//width
+                    tempCtx.beginPath();
+                    tempCtx.moveTo(k, k + d / 4);
+                    tempCtx.quadraticCurveTo(k        , k        , k + v / 4  , k);
+                    tempCtx.quadraticCurveTo(k + v / 2, k        , k + v / 2  , k + d / 4);
+                    tempCtx.quadraticCurveTo(k + v / 2, k        , k + v * 3/4, k);
+                    tempCtx.quadraticCurveTo(k + v    , k        , k + v      , k + d / 4);
+                    tempCtx.quadraticCurveTo(k + v    , k + d / 2, k + v * 3/4, k + d * 3/4);
+                    tempCtx.lineTo(			 k + v / 2, k + d);
+                    tempCtx.lineTo(			 k + v / 4, k + d * 3/4);
+                    tempCtx.quadraticCurveTo(k        , k + d / 2, k          , k + d / 4);
+                    tempCtx.closePath();
+                    tempCtx.stroke();
+                  }
+                }
+              }
+            });
 
           /*functions*/
+          function changecorners(event){
+            var mouseX = event.clientX - tempCanvas.offsetLeft;
+            var mouseY = event.clientY - tempCanvas.offsetTop;
+            var a = mouseX-x;
+            var b = mouseY-y;
+            if(a<0)a=a*(-1);
+            if(b<0)b=b*(-1);
+            var r= Math.max(a,b)/2;
+            var alpha = 360/corners;
+            clicks = null;
+            clicks = [];
+            for(var i=0; i < corners+1; i++) { 
+              clicks.push({
+                _x: (mouseX+x)/2  +  Math.cos(i*alpha * Math.PI / 180)*r,
+                _y: (mouseY+y)/2  +  Math.sin(i*alpha * Math.PI / 180)*r
+              });
+            }
+          }
+
             function addAction() {
               if(pointer<actions.length){
                 for (let i = pointer-1; i < actions.length; i++) {
@@ -899,18 +1172,23 @@
             }
 
             function cancel(){
+              ctx.drawImage(tempCanvas,0,0);
+              tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
               selectMenuDraw();
-              ctx.putImageData(actions[pointer],0,0);
               resetFilters();
+              clicks = null;
+			        clicks = [];
             }
 
             function create(){
               ctx.clearRect(0, 0, canvas.width, canvas.height);
               ctx.drawImage(tempCanvas,0,0);
-              ctx.drawImage(curserCanvas,0,0);
+              tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
               addAction();
               selectMenuDraw();
               resetFilters();
+              clicks = null;
+			        clicks = [];
             }
 
             function resetFilters(){
