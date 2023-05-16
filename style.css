@@ -85,28 +85,27 @@
   }
   
   /*header*/
-  .text-background{
-  color:rgb(255, 255, 255);
-  font-size:60px;
-  text-align: center;
-  font-family: UWU2;
-  font-weight: bolds;
-  background-color: rgb(255, 211, 218);
-  position: absolute;
-  width: 100%;
-  vertical-align:text-bottom;
-  padding-bottom: 0.5vw;
-  }
-  .text-dark{
-  background-color: #a44f90;
-  text-shadow: 0px 0px 5px rgb(186, 97, 127);
-  }
-  .text-other-dark{
-  background-color: #a44f90;
-  }
+
+
   .sticky{
   position: fixed;
   width: 100%;
+  background-color: #abfff9;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
+  height: 110px;
+  }
+
+  .sticky .brand{
+    filter: drop-shadow(2px 2px 2px #ffffff);
+    height: 100px;
+    width: 289px;
+    margin: 0 auto;
+    display: block;
+    position: absolute;
+    left: calc((100% - 289px) / 2);
+    z-index: 100000;
+
+
   }
   .autor {
   position: absolute;
@@ -118,52 +117,52 @@
 
   /*backgrounds*/
   .background-1{
-  background-image: url("pics/uwu.jpg");
+  background-image: url("/pics/uwu.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
   min-height: 40vw;
   }
   .background-2{
-  background-image: url("pics/background1.png");
+  background-image: url("/pics/background1.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
   min-height: 37vw;
   }
   .background-3{
-  background-image: url("pics/background2.png");
+  background-image: url("/pics/background2.png");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
   min-height: 37vw;
   }
   .background-other{
-  background-image: url("pics/background1.png");
+  background-image: url("/pics/background1.png");
   background-repeat: no-repeat;
   background-size: cover;
   min-height: 100vm;
   }
   .background-1-dark{
-  background-image: url("pics/background1-dark.png")
+  background-image: url("/pics/background1-dark.png")
   }
   .background-2-dark{
-  background-image: url("pics/background2-dark.png");
+  background-image: url("/pics/background2-dark.png");
   }
   .background-3-dark{
-  background-image: url("pics/background3-dark.png");
+  background-image: url("/pics/background3-dark.png");
   }
 
   /*switch*/
   .switch {
-  position: relative;
+  position: absolute;
   display: inline-block;
   width:6vw;
   height: 3vw;
   border-radius: 34px;
   margin: 1.1vw;
   }
-  .switch input { 
+  .switch input {
   opacity: 0;
   width: 0;
   height: 0;
@@ -285,7 +284,10 @@
   border-radius: 1.9vw 1.9vw 0px 0px;
   }
   .resp_img{
+
+
   width: 5.5vw;
+
   }
   .flip-card-back {
   background-color: #f9f8f8;
@@ -295,9 +297,7 @@
   .half_round_img{
   border-radius: 1.9vw 1.9vw 0px 0px;
   }
-  .resp_img{
-  width: 5.5vw;
-  }
+
 
   /*menü*/
   #menu__toggle {
@@ -399,7 +399,7 @@
   list-style: none;
   }
   .footer{
-  background-color: #eb9ac7;
+  background-color: #ffbbbb;
   }
   .footer-col{
   width: 25%;
@@ -418,7 +418,7 @@
   position: absolute;
   left: 0;
   bottom: -10px;
-  background-color: #C58699;
+  background-color: #ff7699;
   height: 2px;
   box-sizing: border-box;
   width: 50px;
@@ -432,7 +432,6 @@
   color: #ffffff;
   text-decoration: none;
   font-weight: 300;
-  color: #b13232;
   display: block;
   transition: all 0.3s ease;
   }

@@ -2,32 +2,14 @@
     <head>
         <title>Pink and Grafikdesign</title>
         <link rel="stylesheet" href="style.css">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     </head>
     <body>
-        <div class="sticky">
-            <div class="text-background"id=myDIV1>Picture-editing and Pink</div>
-            
-            <a href="index.html"><img src="pics/logo.png" class="resp_img" style="position: relative;left:10vw" ></a>
-            <label class="switch" style="float: left;">
-                <input type="checkbox" id="toggle-mode"onclick="changecolor()">
-                <span class="slider"></span>
-              </label>
-              <input id="menu__toggle" type="checkbox" />
-              <label class="menu__btn" for="menu__toggle">
-                  <span></span>
-              </label>
-              <ul class="menu__box">
-                <div class="cont">
-                    <li><a class="menu__item" href="index.html">Home</a></li>
-                    <li><a class="menu__item" href="pinkgallery.html">Pink Gallery</a></li>
-                    <li><a class="menu__item" href="grafikdesign.html">Grafikdesign</a></li>
-                    <li><a class="menu__item" href="photoshop.html">Photoshop</a></li>
-                </div>
-
-              </ul>
-        </div>
+    <div id="menu-ph"></div>
         <div class="background-2"id="myDIV2"></div>
-        <div class="main-content">
+        <div class="main-content card">
             <h1><b style="font-weight: bold;">ˏ 𓏧 𓏲 𓏲 𓏲 𓋒Photoshop𓋒 𓏲 𓏲 𓏲 𓏲 𓏧 ˎ</b></h1>
             <p>Adobe Photoshop is a professional image editing software program that lets you edit and modify digital photographs. Numerous fields, including photography, graphic design, and web development, use it extensively.</p>
 
@@ -37,7 +19,7 @@
             <h2>‧̍̊˙· 𓆝.° ｡˚𓆛˚｡ °.𓆞 ·˙‧̍̊</h2>
         </div>
         <div class="background-1"id="myDIV3"></div>
-        <div class="main-content">
+        <div class="main-content card">
             <h1><b style="font-weight: bold;">ˏ 𓏧 𓏲 𓏲 𓏲 𓋒 𓏲 𓏲 𓏲 𓏲 𓏧 ˎ</b></h1>
             <h2>what does it offer?</h2>
             <p>Its a professional tool thats wiedly used and you can fiend many tutorial on youtube, mostly by indians.</p>
@@ -54,20 +36,18 @@
             <h2>‧̍̊˙· 𓆝.° ｡˚𓆛˚｡ °.𓆞 ·˙‧̍̊</h2>
         </div>
 
-        <div class="background-3"id="myDIV4"></div>
-        <footer>
-        <div class="link-container">
-          <div class="link-circle left-link">
-            <a href="about-us.html">AboutUs</a>
-          </div>
-          <div class="link-circle right-link">
-            <a href="#">Home</a>
-          </div>
-        </div>
-        </footer>
-
+        <div id="footer-ph"></div>
     </body>
 <script>
+
+    $(function(){
+        $("#footer-ph").load("Components/footer.html");
+    });
+
+    $(function(){
+        $("#menu-ph").load("Components/header.html");
+    });
+
         function changecolor(){
             document.body.classList.toggle("dark-mode");
             var  element = document.getElementById("myDIV1");

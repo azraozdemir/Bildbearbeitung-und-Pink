@@ -1,34 +1,18 @@
 <html>
     <head>
         <title>Pink and Grafikdesign</title>
+
+        <!-- Links -->
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="icon" href="/pics/logo_alone.png" type="image/icon type">
+
+        <!-- Scripts -->
+        <script src="Scripts/IncludeFile.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <body>
         <div class="autor">Azra und Lina</div>
-        <div class="sticky">
-            <div class="text-background"id=myDIV2>Picture-editing and Pink</div>
-
-            <a href="index.html"><img src="pics/logo.png" class="resp_img" style="position: relative;left:10vw" ></a>
-            <label class="switch" style="float: left;">
-                <input type="checkbox" id="toggle-mode"onclick="changecolor()">
-                <span class="slider"></span>
-              </label>
-              
-              <input id="menu__toggle" type="checkbox" />
-              <label class="menu__btn" for="menu__toggle">
-                  <span></span>
-              </label>
-              <ul class="menu__box">
-                <div class="cont">
-                    <li><a class="menu__item" href="index.html">Home</a></li>
-                    <li><a class="menu__item" href="pinkgallery.html">Pink Gallery</a></li>
-                    <li><a class="menu__item" href="grafikdesign.html">Grafikdesign</a></li>
-                    <li><a class="menu__item" href="photoshop.html">Photoshop</a></li>
-                </div>
-
-              </ul>
-
-        </div>
+        <div id="menu"></div>
         <div class="background-1"id=myDIV3>
             <div class="container">
                     <div class="navbar">
@@ -72,46 +56,18 @@
             <p class="quote"id=myDIV1>Ariana Grande:"I love pink. It's always been my favorite color. It's just so bright and happy and feminine. I love wearing pink and incorporating it into my music and my style."</p>
             <h2>‧̍̊˙· 𓆝.° ｡˚𓆛˚｡ °.𓆞 ·˙‧̍̊</h2>
         </div>
-        
-        <footer class="footer">
-            <div class="content">
-              <div class="row">
-                  <div class="footer-col">
-                      <h4>Overview</h4>
-                      <ul>
-                          <li><a href="index.html"></a>Home</li>
-                          <li><a href="pinkgallery.html"></a>Pinkgallery</li>
-                          <li><a href="grafikdesign.html"></a>Grafikdesign</li>
-                          <li><a href="photoshop.html"></a>Photoshop</li>
-                      </ul>
-                  </div>
-  
-                  <div class="footer-col">
-                      <h4>get help</h4>
-                      <ul>
-                          <li><a href="#"></a>about us</li>
-                          <li><a href="#"></a>our service</li>
-                          <li><a href="#"></a>privat</li>
-                          <li><a href="#"></a>ask</li>
-                      </ul>
-                  </div>
-
-                  <div class="footer-col follow-us">
-                      <h4>follow us</h4>
-                      <div class="sozial-links">
-                          <a href="https://www.instagram.com/azn.68/"><i class="fab fa-instagram"></i></a>
-                          <a href="#"><i class="fab fa-snapchat"></i></a>
-                          <a href="https://discordapp.com/users/Lina_#1030"><i class="fab fa-discord"></i></a>
-                          <a href="https://www.instagram.com/caroundsky"><i class="fab fa-instagram"></i></a>
-                      </div>
-                  </div>
-              </div>
-            </div>
-          </footer>
-        
+    <div id="footer-load"></div>
     </body>
     <script>
-        function changecolor(){
+
+        $(function(){
+            $("#footer-load").load("Components/footer.html");
+        });
+
+        $(function(){
+            $("#menu").load("Components/header.html");
+        });
+  function changecolor(){
             document.body.classList.toggle("dark-mode");
             var element = document.getElementById("myDIV1");
             element.classList.toggle("quote-dark");
