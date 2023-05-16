@@ -139,7 +139,6 @@
               margin: 0 auto;
               display: block;
               top:5vw;
-
               position: absolute;
             }
             #tempcanvas{
@@ -168,11 +167,8 @@
               resize: none;
             }
             input[type=text], select {
-
               border-color: #1900ff;
-
             }
-
             .left30{
               left:30%;
             }
@@ -294,29 +290,27 @@
             .box{
               width: 2px;
               height: 20px;
-
               background-color: #000000;
               animation-name: example;
               animation-duration: 1s;
               animation-iteration-count: infinite;
-              }
-              @keyframes example {
-                0%   {background-color:rgb(0, 0, 0);}
-                100% {background-color:#00000000;}
-              }
-              #font-selector {
-                  margin: 20px;
-              }
-              #text {
-                margin: 20px;
-                font-size: 24px;
-              }
-              .font-option {
-                display: inline-block;
-                font-size: 16px;
-                padding: 4px;
-              }
-
+            }
+            @keyframes example {
+              0%   {background-color:rgb(0, 0, 0);}
+              100% {background-color:#00000000;}
+            }
+            #font-selector {
+              margin: 20px;
+            }
+            #text {
+              margin: 20px;
+              font-size: 24px;
+            }
+            .font-option {
+              display: inline-block;
+              font-size: 16px;
+              padding: 4px;
+            }
         </style>
     </head>
     <body>
@@ -324,8 +318,8 @@
             <div class="text-background"id=myDIV2>Editing</div>
             <a href="index.html"><img src="pics/logo.png" class="resp_img" style="position: relative;left:42vw" ></a>
             <label class="switch" style="float: right;">
-                <input type="checkbox" id="toggle-mode"onclick="changecolor()">
-                <span class="slider"></span>
+              <input type="checkbox" id="toggle-mode"onclick="changecolor()">
+              <span class="slider"></span>
             </label>
         </div><!--navbar*/ -->
         <div>
@@ -342,7 +336,6 @@
             <canvas id="canvas" width="500" height="500"></canvas>
             <canvas id="tempcanvas" width="500" height="500"></canvas>
             <canvas id="cursercanvas" width="500"height="500"></canvas>
-
             <div class="box" hidden="true" id="textcursor"></div><!--cursor-->
         </div><!--canvas -->
         <div>
@@ -390,9 +383,6 @@
                   <input class="opt_slider"type="range" id="invert" min="0" max="100" value="0">
                   <div class="menuButtons"><button class="cancelButton"id="cancelButton_filters">Cancel</button><button id="createButton_filters"class="createButton">Create</button></div>
                 </div>
-
-
-                
                 <div id="opt_forms"  hidden="true">
                   <div id="forms-selector">
                     <label >Form:</label>
@@ -407,7 +397,6 @@
                       <option value="forms_heart" class="forms-option">Heart</option>
                     </select>
                   </div>
-
                   <div id="forms-type-selector">
                     <label >DrawMode:</label>
                     <select id="forms-type-select" size="1">
@@ -418,9 +407,6 @@
                   </div>
                   <input  class="color" type="color" id="colorPicker_f1" value="#000000">
                   <input  class="color" type="color" id="colorPicker_f2" value="#000000">
-
-
-
                   <div id="forms_line"hidden=true>
                   </div>
                   <div id="forms_tri"hidden=true>
@@ -438,25 +424,13 @@
                   <div id="forms_anygon"hidden=true>
                   </div>
                   <div id="forms_polygon"hidden=true>
-
                     <input class="opt_slider" type="range" id="f_pcorners" min="2" max = "16" value="6">
                     <p id ="f_p_txt"></p>
                   </div>
                   <div id="forms_heart"hidden=true>
                   </div>
-
-
-
-
-
-
-
-
-                <div class="menuButtons"><button class="cancelButton"id="cancelButton_forms">Cancel</button><button id="createButton_forms"class="createButton">Create</button></div>
+                  <div class="menuButtons"><button class="cancelButton"id="cancelButton_forms">Cancel</button><button id="createButton_forms"class="createButton">Create</button></div>
                 </div>
-
-
-
                 <div id="opt_text"  hidden="true">
                   <div id="standardColorsText">
                     <input  class="color pik" type="color" id="colorPickerText" value="#000000">
@@ -495,9 +469,6 @@
                       <option style="font-family:Mistral;" value="Mistral" class="font-option">Mistral</option>
                     </select>
                   </div>
-
-
-
                   <label for="textinput">Text:</label><br>
                   <textarea id="textinput"></textarea>
                   <div class="menuButtons"><button class="cancelButton"id="cancelButton_text">Cancel</button><button id="createButton_text"class="createButton">Create</button></div>
@@ -525,156 +496,154 @@
                 <b>*Hier kommen die beschreibungen der einzelnen optinen hin /load*</b>
             </div>
         </div><!--info box -->
-
         <!--@lela hier footer einfügen-->
-
         <script>
 /*------------------------------------------script----------------------------------------*/
           /*static management*/
-            function unselectAllMenu(){
-                var element = document.getElementById("menu_draw");
-                element.classList.remove("menu_item_selected");
-                element = document.getElementById("menu_filters");
-                element.classList.remove("menu_item_selected");
-                element = document.getElementById("menu_forms");
-                element.classList.remove("menu_item_selected");
-                element = document.getElementById("menu_text");
-                element.classList.remove("menu_item_selected");
-                element = document.getElementById("menu_load");
-                element.classList.remove("menu_item_selected");
-                document.getElementById("undoButton").disabled = false;
-                document.getElementById("redoButton").disabled = false;
-                document.getElementById("clearButton").disabled = false;
-                modeDraw=false;
-                modeFilters = false;
-                modeForms = false;
-                modeText = false;
-                modeLoad = false;
-                isDrawing=false;
-                element=document.getElementById("tempcanvas");
-                element.classList.add("left-100");
-                element.classList.remove("left30");
-                element=document.getElementById("cursercanvas");
-                element.classList.add("left-100");
-                element.classList.remove("left30");
-                element=document.getElementById("canvas");
-                element.classList.add("left30");
-                element.classList.remove("left-100");
-                tempCtx.putImageData(actions[0].data, 0, 0);
-                element=document.getElementById("textcursor");
-                element.hidden=true;
-                resetFilters();
-            }
-            function unloadAllOptions(){
-                var element = document.getElementById("opt_draw");
-                element.hidden=true;
-                element = document.getElementById("opt_filters");
-                element.hidden=true;
-                element = document.getElementById("opt_forms");
-                element.hidden=true;
-                element = document.getElementById("opt_text");
-                element.hidden=true;
-                element = document.getElementById("opt_load");
-                element.hidden=true;
-            }
-            function unloadAllInfo(){
-                var element = document.getElementById("info_draw");
-                element.hidden=true;
-                element = document.getElementById("info_filters");
-                element.hidden=true;
-                element = document.getElementById("info_forms");
-                element.hidden=true;
-                element = document.getElementById("info_text");
-                element.hidden=true;
-                element = document.getElementById("info_load");
-                element.hidden=true;
-            }
-            function loadTempCanVas(){
-              document.getElementById("undoButton").disabled = true;
-              document.getElementById("redoButton").disabled = true;
-              document.getElementById("clearButton").disabled = true;
-              element=document.getElementById("canvas");
-              element.classList.add("left-100");
-              element.classList.remove("left30");
-              element=document.getElementById("tempcanvas");
-              element.classList.add("left30");
-              element.classList.remove("left-100");
-              tempCtx.drawImage(canvas, 0, 0);
-            }
-            function selectMenuDraw(){
-                unselectAllMenu();
-                unloadAllOptions();
-                unloadAllInfo();
-                var element = document.getElementById("menu_draw");
-                element.classList.add("menu_item_selected");
-                element = document.getElementById("opt_draw");
-                element.hidden=false;
-                element = document.getElementById("info_draw");
-                element.hidden=false;
-                modeDraw=true;
-            }
-            function selectMenuFilters(){
-                unselectAllMenu();
-                unloadAllOptions();
-                unloadAllInfo();
-                var element = document.getElementById("menu_filters");
-                element.classList.add("menu_item_selected");
-                element = document.getElementById("opt_filters");
-                element.hidden=false;
-                element = document.getElementById("info_filters");
-                element.hidden=false;
-                document.getElementById("undoButton").disabled = true;
-                document.getElementById("redoButton").disabled = true;
-                document.getElementById("clearButton").disabled = true;
-                modeFilters=true;
-                loadTempCanVas();
-            }
-            function selectMenuFroms(){
-                unselectAllMenu();
-                unloadAllOptions();
-                unloadAllInfo();
-                var element = document.getElementById("menu_forms");
-                element.classList.add("menu_item_selected");
-                element = document.getElementById("opt_forms");
-                element.hidden=false;
-                element = document.getElementById("info_forms");
-                element.hidden=false;
-                modeForms = true;
-                loadTempCanVas();
-                element = document.getElementById("forms_line");
-                element.hidden=false;
-            }
-            function selectMenuText(){
-                unselectAllMenu();
-                unloadAllOptions();
-                unloadAllInfo();
-                var element = document.getElementById("menu_text");
-                element.classList.add("menu_item_selected");
-                element = document.getElementById("opt_text");
-                element.hidden=false;
-                element = document.getElementById("info_text");
-                element.hidden=false;
-                modeText=true;
-                loadTempCanVas();
-                element=document.getElementById("cursercanvas");
-                element.classList.add("left30");
-                element.classList.remove("left-100");
-                drawTextCurser();
-                element=document.getElementById("textcursor");
-                element.hidden=false;
-            }
-            function selectMenuLoad(){
-                unselectAllMenu();
-                unloadAllOptions();
-                unloadAllInfo();
-                var element = document.getElementById("menu_load");
-                element.classList.add("menu_item_selected");
-                element = document.getElementById("opt_load");
-                element.hidden=false;
-                element = document.getElementById("info_load");
-                element.hidden=false;
-                modeLoad=true;
-            }
+          function unselectAllMenu(){
+            var element = document.getElementById("menu_draw");
+            element.classList.remove("menu_item_selected");
+            element = document.getElementById("menu_filters");
+            element.classList.remove("menu_item_selected");
+            element = document.getElementById("menu_forms");
+            element.classList.remove("menu_item_selected");
+            element = document.getElementById("menu_text");
+            element.classList.remove("menu_item_selected");
+            element = document.getElementById("menu_load");
+            element.classList.remove("menu_item_selected");
+            document.getElementById("undoButton").disabled = false;
+            document.getElementById("redoButton").disabled = false;
+            document.getElementById("clearButton").disabled = false;
+            modeDraw=false;
+            modeFilters = false;
+            modeForms = false;
+            modeText = false;
+            modeLoad = false;
+            isDrawing=false;
+            element=document.getElementById("tempcanvas");
+            element.classList.add("left-100");
+            element.classList.remove("left30");
+            element=document.getElementById("cursercanvas");
+            element.classList.add("left-100");
+            element.classList.remove("left30");
+            element=document.getElementById("canvas");
+            element.classList.add("left30");
+            element.classList.remove("left-100");
+            tempCtx.putImageData(actions[0].data, 0, 0);
+            element=document.getElementById("textcursor");
+            element.hidden=true;
+            resetFilters();
+          }
+          function unloadAllOptions(){
+            var element = document.getElementById("opt_draw");
+            element.hidden=true;
+            element = document.getElementById("opt_filters");
+            element.hidden=true;
+            element = document.getElementById("opt_forms");
+            element.hidden=true;
+            element = document.getElementById("opt_text");
+            element.hidden=true;
+            element = document.getElementById("opt_load");
+            element.hidden=true;
+          }
+          function unloadAllInfo(){
+            var element = document.getElementById("info_draw");
+            element.hidden=true;
+            element = document.getElementById("info_filters");
+            element.hidden=true;
+            element = document.getElementById("info_forms");
+            element.hidden=true;
+            element = document.getElementById("info_text");
+            element.hidden=true;
+            element = document.getElementById("info_load");
+            element.hidden=true;
+          }
+          function loadTempCanVas(){
+            document.getElementById("undoButton").disabled = true;
+            document.getElementById("redoButton").disabled = true;
+            document.getElementById("clearButton").disabled = true;
+            element=document.getElementById("canvas");
+            element.classList.add("left-100");
+            element.classList.remove("left30");
+            element=document.getElementById("tempcanvas");
+            element.classList.add("left30");
+            element.classList.remove("left-100");
+            tempCtx.drawImage(canvas, 0, 0);
+          }
+          function selectMenuDraw(){
+            unselectAllMenu();
+            unloadAllOptions();
+            unloadAllInfo();
+            var element = document.getElementById("menu_draw");
+            element.classList.add("menu_item_selected");
+            element = document.getElementById("opt_draw");
+            element.hidden=false;
+            element = document.getElementById("info_draw");
+            element.hidden=false;
+            modeDraw=true;
+          }
+          function selectMenuFilters(){
+            unselectAllMenu();
+            unloadAllOptions();
+            unloadAllInfo();
+            var element = document.getElementById("menu_filters");
+            element.classList.add("menu_item_selected");
+            element = document.getElementById("opt_filters");
+            element.hidden=false;
+            element = document.getElementById("info_filters");
+            element.hidden=false;
+            document.getElementById("undoButton").disabled = true;
+            document.getElementById("redoButton").disabled = true;
+            document.getElementById("clearButton").disabled = true;
+            modeFilters=true;
+            loadTempCanVas();
+          }
+          function selectMenuFroms(){
+            unselectAllMenu();
+            unloadAllOptions();
+            unloadAllInfo();
+            var element = document.getElementById("menu_forms");
+            element.classList.add("menu_item_selected");
+            element = document.getElementById("opt_forms");
+            element.hidden=false;
+            element = document.getElementById("info_forms");
+            element.hidden=false;
+            modeForms = true;
+            loadTempCanVas();
+            element = document.getElementById("forms_line");
+            element.hidden=false;
+          }
+          function selectMenuText(){
+            unselectAllMenu();
+            unloadAllOptions();
+            unloadAllInfo();
+            var element = document.getElementById("menu_text");
+            element.classList.add("menu_item_selected");
+            element = document.getElementById("opt_text");
+            element.hidden=false;
+            element = document.getElementById("info_text");
+            element.hidden=false;
+            modeText=true;
+            loadTempCanVas();
+            element=document.getElementById("cursercanvas");
+            element.classList.add("left30");
+            element.classList.remove("left-100");
+            drawTextCurser();
+            element=document.getElementById("textcursor");
+            element.hidden=false;
+          }
+          function selectMenuLoad(){
+            unselectAllMenu();
+            unloadAllOptions();
+            unloadAllInfo();
+            var element = document.getElementById("menu_load");
+            element.classList.add("menu_item_selected");
+            element = document.getElementById("opt_load");
+            element.hidden=false;
+            element = document.getElementById("info_load");
+            element.hidden=false;
+            modeLoad=true;
+          }
   /*-----------------here all functinsfor canvas begin------------------*/
           /*initialisation*/
             const canvas = document.getElementById('canvas');
@@ -720,9 +689,6 @@
             let f_x2=0;
             let f_y2=0;
             
-
-
-
           /*consts*/
 
             const fontSelect = document.getElementById("font-select");
@@ -770,7 +736,6 @@
             const form_Polygon = document.getElementById("forms_polygon");
             const form_Heart = document.getElementById("forms_heart");
             const checkBox = document.getElementById("f_tri_bx");
-
 
           /*startfunctions*/
             addAction();
@@ -836,7 +801,6 @@
               }
             });
             curserCanvas.addEventListener('mousemove',(e)=>{
-              
               if(mouse_Down){
                 if(modeText){
                   [lastX, lastY] = [e.offsetX, e.offsetY];
@@ -844,7 +808,6 @@
                   drawTextCurser(e);
                 }
               }
-
             });
             colorPicker.addEventListener('change', () => {
               selectedColor = colorPicker.value;
@@ -871,17 +834,13 @@
                   isFillMode=true;
                 }
                 else{
-
-                  
                   selectedColor = e.target.style.backgroundColor;
                   colorPicker.value = selectedColor;
                 }
-
               }
             });
             colorPickerText.addEventListener('change', () => {
               selectedColor = colorPickerText.value;
-
               drawTextCurser(null);
             });
             standardColorsText.addEventListener('click', (e) => {
@@ -900,7 +859,6 @@
               if (e.target.classList.contains('color')) {
 
                   selectedColor = e.target.style.backgroundColor;
-
               }
             });
             brushSizeInput.addEventListener('input', () => {
@@ -989,7 +947,6 @@
                     }
                     f_x2=mouseX;
                     f_y2=mouseY;
-                  
                   tempCtx.closePath();
                 tempCtx.fill();
                 tempCtx.stroke();
@@ -997,7 +954,6 @@
             f_cornersSlider.addEventListener("change",function(){
               var mouseX = f_x2;
                   var mouseY =f_y2;
-
                     width = mouseX - x;
                     height = mouseY - y;
                     tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
@@ -1009,28 +965,27 @@
                     tempCtx.closePath();
                 tempCtx.fill();
                 tempCtx.stroke();
-
             });
 
           /*functions*/
             function changecorners(event){
-            var mouseX = event.clientX - tempCanvas.offsetLeft;
-            var mouseY = event.clientY - tempCanvas.offsetTop;
-            var a = mouseX-x;
-            var b = mouseY-y;
-            if(a<0)a=a*(-1);
-            if(b<0)b=b*(-1);
-            var r= Math.max(a,b)/2;
-            var alpha = 360/corners;
-            clicks = null;
-            clicks = [];
-            for(var i=0; i < corners+1; i++) { 
-              clicks.push({
-                _x: (mouseX+x)/2  +  Math.cos(i*alpha * Math.PI / 180)*r,
-                _y: (mouseY+y)/2  +  Math.sin(i*alpha * Math.PI / 180)*r
-              });
+              var mouseX = event.clientX - tempCanvas.offsetLeft;
+              var mouseY = event.clientY - tempCanvas.offsetTop;
+              var a = mouseX-x;
+              var b = mouseY-y;
+              if(a<0)a=a*(-1);
+              if(b<0)b=b*(-1);
+              var r= Math.max(a,b)/2;
+              var alpha = 360/corners;
+              clicks = null;
+              clicks = [];
+              for(var i=0; i < corners+1; i++) { 
+                clicks.push({
+                  _x: (mouseX+x)/2  +  Math.cos(i*alpha * Math.PI / 180)*r,
+                  _y: (mouseY+y)/2  +  Math.sin(i*alpha * Math.PI / 180)*r
+                });
+              }
             }
-          }
 
             function changecornerswoe(event){
               var mouseX = f_x2;
@@ -1050,7 +1005,6 @@
                   _y: (mouseY+y)/2  +  Math.sin(i*alpha * Math.PI / 180)*r
                 });     
                 }
-
               }
             }
 
@@ -1226,7 +1180,6 @@
                     tempCtx.quadraticCurveTo(k        , k + d / 2, k          , k + d / 4);
                   }
                 }
-                
                 tempCtx.closePath();
                 tempCtx.fill();
                 tempCtx.stroke();
@@ -1234,35 +1187,35 @@
             }
 
             function draw(e) {
-                if (!isDrawing) return;
-                if(isEraseMode){
-                  ctx.save(); 
+              if (!isDrawing) return;
+              if(isEraseMode){
+                ctx.save(); 
+                ctx.beginPath();
+                ctx.arc(e.offsetX, e.offsetY, brushSize/2, 0, 2*Math.PI); 
+                ctx.clip();
+                ctx.clearRect(0, 0, canvas.width, canvas.height); 
+                ctx.restore(); 
+              }
+              else{
+                if (isRainbowMode) {
+                  const hue = Math.atan2(e.offsetY - lastY, e.offsetX - lastX) / (2 * Math.PI) + 0.5;
+                  ctx.strokeStyle = `hsl(${hue * 360}, 100%, 50%)`;
+                }
+                else {
+                  ctx.strokeStyle = selectedColor;
+                }
+                ctx.lineJoin = 'round';
+                ctx.lineCap = 'round';
+                ctx.lineWidth = brushSize;
+                ctx.globalAlpha = brushOpacity/255;
+                if (lastX !== 0 && lastY !== 0) {
                   ctx.beginPath();
-                  ctx.arc(e.offsetX, e.offsetY, brushSize/2, 0, 2*Math.PI); 
-                  ctx.clip();
-                  ctx.clearRect(0, 0, canvas.width, canvas.height); 
-                  ctx.restore(); 
+                  ctx.moveTo(lastX, lastY);
+                  ctx.lineTo(e.offsetX, e.offsetY);
+                  ctx.stroke();
                 }
-                else{
-                  if (isRainbowMode) {
-                    const hue = Math.atan2(e.offsetY - lastY, e.offsetX - lastX) / (2 * Math.PI) + 0.5;
-                    ctx.strokeStyle = `hsl(${hue * 360}, 100%, 50%)`;
-                  }
-                  else {
-                    ctx.strokeStyle = selectedColor;
-                  }
-                  ctx.lineJoin = 'round';
-                  ctx.lineCap = 'round';
-                  ctx.lineWidth = brushSize;
-                  ctx.globalAlpha = brushOpacity/255;
-                  if (lastX !== 0 && lastY !== 0) {
-                    ctx.beginPath();
-                    ctx.moveTo(lastX, lastY);
-                    ctx.lineTo(e.offsetX, e.offsetY);
-                    ctx.stroke();
-                  }
-                  [lastX, lastY] = [e.offsetX, e.offsetY];
-                }
+                [lastX, lastY] = [e.offsetX, e.offsetY];
+              }
             }
 
             function undo() {
