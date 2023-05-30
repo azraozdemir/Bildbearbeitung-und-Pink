@@ -19,9 +19,11 @@ Schärfe und Unschärfeeffekte hinzufügen
 Filter und Effekte anwenden
 Textelemente hinzufügen 
 
+Natürlich setzen wir unsere Website kontinuierlich fort und haben viele neue Funktionen hinzugefügt, darunter auch Layers. Nun ist es möglich, mehrere Bilder gleichzeitig zu zeichnen und zu speichern. Darüber hinaus finden Sie auf unserer Website detaillierte Beschreibungen, die Ihnen helfen, alle Funktionen optimal zu nutzen. Insbesondere im JavaScript-Bereich haben wir uns intensiv mit der Farbgebung der Bilder beschäftigt.
+
 3. Warum ist das Thema interessant? 
 Fotografie vor allem Bildbearbeitung interessiert uns. Die Farbe Pink finden wir attraktiv und anziehend, deswegen wollen wir auch die Farbe detaliert bearbeiten. 
 
 4. Ist es Dynamisch oder Statisch?
-Unsere Website wird Statisch sein und etwas dynamisch
+Unsere Website wird Statisch sein und etwas Dynamisch
 
