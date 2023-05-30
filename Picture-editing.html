@@ -4,31 +4,38 @@
         <title>Drawing App</title>
         <style>
           /*general*/
-            .text-background{
-              color:rgb(255, 255, 255);
-              font-size:3vw;
-              text-align: center;
-              font-family: UWU2;
-              font-weight: bolds;
-              background-color: rgb(255, 211, 218);
-              position: absolute;
-              width: 100%;
-              height: 3vw;
-              vertical-align:text-bottom;
-              padding-bottom: 0.5vw;
-            }
             body {
               font-family: Arial, sans-serif;
               margin: 0vw;
               color: palevioletred;
             }
             @font-face {
-                font-family: UWU2;
-                src: url(HashedBrowns-WyJgn.ttf);
+            font-family: UWU;
+            src: url(AkayaTelivigala-Regular.ttf);
             }
-            .resp_img{
-              width: 3.5vw;
+            @font-face {
+            font-family: UWU2;
+            src: url(HashedBrowns-WyJgn.ttf);
             }
+            h1 {
+            color: rgb(255, 255, 255);
+            font-family: UWU2;
+            font-size:2vw;
+            text-align: center;
+            margin:0px;
+            }
+            h2 {
+            font-family: UWU;
+            font-size: 2vw;
+            color: rgb(255, 223, 228);
+            text-align: left;
+            margin:1vw;
+            }
+            b {
+              font-size:1.3vw;
+              margin:1vw;
+            }
+
           /*switch*/
             .switch {
               position: relative;
@@ -38,6 +45,7 @@
               border-radius: 34px;
               margin: 0.4vw;
               right:3vw;
+              top:0.8vw;
             }
             .switch input { 
               opacity: 0;
@@ -79,83 +87,56 @@
               -ms-transform: translateX(2.5vw);
               transform: translateX(2.5vw);
             }
-          /*menue*/
-            .menu__box {
-              position: fixed;
-              top:3.4vw;
-              left: 0;
-              width: 16vw;
-              height: 34vw;
-              list-style: none;
-              padding:0vw;
-              background: #fedee3;
-              box-shadow: white;
-              margin :0;
-              border-radius: 0 0 2vw 0;
-            }
-            .menu__item {
-              display: block;
-              padding: 2vw 2vw;
-              top:0vw;
-              color: white;
-              font-size: 20px;
-              font-weight: 1.5px;
-              position: relative;
-              font-size: 1.5vw;
-              border:none;
-              background-color:#fdf1f400;
-              cursor: pointer;
-            }
-            .menu_item_selected{
-              color:rgb(255, 73, 170);
-              font-weight: bold;
-              text-decoration: underline;
-            }
+
           /*options*/
             .opt__box {
-              position: fixed;
-              top:3.4vw;
-              right: 0;
+              position: relative;
+              top:5.2vw;
+              left: 0;
               width: 22vw;
-              height: 40vw;
+              height: 45vw;
               list-style: none;
               padding:0vw;
               background: #fedee3;
               box-shadow: white;
               margin :0;
-              border-radius: 0 0 0 2vw;
+              border-radius: 0 0 0 0;
+              z-index: 8;
             }
+
           /*info*/
-            .info{
-              background-color: rgb(255, 194, 218);
-              bottom:0;
-              position: fixed;
+            .info {
+              background-color: #ffc2da;
+              margin-top:5.2vw;
+              z-index:9;
               width: 100%;
-              text-align: center;
+              text-align: left;
             }
+
           /*canvas*/
             #canvas {
               border: 1px solid black;
               margin: 0 auto;
               display: block;
-              top:5vw;
-              position: absolute;
+              top:6vw;
+              position:absolute;
+              
             }
-            #tempcanvas{
+            #tempcanvas {
               border: 1px solid black;
-              margin: 0 auto;
+              margin: 1 auto;
               display: block;
-              top:5vw;
+              top:6vw;
               position: absolute;
             }
-            #cursercanvas{
+            #cursercanvas {
               border: 1px solid black;
-              margin: 0 auto;
+              margin: 1 auto;
               display: block;
-              top:5vw;
+              top:6vw;
               position: absolute;
             }
-            #textinput{
+            #textinput {
               width: 20vw;
               height: 2vw;
               padding: 2px 2px;
@@ -166,16 +147,14 @@
               background-color: #ffefef;
               resize: none;
             }
-            input[type=text], select {
-              border-color: #1900ff;
-            }
-            .left30{
+            .left30 {
               left:30%;
             }
-            .left-100{
+            .left-100 {
               left:-100%;
             }
-            .undoButton{
+          /*opt_buttons*/
+            .undoButton {
               margin:0.3vw;
               width: 4vw;
               height: 2vw;
@@ -186,7 +165,7 @@
               color:#fff;
               cursor: pointer;
             }
-            .redoButton{
+            .redoButton {
               margin:0.3vw;
               width: 4vw;
               height: 2vw;
@@ -197,7 +176,7 @@
               color:#fff;
               cursor: pointer;
             }
-            .clearButton{
+            .clearButton {
               margin:0.3vw;
               width: 4vw;
               height: 2vw;
@@ -208,38 +187,16 @@
               color:#fff;
               cursor: pointer;
             }
-            .createButton{
-              margin:0.3vw;
-              width: 4vw;
-              height: 2vw;
-              background-color: #ffbccd;
-              border: none;
-              border-radius: 15%;
-              font-size: 1vw;
-              color:#fff;
-              cursor: pointer;
-            }
-            .cancelButton{
-              margin:0.3vw;
-              width: 4vw;
-              height: 2vw;
-              background-color: #ffbccd;
-              border: none;
-              border-radius: 15%;
-              font-size: 1vw;
-              color:#fff;
-              cursor: pointer;
-            }
-            .undoButton:disabled{
+            .undoButton:disabled {
               background-color: #ea9fb4;
             }
-            .redoButton:disabled{
+            .redoButton:disabled {
               background-color: #ea9fb4;
             }
-            .clearButton:disabled{
+            .clearButton:disabled {
               background-color: #ea9fb4;
             }
-            .menuButtons{
+            .menuButtons {
               display: flex;
               justify-content: center;
             }
@@ -254,12 +211,12 @@
             .color:hover {
               opacity: 0.7;
             }
-            #standardColors{
+            #standardColors {
               display: flex;
               flex-wrap: wrap;
               justify-content: center;
             }
-            #standardColorsText{
+            #standardColorsText {
               display: flex;
               flex-wrap: wrap;
               justify-content: center;
@@ -283,11 +240,11 @@
               background: #ff83b5;
               cursor: pointer;
             }
-            label{
+            label {
               font-size: 1.3vw;
               margin:1vw
             }
-            .box{
+            .box {
               width: 2px;
               height: 20px;
               background-color: #000000;
@@ -299,39 +256,115 @@
               0%   {background-color:rgb(0, 0, 0);}
               100% {background-color:#00000000;}
             }
-            #font-selector {
-              margin: 20px;
-            }
-            #text {
-              margin: 20px;
-              font-size: 24px;
+            select #font-selector {
+              width: 20vw;
+              margin:1vw;
+              color: #ff83b5;
             }
             .font-option {
-              display: inline-block;
-              font-size: 16px;
-              padding: 4px;
+              width: 20vw;
+              height: 2vw;
+              padding: 2px 2px;
+              margin:1vw;
+              box-sizing: border-box;
+              border: 2px solid #fccce2;
+              border-radius: 4px;
+              background-color: #ffefef;
+              color:#ea9fb4
             }
+            #font-select {
+              width:20;
+            }
+
+            /*navbar*/
+            .navbar {
+              background-color: #ffc2da;
+              overflow: hidden;
+              position: fixed;
+              top: 0;
+              left:0;
+              width: 100%;
+              margin: 0;
+              padding: 0;
+              z-index: 10;
+            }
+            .navbar a.tab{
+              float: left;
+              display: block;
+              color: #fff;
+              text-align: center;
+              padding: 10vw;
+              text-decoration: none;
+              font-size: 1.5vw;
+              transition: all 0.3s ease;
+              cursor: pointer;
+            }
+            .navbar a:hover {
+              background-color: #ffcfe1;
+            }
+            .navbar a.menu_item_selected {
+              background-color: #ffa8cb;
+              color: white;
+            }
+            .underline-slide {
+              position: absolute;
+              bottom: 0;
+              height: 3px;
+              background-color: #ff8ebb;
+              transition: all 0.5s ease;
+            }
+            .resp_img {
+              width: 8vw;
+              padding: 0;
+              margin:5px;
+              float: left;
+            }
+
+            /* layers */
+            .layer-box {
+              position: absolute;
+              top:5.2vw;
+              right: 0;
+              width: 22vw;
+              height: 45vw;
+              list-style: none;
+              padding:0vw;
+              background: #fedee3;
+            }
+            .layer-container {
+              margin-top: 10px;
+            }
+            .layer-image {
+              display: inline-block;
+              width: 50px;
+              height: 50px;
+              vertical-align: middle;
+              border: 1px solid black;
+              margin-right: 10px;
+            }
+            .layer-checkbox {
+              vertical-align: middle;
+            }
+            .layer-container.highlighted {
+              background-color: rgb(255, 235, 236);
+            }
+          /*dark-mode*/
+
         </style>
     </head>
     <body>
-        <div>
-            <div class="text-background"id=myDIV2>Editing</div>
-            <a href="index.html"><img src="pics/logo.png" class="resp_img" style="position: relative;left:42vw" ></a>
-            <label class="switch" style="float: right;">
-              <input type="checkbox" id="toggle-mode"onclick="changecolor()">
-              <span class="slider"></span>
-            </label>
-        </div><!--navbar*/ -->
-        <div>
-            <ul class="menu__box">
-                <li><input type="button" class="menu__item menu_item_selected"id="menu_draw" onclick="selectMenuDraw()" value="Draw"></li>
-                <li><input type="button" class="menu__item" id="menu_filters" onclick="selectMenuFilters()" value="Filters"></li>
-                <li><input type="button" class="menu__item" id="menu_forms" onclick="selectMenuFroms()" value="Forms"></li>
-                <li><input type="button" class="menu__item" id="menu_text" onclick="selectMenuText()" value="Text"></li>
-                <li><input type="button" class="menu__item" id="menu_load" onclick="selectMenuLoad()" value="Image"></li>
-                <li class="menuButtons"><button class="undoButton"id="undoButton">Undo</button><button class="redoButton"id="redoButton">Redo</button><button class="clearButton"id="clearButton">Clear</button></li>
-          </ul>
-        </div><!--menubox -->
+      <div class="navbar">
+        <a class="resp_img"href="index.html"><img src="pics/icons/logo_schrift.png" class="resp_img"  ></a>
+        <a  class="menu_item_selected tab"onclick="selectMenuDraw()" id="menu_draw" style="padding:1.7vw;">Draw</a>
+        <a  class="tab"onclick="selectMenuFilters()" id="menu_filters"style="padding:1.7vw;">Filters</a>
+        <a class="tab"onclick="selectMenuFroms()"id="menu_forms"style="padding:1.7vw;">Forms</a>
+        <a class="tab"onclick="selectMenuText()" id="menu_text"style="padding:1.7vw;">Text</a>
+        <a class="tab"onclick="selectMenuLoad()"id="menu_load"style="padding:1.7vw;">Image</a>
+        <label class="switch" style="float: right;">
+          <input type="checkbox" id="toggle-mode"onclick="changecolor()">
+          <span class="slider"></span>
+        </label>
+      </div><!--navbar-->
         <div>
             <canvas id="canvas" width="500" height="500"></canvas>
             <canvas id="tempcanvas" width="500" height="500"></canvas>
@@ -340,8 +373,8 @@
         </div><!--canvas -->
         <div>
             <ul class="opt__box">
+              <br>
                 <div id="opt_draw">
-                  <br><br>
                   <div id="standardColors">
                     <input  class="color" type="color" id="colorPicker" value="#000000">
                     <div class="color rbw"id="rainbowButton" style="width: 2.5vw; height: 2.5vw; background: linear-gradient( to bottom right,rgb(255, 122, 122),rgb(255, 255, 26),rgb(141, 255, 141),rgb(112, 112, 255),rgb(215, 160, 255),violet); cursor: pointer;"></div>
@@ -381,7 +414,6 @@
                   <input class="opt_slider"type="range" id="grayscale" min="0" max="100" value="0">
                   <label for="invert">Invert</label>
                   <input class="opt_slider"type="range" id="invert" min="0" max="100" value="0">
-                  <div class="menuButtons"><button class="cancelButton"id="cancelButton_filters">Cancel</button><button id="createButton_filters"class="createButton">Create</button></div>
                 </div>
                 <div id="opt_forms"  hidden="true">
                   <div id="forms-selector">
@@ -411,7 +443,7 @@
                   </div>
                   <div id="forms_tri"hidden=true>
                     <label >Rectangular:</label>
-                    <input type="checkbox" id="f_tri_bx">
+                    <input value="true"type="checkbox" id="f_tri_bx">
                   </div>
                   <div id="forms_rect"hidden=true>
                     <label >f_corners:</label>
@@ -429,7 +461,6 @@
                   </div>
                   <div id="forms_heart"hidden=true>
                   </div>
-                  <div class="menuButtons"><button class="cancelButton"id="cancelButton_forms">Cancel</button><button id="createButton_forms"class="createButton">Create</button></div>
                 </div>
                 <div id="opt_text"  hidden="true">
                   <div id="standardColorsText">
@@ -448,7 +479,7 @@
                   <label for="Textsize">Size:</label>
                   <input class="opt_slider"type="range" id="Textsize" min="10" max="200" value="20">
                   <div id="font-selector">
-                    <label >Font:</label>
+                  <label for="font-select">Font:</label>
                     <select id="font-select" size="1">
                       <option style="font-family:Arial;" value="Arial" class="font-option">Arial</option>
                       <option style="font-family:Verdana;" value="Verdana" class="font-option">Verdana</option>
@@ -471,50 +502,116 @@
                   </div>
                   <label for="textinput">Text:</label><br>
                   <textarea id="textinput"></textarea>
-                  <div class="menuButtons"><button class="cancelButton"id="cancelButton_text">Cancel</button><button id="createButton_text"class="createButton">Create</button></div>
                 </div>
                 <div id="opt_load"  hidden="true">
                   <button id="downloadButton">Download</button>
+                  <input type="file" id="imageUpload">
                 </div>
             </ul>
         </div><!--option box -->
+        <div>
+          <div class="layer-box">
+            <li class="menuButtons"><button class="undoButton"id="undoButton">Undo</button><button class="redoButton"id="redoButton">Redo</button><button class="clearButton"id="clearButton">Clear</button></li>
+            <div>
+              <label for="layer-select">Layer:</label>
+              <select id="layer-select"></select>
+              <button id="add-layer-btn">New Layer</button>
+              <button id="delete-layer-btn">Delete Layer</button>
+              <button id="duplicate-layer-btn">Duplicate Layer</button>
+              <button id="merge-layers-btn">Merge Layers</button>
+              <button id="layer-up-btn">Layer Up</button>
+              <button id="layer-down-btn">Layer Down</button>
+            </div>
+            <div id="layers-container"></div>
+          </div>
+        </div><!--layer box-->
         <div class="info">
           <!-- @azra hier info dazutuhen bei jedem-->
             <div id="info_draw">
-                <b>*Hier kommen die beschreibungen der einzelnen optinen hin /draw*</b>
+              <b>
+                <h1>Documentation / Draw:</h1>
+                  <h2>Color selection:</h2>
+                  To select colors, there is a palette with predefined colors located in the top right corner. If you click on the first black box, you can also create a custom color by simply clicking on a spot with the desired color.
+                  
+                  <h2>Eraser:</h2>
+                  The eraser is used to delete the areas you want to remove, just click on the canvas.
+                  
+                  <h2>Fill entire canvas:</h2>
+                  The bucket symbol is used to fill an area with a colour, just click and drag on the canvas.
+                  
+                  <h2>Brush size:</h2>
+                  The "Brush Size" refers to the size of the brush or drawing tools. With a larger brush size, you can create broader lines or areas, while a smaller brush size allows for finer details.
+                  
+                  <h2>Opacity:</h2>
+                  The "Opacity" determines how transparent or opaque the applied stroke of color is to achieve different effects and create shading or overlays. </b>
             </div>
             <div id="info_filters" hidden="true">
-                <b>*Hier kommen die beschreibungen der einzelnen optinen hin /filters*</b>
+                <b>
+                  <h1>Documentation / Filters</h1>
+                  <h2>FILTERS:
+                  Hue, Blur, Contrast, Exposure, Brightness, Saturation, Gray-scale, Invert</h2>
+                  <br>
+                  Hue: Adjusts the color tone.<br>
+                  Blur: Blurs or softens images.<br>
+                  Contrast: Adjusts the differences between light and dark areas.<br>
+                  Exposure: Controls the brightness of the image.<br>
+                  Brightness: Controls the overall brightness of the image.<br>
+                  Saturation: Adjusts the intensity of colors.<br>
+                  Gray-scale: Converts the image to black and white.<br>
+                  Invert: Reverses colors and contrasts.<br>
+                </b>
             </div>
             <div id="info_forms" hidden="true">
-                <b>*Hier kommen die beschreibungen der einzelnen optinen hin /forms*</b>
+                <b>
+                  <h1>Documentation / Shapes</h1>
+                  <h2>Shape:</h2> In this section, you can enter the desired shape. To Make a Shape, choose one from the dropdown menue and click and drag on the canvas.
+                  <h2>DrawMode:</h2> This option allows you to specify whether the inner part, outer part, or both of the shape should be filled.<br>
+                  <h2>line:</h2>makes a basic line
+                  <h2>Trianle:</h2>makes a basic tricangle, check the box to make it with an 90° angle
+                  <h2>Rectangle:</h2>makes a basic rectangle, you can make the corners round
+                  <h2>Circle:</h2>makes a circle 
+                  <h2>Elypse:</h2>makes a elypse(a wierd circle)
+                  <h2>Any-Gon:</h2>makes any kind of shape with straight edges. ad corners by clicking on the canvas
+                  <h2>Poly-Gon:</h2>makes a shape with at least two corners, you can adjust the amount of corners
+                  <h2>hears:</h2>creates a heart!
+                </b>
             </div>
             <div id="info_text" hidden="true">
-                <b>*Hier kommen die beschreibungen der einzelnen optinen hin /text*</b>
+                <b>
+                  <h1>Documentation / Text</h1>
+                    on the canvas click and drag to moce the curser
+                    <h2>Colors:</h2> Inside the boxes, you can select your desired font color. The first black box allows you to create your own color by clicking on the desired color with the mouse.
+                    <h2>Size:</h2> Decide how big the text should be.
+                    <h2>Font:</h2> Here, you can select and use the desired font style.
+                    <h2>Text:</h2> In the table, you can enter your text and position it within the frame.
+                </b>
             </div>
             <div id="info_load" hidden="true">
-                <b>*Hier kommen die beschreibungen der einzelnen optinen hin /load*</b>
+                <b>
+                  <h1>Documentation / Image</h1>
+                </b>
             </div>
+            <b>
+              <h1>Documentation / Layers</h1>
+            </b>
         </div><!--info box -->
         <!--@lela hier footer einfügen-->
         <script>
 /*------------------------------------------script----------------------------------------*/
           /*static management*/
           function unselectAllMenu(){
-            var element = document.getElementById("menu_draw");
-            element.classList.remove("menu_item_selected");
-            element = document.getElementById("menu_filters");
-            element.classList.remove("menu_item_selected");
-            element = document.getElementById("menu_forms");
-            element.classList.remove("menu_item_selected");
-            element = document.getElementById("menu_text");
-            element.classList.remove("menu_item_selected");
-            element = document.getElementById("menu_load");
-            element.classList.remove("menu_item_selected");
+            if(modeFilters||modeForms||modeText){
+              saveHistory();
+            }
+            var element = document.getElementById("menu_draw").classList.remove("menu_item_selected");
+            element = document.getElementById("menu_filters").classList.remove("menu_item_selected");
+            element = document.getElementById("menu_forms").classList.remove("menu_item_selected");
+            element = document.getElementById("menu_text").classList.remove("menu_item_selected");
+            element = document.getElementById("menu_load").classList.remove("menu_item_selected");
             document.getElementById("undoButton").disabled = false;
             document.getElementById("redoButton").disabled = false;
             document.getElementById("clearButton").disabled = false;
-            modeDraw=false;
+            modeDraw = false;
             modeFilters = false;
             modeForms = false;
             modeText = false;
@@ -529,7 +626,6 @@
             element=document.getElementById("canvas");
             element.classList.add("left30");
             element.classList.remove("left-100");
-            tempCtx.putImageData(actions[0].data, 0, 0);
             element=document.getElementById("textcursor");
             element.hidden=true;
             resetFilters();
@@ -558,18 +654,7 @@
             element = document.getElementById("info_load");
             element.hidden=true;
           }
-          function loadTempCanVas(){
-            document.getElementById("undoButton").disabled = true;
-            document.getElementById("redoButton").disabled = true;
-            document.getElementById("clearButton").disabled = true;
-            element=document.getElementById("canvas");
-            element.classList.add("left-100");
-            element.classList.remove("left30");
-            element=document.getElementById("tempcanvas");
-            element.classList.add("left30");
-            element.classList.remove("left-100");
-            tempCtx.drawImage(canvas, 0, 0);
-          }
+
           function selectMenuDraw(){
             unselectAllMenu();
             unloadAllOptions();
@@ -586,50 +671,39 @@
             unselectAllMenu();
             unloadAllOptions();
             unloadAllInfo();
-            var element = document.getElementById("menu_filters");
-            element.classList.add("menu_item_selected");
-            element = document.getElementById("opt_filters");
-            element.hidden=false;
-            element = document.getElementById("info_filters");
-            element.hidden=false;
+            var element = document.getElementById("menu_filters").classList.add("menu_item_selected");
+            element = document.getElementById("opt_filters").hidden=false;
+            element = document.getElementById("info_filters").hidden=false;
             document.getElementById("undoButton").disabled = true;
             document.getElementById("redoButton").disabled = true;
             document.getElementById("clearButton").disabled = true;
+            tempCtx.clearRect(0,0,cWidth,cHeight);
+            curserCtx.clearRect(0,0,cWidth,cHeight);
+            curserCtx.drawImage(layers[currentLayerIndex],0,0);
             modeFilters=true;
-            loadTempCanVas();
           }
           function selectMenuFroms(){
             unselectAllMenu();
             unloadAllOptions();
             unloadAllInfo();
-            var element = document.getElementById("menu_forms");
-            element.classList.add("menu_item_selected");
-            element = document.getElementById("opt_forms");
-            element.hidden=false;
-            element = document.getElementById("info_forms");
-            element.hidden=false;
+            var element = document.getElementById("menu_forms").classList.add("menu_item_selected");
+            element = document.getElementById("opt_forms").hidden=false;
+            element = document.getElementById("info_forms").hidden=false;
+            element = document.getElementById("forms_line").hidden=false;
             modeForms = true;
-            loadTempCanVas();
-            element = document.getElementById("forms_line");
-            element.hidden=false;
           }
           function selectMenuText(){
             unselectAllMenu();
             unloadAllOptions();
             unloadAllInfo();
-            var element = document.getElementById("menu_text");
-            element.classList.add("menu_item_selected");
-            element = document.getElementById("opt_text");
-            element.hidden=false;
-            element = document.getElementById("info_text");
-            element.hidden=false;
-            modeText=true;
-            loadTempCanVas();
-            element=document.getElementById("cursercanvas");
-            element.classList.add("left30");
-            element.classList.remove("left-100");
+
             drawTextCurser();
-            element=document.getElementById("textcursor");
+            var element = document.getElementById("menu_text").classList.add("menu_item_selected");
+            element = document.getElementById("opt_text").hidden=false;
+            element=document.getElementById("textcursor").hidden=false;
+            element=document.getElementById("textinput").focus();
+            modeText=true;
+            element = document.getElementById("info_text");
             element.hidden=false;
           }
           function selectMenuLoad(){
@@ -652,7 +726,6 @@
             const tempCtx= tempcanvas.getContext('2d');
             const curserCanvas = document.getElementById('cursercanvas');
             const curserCtx=curserCanvas.getContext('2d');
-
             let isDrawing = false;
             let lastX = 0;
             let lastY = 0;
@@ -661,8 +734,6 @@
             let brushSize = 10;
             let brushOpacity=255;
             let selectedColor = '#000000';
-            let actions = [];
-            let pointer = 0;
             let isRainbowMode = false;
             let isEraseMode=false;
             let isFillMode=false;
@@ -688,15 +759,23 @@
             let form_type="o";
             let f_x2=0;
             let f_y2=0;
-            
+            let layers = [];
+            let currentLayerIndex = 0;
+            let layerHistory = [[]];
+            let historyIndex = 0;
           /*consts*/
-
+            const layersContainer = document.getElementById('layers-container');
+            const deleteLayerBtn = document.getElementById('delete-layer-btn');
+            const mergeLayersBtn = document.getElementById('merge-layers-btn');
+            const layerUpBtn = document.getElementById('layer-up-btn');
+            const layerDownBtn = document.getElementById('layer-down-btn');
+            const duplicateLayerBtn = document.getElementById('duplicate-layer-btn');
             const fontSelect = document.getElementById("font-select");
             const formSelect = document.getElementById("forms-select");
             const formtypeSelect = document.getElementById("forms-type-select");
             const clearButton = document.getElementById('clearButton');
-            const undoButton = document.getElementById('undoButton');
-            const redoButton = document.getElementById('redoButton');
+            const undoBtn = document.getElementById('undoButton');
+            const redoBtn = document.getElementById('redoButton');
             const colorPicker = document.getElementById('colorPicker');
             const colorPicker_f1 = document.getElementById('colorPicker_f1');
             const colorPicker_f2 = document.getElementById('colorPicker_f2');
@@ -706,12 +785,6 @@
             const brushSizeInput = document.getElementById('brushSize');
             const brushOpacityInput = document.getElementById('brushOpacity');
             const downloadButton = document.getElementById('downloadButton');
-            const cancelButton_filter = document.getElementById('cancelButton_filters');
-            const createButton_filter = document.getElementById('createButton_filters');
-            const cancelButton_forms = document.getElementById('cancelButton_forms');
-            const createButton_forms = document.getElementById('createButton_forms');
-            const cancelButton_text = document.getElementById('cancelButton_text');
-            const createButton_text = document.getElementById('createButton_text');
             const TextSizeSlider = document.getElementById("Textsize");
             const TextInput = document.getElementById("textinput");
             const hueSlider = document.getElementById("hue");
@@ -736,12 +809,20 @@
             const form_Polygon = document.getElementById("forms_polygon");
             const form_Heart = document.getElementById("forms_heart");
             const checkBox = document.getElementById("f_tri_bx");
+            const imageUpload = document.getElementById('imageUpload');
 
           /*startfunctions*/
-            addAction();
+            createLayer();
             selectMenuDraw();
 
           /*eventlisterns*/
+            document.getElementById('layer-select').addEventListener('change', switchLayer);
+            document.getElementById('add-layer-btn').addEventListener('click', createLayer);
+            duplicateLayerBtn.addEventListener('click', duplicateLayer);
+            layerDownBtn.addEventListener('click', moveLayerDown);
+            layerUpBtn.addEventListener('click', moveLayerUp);
+            mergeLayersBtn.addEventListener('click', mergeLayers);
+            deleteLayerBtn.addEventListener('click', deleteLayer);
             checkBox.addEventListener('change',function(){
               isrectangular=!isrectangular;
             });
@@ -749,13 +830,6 @@
             undoButton.addEventListener('click', undo);
             redoButton.addEventListener('click', redo);
             downloadButton.addEventListener('click', downloadCanvas);
-            canvas.addEventListener('mousemove', draw);
-            cancelButton_filter.addEventListener('click',cancel);
-            createButton_filter.addEventListener('click',create);
-            cancelButton_forms.addEventListener('click',cancel);
-            createButton_forms.addEventListener('click',create);
-            cancelButton_text.addEventListener('click',cancel);
-            createButton_text.addEventListener('click',create);
             TextSizeSlider.addEventListener("input",drawTextCurser);
             exposureSlider.addEventListener("input", applyFilters);
             grayscaleSlider.addEventListener("input",applyFilters);
@@ -766,19 +840,101 @@
             brightnessSlider.addEventListener("input", applyFilters);
             TextInput.addEventListener("input",drawTextCurser);
             saturationSlider.addEventListener("input", applyFilters);
+
             canvas.addEventListener('mousedown', (e) => {
               if(modeDraw){
                 isDrawing = true;
-              [lastX, lastY] = [e.offsetX, e.offsetY];
-                  }
-              if(isFillMode){
-                flood_fill(lastX,lastY,color_to_rgba(selectedColor));
+                [lastX, lastY] = [e.offsetX, e.offsetY];
+                if(isFillMode){
+                  flood_fill(lastX,lastY,color_to_rgba(selectedColor));
+                }
               }
-              });
+              else if(modeForms){
+                x= event.clientX - canvas.offsetLeft;
+                y= event.clientY - canvas.offsetTop;
+                isResizing = true;
+                if(selectedform=="forms_anygon"){
+                  clicks.push({
+                  x: event.offsetX,
+                  y: event.offsetY
+                  });
+                  tempCtx.clearRect(0, 0, canvas.width, canvas.height);
+                  if(form_type=="f"){
+                    tempCtx.strokeStyle='#00000000';
+                    tempCtx.fillStyle =forms_c2;
+                  }
+                  else if(form_type=="o"){
+                    tempCtx.strokeStyle=forms_c1;
+                    tempCtx.fillStyle ='#00000000';
+                  }
+                  else if(form_type=="of"){
+                    tempCtx.strokeStyle=forms_c1;
+                    tempCtx.fillStyle =forms_c2;
+                  }
+                  tempCtx.lineWidth = 1;
+                  tempCtx.beginPath();
+                  tempCtx.moveTo(clicks[0].x, clicks[0].y);
+                  for(var i=1; i < clicks.length; i++) { 
+                    tempCtx.lineTo(clicks[i].x,clicks[i].y);
+                  }
+                  tempCtx.closePath();
+                  tempCtx.fill();
+                  tempCtx.stroke();
+
+                  ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    layers.forEach((layer, index) => {
+                      const layerCtx = layer.getContext('2d');
+                      const layerCheckbox = document.querySelector(`#layer-${index}-checkbox`);
+                      if (layerCheckbox.checked) {
+                        if(index==currentLayerIndex){
+                          layerCtx.clearRect(0, 0, canvas.width, canvas.height);
+                          layerCtx.drawImage(tempCanvas,0,0);
+                        }
+                      }
+                    });
+                    const layerPreviewImage = document.querySelector(`#layer-${currentLayerIndex}-preview`);
+                    layerPreviewImage.src = layers[currentLayerIndex].toDataURL();
+                    drawCurrentCanvas();
+                }
+              }
+              else  if(modeText){
+                [lastX, lastY] = [e.offsetX, e.offsetY];
+                [curserX,curserY]=[e.x,e.y];
+                drawTextCurser(e);
+                mouse_Down=true;
+              }
+            });
+
+            canvas.addEventListener('mousemove', (e)=>{
+              if(modeDraw){
+                draw(e);                
+              }
+              else if(modeForms){
+                drawforms(e);
+              }
+              else   if(mouse_Down){
+                if(modeText){
+                  [lastX, lastY] = [e.offsetX, e.offsetY];
+                  [curserX,curserY]=[e.x,e.y];
+                  drawTextCurser(e);
+                }
+              }
+            });
             canvas.addEventListener('mouseup', () => {
               if(modeDraw){
                 isDrawing = false;
-              addAction();
+                saveHistory();
+              }
+              else if(modeForms){
+                isResizing = false;
+              }
+              else if(modeText){
+                mouse_Down=false;
+              }
+            });
+            canvas.addEventListener('mouseout',(e)=>{
+              if(modeText){
+                mouse_Down=false;
               }
             });
             curserCanvas.addEventListener('mousedown',(e)=>{
@@ -791,7 +947,6 @@
             });
             curserCanvas.addEventListener('mouseup',(e)=>{
               if(modeText){
-
                 mouse_Down=false;
               }
             });
@@ -828,7 +983,6 @@
                 }
                 else if (e.target.classList.contains('ers')){
                   isEraseMode=true;
-
                 }
                 else if (e.target.classList.contains('fill')){
                   isFillMode=true;
@@ -857,7 +1011,6 @@
             });
             standardColorsText.addEventListener('click', (e) => {
               if (e.target.classList.contains('color')) {
-
                   selectedColor = e.target.style.backgroundColor;
               }
             });
@@ -883,50 +1036,6 @@
             });
             formtypeSelect.addEventListener("change",function(){
               form_type=formtypeSelect.value;
-            });
-            tempCanvas.addEventListener("mousedown", function(event) {
-              if(modeForms){
-                x= event.clientX - tempCanvas.offsetLeft;
-                y= event.clientY - tempCanvas.offsetTop;
-                isResizing = true;
-                if(selectedform=="forms_anygon"){
-                  clicks.push({
-                  x: event.offsetX,
-                  y: event.offsetY
-                  });
-                  tempCtx.clearRect(0, 0, canvas.width, canvas.height);
-                  tempCtx.drawImage(canvas, 0, 0);
-                  if(form_type=="f"){
-                    tempCtx.strokeStyle='#00000000';
-                    tempCtx.fillStyle =forms_c2;
-                  }
-                  else if(form_type=="o"){
-                    tempCtx.strokeStyle=forms_c1;
-                    tempCtx.fillStyle ='#00000000';
-                  }
-                  else if(form_type=="of"){
-                    tempCtx.strokeStyle=forms_c1;
-                    tempCtx.fillStyle =forms_c2;
-                  }
-                  tempCtx.lineWidth = 1;
-                  tempCtx.beginPath();
-                  tempCtx.moveTo(clicks[0].x, clicks[0].y);
-                  for(var i=1; i < clicks.length; i++) { 
-                    tempCtx.lineTo(clicks[i].x,clicks[i].y);
-                  }
-                  tempCtx.closePath();
-                  tempCtx.fill();
-                  tempCtx.stroke();
-                }
-              }
-            });
-            tempCanvas.addEventListener("mouseup", function(event) {
-              if(modeForms){
-                isResizing = false;
-              }
-            });
-            tempCanvas.addEventListener("mousemove", function(event) {
-              drawforms(event);
             });
             f_pcorners.addEventListener("change",function(){
               corners=f_pcorners.value;
@@ -966,11 +1075,272 @@
                 tempCtx.fill();
                 tempCtx.stroke();
             });
+            window.addEventListener('DOMContentLoaded', (event) => {
+              const navbar = document.querySelector('.navbar');
+              const tabs = navbar.getElementsByClassName('tab');
+              const underline = document.createElement('div');
+              underline.classList.add('underline-slide');
+              navbar.appendChild(underline);
+              let activeTab = navbar.querySelector('.menu_item_selected');
+              if (activeTab) {
+                underline.style.width = activeTab.offsetWidth + 'px';
+                underline.style.transform = `translateX(${activeTab.offsetLeft}px)`;
+              }
+              for (let i = 0; i < tabs.length; i++) {
+                tabs[i].addEventListener('click', function () {
+                  if (activeTab) {
+                    activeTab.classList.remove('menu_item_selected');
+                  }
+                  activeTab = this;
+                  activeTab.classList.add('menu_item_selected');
+                  underline.style.width = activeTab.offsetWidth + 'px';
+                  underline.style.transform = `translateX(${activeTab.offsetLeft}px)`;
+                });
+              }
+              navbar.addEventListener('mouseleave', function () {
+                if (activeTab) {
+                  underline.style.width = activeTab.offsetWidth + 'px';
+                  underline.style.transform = `translateX(${activeTab.offsetLeft}px)`;
+                }
+              });
+              navbar.addEventListener('mouseover', function (e) {
+                if (e.target.classList.contains('tab')) {
+                  const targetTab = e.target;
+                  underline.style.width = targetTab.offsetWidth + 'px';
+                  underline.style.transform = `translateX(${targetTab.offsetLeft}px)`;
+                }
+              });
+            });
+            imageUpload.addEventListener('change', (e) => {
+              const file = e.target.files[0];
+              const reader = new FileReader();
+              reader.onload = (event) => {
+                const img = new Image();
+                img.onload = () => {
+                  if(canvas.width<img.width||canvas.height<img.height){
+                  canvas.width = img.width;
+                  canvas.height = img.height;}
+                  ctx.drawImage(img, 0, 0);
+                }
+                img.src = event.target.result;
+              }
+              reader.readAsDataURL(file);
+              saveHistory();
+            });
+          
+            /*functions*/
+            function deleteLayer() {
+              if (layers.length > 1) {
+                layers.splice(currentLayerIndex, 1);
+                const layerContainer = document.getElementById(`layer-${currentLayerIndex}-container`);
+                layerContainer.remove();
+                redrawLayers();
+              }
+              saveHistory();
+            }
 
-          /*functions*/
+            function createLayer() {
+              const layer = document.createElement('canvas');
+              layer.width = canvas.width;
+              layer.height = canvas.height;
+              layers.push(layer);
+              const layerIndex = layers.length - 1;
+              const option = document.createElement('option');
+              option.value = layerIndex;
+              option.text = `Layer ${layerIndex + 1}`;
+              document.getElementById('layer-select').appendChild(option);
+              addLayerToContainer(layerIndex);
+              const layerContainer = document.querySelector(`#layer-${layerIndex}-container`);
+              if (layers.length === 1) {
+                layerContainer.classList.add('highlighted');
+              }
+              saveHistory();
+            }
+
+            function switchLayer() {
+              const layerIndex = parseInt(this.value);
+              currentLayerIndex = layerIndex;
+            }
+
+            function mergeLayers() {
+              if (currentLayerIndex < layers.length - 1) {
+                const currentLayer = layers[currentLayerIndex];
+                const belowLayer = layers[currentLayerIndex + 1];
+                const currentLayerCtx = currentLayer.getContext('2d');
+                currentLayerCtx.drawImage(belowLayer, 0, 0);
+                layers.splice(currentLayerIndex + 1, 1);
+                deleteLayerOption(currentLayerIndex + 1);
+                deleteLayerContainer(currentLayerIndex + 1);
+                redrawLayers();
+                saveHistory();
+              }
+            }
+
+            function moveLayerUp() {
+              if (currentLayerIndex > 0) {
+                swapLayers(currentLayerIndex, currentLayerIndex - 1);
+                currentLayerIndex--;
+                updateLayerSelect();
+                redrawLayers();
+              }
+            }
+
+            function moveLayerDown() {
+              if (currentLayerIndex < layers.length - 1) {
+                swapLayers(currentLayerIndex, currentLayerIndex + 1);
+                currentLayerIndex++;
+                updateLayerSelect();
+                redrawLayers();
+              }
+            }
+
+            function swapLayers(index1, index2) {
+              const temp = layers[index1];
+              layers[index1] = layers[index2];
+              layers[index2] = temp;
+              saveHistory();
+            }
+
+            function updateLayerSelect() {
+              const layerSelect = document.getElementById('layer-select');
+              layerSelect.value = currentLayerIndex;
+            }
+
+            function deleteLayerOption(layerIndex) {
+              const layerSelect = document.getElementById('layer-select');
+              layerSelect.remove(layerIndex);
+            }
+
+            function deleteLayerContainer(layerIndex) {
+              const layerContainer = document.getElementById(`layer-${layerIndex}-container`);
+              layerContainer.remove();
+            }
+
+            function drawCurrentCanvas() {
+              ctx.clearRect(0, 0, canvas.width, canvas.height);
+              layers.forEach((layer, index) => {
+                const layerCheckbox = document.querySelector(`#layer-${index}-checkbox`);
+                if (layerCheckbox.checked) {
+                  ctx.drawImage(layer, 0, 0);
+                }
+              });
+            }
+
+            function duplicateLayer() {
+              const currentLayer = layers[currentLayerIndex];
+              const newLayer = document.createElement('canvas');
+              newLayer.width = currentLayer.width;
+              newLayer.height = currentLayer.height;
+              const newLayerCtx = newLayer.getContext('2d');
+              newLayerCtx.drawImage(currentLayer, 0, 0);
+              layers.splice(currentLayerIndex + 1, 0, newLayer);
+              createLayerOption(currentLayerIndex + 1);
+              addLayerToContainer(currentLayerIndex + 1);
+              redrawLayers();
+              saveHistory();
+            }
+
+            function createLayerOption(layerIndex) {
+              const option = document.createElement('option');
+              option.value = layerIndex;
+              option.text = `Layer ${layerIndex + 1}`;
+              document.getElementById('layer-select').appendChild(option);
+            }
+
+            function addLayerToContainer(layerIndex) {
+              const layerContainer = document.createElement('div');
+              layerContainer.id = `layer-${layerIndex}-container`;
+              layerContainer.className = 'layer-container';
+              const layerImage = document.createElement('img');
+              layerImage.id = `layer-${layerIndex}-preview`;
+              layerImage.src = layers[layerIndex].toDataURL();
+              layerImage.className = 'layer-image';
+              const layerCheckbox = document.createElement('input');
+              layerCheckbox.type = 'checkbox';
+              layerCheckbox.className = 'layer-checkbox';
+              layerCheckbox.id = `layer-${layerIndex}-checkbox`;
+              layerCheckbox.checked = true;
+              layerCheckbox.addEventListener('input', drawCurrentCanvas);
+              const layerLabel = document.createElement('label');
+              layerLabel.innerText = `Layer ${layerIndex + 1}, `;
+              layerLabel.appendChild(layerImage);
+              layerLabel.appendChild(layerCheckbox);
+              layerContainer.appendChild(layerLabel);
+              layersContainer.appendChild(layerContainer);
+              layerContainer.addEventListener('click', () => {
+                currentLayerIndex = layerIndex;
+                document.getElementById('layer-select').value = layerIndex;
+                const allLayerContainers = document.getElementsByClassName('layer-container');
+                for (let i = 0; i < allLayerContainers.length; i++) {
+                  allLayerContainers[i].classList.remove('highlighted');
+                }
+                layerContainer.classList.add('highlighted');
+                curserCtx.clearRect(0,0,cWidth,cHeight);
+                curserCtx.drawImage(layers[currentLayerIndex],0,0);
+              });
+              if (layerIndex === 0) {
+                layerContainer.classList.add('highlighted');
+              }
+            }
+
+            function undo() {
+              if (historyIndex > 1) {
+                historyIndex--;
+                const history = layerHistory[historyIndex];
+                layers = history.map((dataURL) => {
+                  const layer = document.createElement('canvas');
+                  layer.width = canvas.width;
+                  layer.height = canvas.height;
+                  const img = new Image();
+                  img.src = dataURL;
+                  layer.getContext('2d').drawImage(img, 0, 0);
+                  return layer;
+                });
+                redrawLayers();
+              }
+            }
+
+            function redo() {
+              if (historyIndex < layerHistory.length - 1) {
+                historyIndex++;
+                const history = layerHistory[historyIndex];
+                layers = history.map((dataURL) => {
+                  const layer = document.createElement('canvas');
+                  layer.width = canvas.width;
+                  layer.height = canvas.height;
+                  const img = new Image();
+                  img.src = dataURL;
+                  layer.getContext('2d').drawImage(img, 0, 0);
+                  return layer;
+                });
+                redrawLayers();
+              }
+            }
+
+            function saveHistory() {
+              const history = layers.map((layer) => layer.toDataURL());
+              layerHistory = layerHistory.slice(0, historyIndex + 1);
+              layerHistory.push(history);
+              historyIndex++;
+            }
+
+            function redrawLayers() {      
+              const layerSelect = document.getElementById('layer-select');
+              layerSelect.innerHTML = '';
+              layersContainer.innerHTML = '';
+              layers.forEach((layer, index) => {
+                const option = document.createElement('option');
+                option.value = index;
+                option.text = `Layer ${index + 1}`;
+                layerSelect.appendChild(option);
+                addLayerToContainer(index);
+              });
+              drawCurrentCanvas();
+            }
+
             function changecorners(event){
-              var mouseX = event.clientX - tempCanvas.offsetLeft;
-              var mouseY = event.clientY - tempCanvas.offsetTop;
+              var mouseX = event.clientX - canvas.offsetLeft;
+              var mouseY = event.clientY - canvas.offsetTop;
               var a = mouseX-x;
               var b = mouseY-y;
               if(a<0)a=a*(-1);
@@ -1008,29 +1378,24 @@
               }
             }
 
-            function addAction() {
-              if(pointer<actions.length){
-                for (let i = pointer-1; i < actions.length; i++) {
-                  actions.pop();
-                }
-              }
-              const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-              const currentState = {
-                data: imageData,
-                width: canvas.width,
-                height: canvas.height
-              };
-              actions.push(currentState);
-              pointer++;
-            }
-
             function clearCanvas() {
               ctx.putImageData(actions[0].data, 0, 0);
-              addAction();
+              saveHistory();
             }
 
             function drawTextCurser(e){
-             curserCtx.putImageData(actions[0].data, 0, 0);
+              const history = layerHistory[historyIndex];
+                  layers = history.map((dataURL) => {
+                      const layer = document.createElement('canvas');
+                      layer.width = canvas.width;
+                      layer.height = canvas.height;
+                      const img = new Image();
+                      img.src = dataURL;
+                      layer.getContext('2d').drawImage(img, 0, 0);
+                      return layer;
+                    });
+              tempCtx.clearRect(0,0,cWidth,cHeight);
+              tempCtx.drawImage(tempcanvas,0,0);
               var d = document.getElementById("textcursor");
               d.style.position = "absolute";
               let cordstrg =  curserX+"px";
@@ -1040,10 +1405,25 @@
               cordstrg= TextSizeSlider.value+"px";
               d.style.height= cordstrg;
               let strg = TextSizeSlider.value +"px "+selectedFont;
-              curserCtx.font= strg;
-              curserCtx.fillStyle =selectedColor;
-              curserCtx.fillText(TextInput.value, lastX, lastY);
+              tempCtx.font= strg;
+              tempCtx.fillStyle =selectedColor;
+              tempCtx.fillText(TextInput.value, lastX, lastY);
+              
+              ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    layers.forEach((layer, index) => {
+                      const layerCtx = layer.getContext('2d');
+                      const layerCheckbox = document.querySelector(`#layer-${index}-checkbox`);
+                      if (layerCheckbox.checked) {
+                        if(index==currentLayerIndex){
+                          layerCtx.drawImage(tempCanvas,0,0);
+                        }
+                      }
+                    });
+                    const layerPreviewImage = document.querySelector(`#layer-${currentLayerIndex}-preview`);
+                      layerPreviewImage.src = layers[currentLayerIndex].toDataURL();
+                      drawCurrentCanvas();
             }
+            
 
             function drawforms(event){
               if(modeForms){
@@ -1059,142 +1439,166 @@
                   tempCtx.strokeStyle=forms_c1;
                   tempCtx.fillStyle =forms_c2;
                 }
-                if(selectedform=="forms_line"){
-                  var mouseX = event.clientX - tempCanvas.offsetLeft;
-                  var mouseY = event.clientY - tempCanvas.offsetTop;
-                  if (isResizing) {
-                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
-                    tempCtx.drawImage(canvas, 0, 0);
-                    tempCtx.beginPath();
-                    tempCtx.moveTo(x, y);
-                    tempCtx.lineTo(mouseX, mouseY);
-                  }
-                }
-                else if(selectedform=="forms_tri"){
-                  var mouseX = event.clientX - tempCanvas.offsetLeft;
-                  var mouseY = event.clientY - tempCanvas.offsetTop;
-                  if (isResizing) {
-                    width = mouseX - x;
-                    height = mouseY - y;
-                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
-                    tempCtx.drawImage(canvas, 0, 0);
-                    tempCtx.beginPath();
-                    if(isrectangular){
-                      tempCtx.moveTo(x, y);
-                      tempCtx.lineTo(x, mouseY);
-                      tempCtx.lineTo(mouseX, mouseY);
+                if(isResizing){
+                  const history = layerHistory[historyIndex];
+                  layers = history.map((dataURL) => {
+                      const layer = document.createElement('canvas');
+                      layer.width = canvas.width;
+                      layer.height = canvas.height;
+                      const img = new Image();
+                      img.src = dataURL;
+                      layer.getContext('2d').drawImage(img, 0, 0);
+                      return layer;
+                    });
+
+
+                    if(selectedform=="forms_line"){
+                      var mouseX = event.clientX - canvas.offsetLeft;
+                      var mouseY = event.clientY - canvas.offsetTop;
+                        tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+                        tempCtx.beginPath();
+                        tempCtx.moveTo(x, y);
+                        tempCtx.lineTo(mouseX, mouseY);
                     }
-                    else{
-                      tempCtx.moveTo((x+mouseX)/2, y);
-                      tempCtx.lineTo(x, mouseY);
-                      tempCtx.lineTo(mouseX, mouseY);
+                    else if(selectedform=="forms_tri"){
+                      var mouseX = event.clientX - canvas.offsetLeft;
+                      var mouseY = event.clientY - canvas.offsetTop;
+
+                        width = mouseX - x;
+                        height = mouseY - y;
+                        tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+                        tempCtx.beginPath();
+                        if(!isrectangular){
+                          tempCtx.moveTo(x, y);
+                          tempCtx.lineTo(x, mouseY);
+                          tempCtx.lineTo(mouseX, mouseY);
+                        }
+                        else{
+                          tempCtx.moveTo((x+mouseX)/2, y);
+                          tempCtx.lineTo(x, mouseY);
+                          tempCtx.lineTo(mouseX, mouseY);
+                        }
+                      
                     }
-                  }
-                }
-                else if(selectedform=="forms_rect"){
-                  var mouseX = event.clientX - tempCanvas.offsetLeft;
-                  var mouseY = event.clientY - tempCanvas.offsetTop;
-                  if (isResizing) {
-                    width = mouseX - x;
-                    height = mouseY - y;
-                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
-                    tempCtx.drawImage(canvas, 0, 0);
-                    tempCtx.beginPath();
-                    tempCtx.roundRect(x, y, width, height,f_cornersSlider.value);//(0°rounded corners)
-                    f_x2=mouseX;
-                    f_y2=mouseY;
-                  }
-                }
-                else if(selectedform=="forms_circle"){
-                  var mouseX = event.clientX - tempCanvas.offsetLeft;
-                  var mouseY = event.clientY - tempCanvas.offsetTop;
-                  if (isResizing) {
-                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
-                    tempCtx.drawImage(canvas, 0, 0);
-                    tempCtx.beginPath();
-                    //mathe abvoten?
-                    var a = mouseX-x;
-                    var b = mouseY-y;
-                    if(a<0)a=a*(-1);
-                    if(b<0)b=b*(-1);
-                    var r= Math.max(a,b)/2;
-                    tempCtx.arc((x+mouseX)/2, (y+mouseY)/2, r, 0, 360,false);//(clockwise)
-                  }
-                }
-                else if(selectedform=="forms_elypse"){
-                  var mouseX = event.clientX - tempCanvas.offsetLeft;
-                  var mouseY = event.clientY - tempCanvas.offsetTop;
-                  if (isResizing) {
-                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
-                    tempCtx.drawImage(canvas, 0, 0);
-                    tempCtx.beginPath();
-                    //mathe abschaffen?
-                    var a = mouseX-x;
-                    var b = mouseY-y;
-                    if(a<0)a=a*(-1);
-                    if(b<0)b=b*(-1);
-                    tempCtx.ellipse((x+mouseX)/2, (y+mouseY)/2, a/2, b/2, 0, 0, 360);
-                  }
-                }
-                else if(selectedform=="forms_polygon"){
-                  var mouseX = event.clientX - tempCanvas.offsetLeft;
-                  var mouseY = event.clientY - tempCanvas.offsetTop;
-                  if (isResizing) {
-                    changecorners(event);
-                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
-                    tempCtx.drawImage(canvas, 0, 0);
-                    var a = mouseX-x;
-                    var b = mouseY-y;
-                    if(a<0)a=a*(-1);
-                    if(b<0)b=b*(-1);
-                    var r= Math.max(a,b)/2;
-                    tempCtx.beginPath();
-                    tempCtx.moveTo(clicks[0]._x,clicks[0]._y);//(clockwise)
-                    for(var i=1; i < clicks.length; i++) { 
-                      tempCtx.lineTo(clicks[i]._x,clicks[i]._y);
+                    else if(selectedform=="forms_rect"){
+                      var mouseX = event.clientX - canvas.offsetLeft;
+                      var mouseY = event.clientY - canvas.offsetTop;
+
+                        width = mouseX - x;
+                        height = mouseY - y;
+                        tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+                        tempCtx.beginPath();
+                        tempCtx.roundRect(x, y, width, height,f_cornersSlider.value);//(0°rounded corners)
+                        f_x2=mouseX;
+                        f_y2=mouseY;
+                      
                     }
-                    f_x2=mouseX;
-                    f_y2=mouseY;
+                    else if(selectedform=="forms_circle"){
+                      var mouseX = event.clientX - canvas.offsetLeft;
+                      var mouseY = event.clientY - canvas.offsetTop;
+
+                        tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+                        tempCtx.beginPath();
+                        //mathe abvoten?
+                        var a = mouseX-x;
+                        var b = mouseY-y;
+                        if(a<0)a=a*(-1);
+                        if(b<0)b=b*(-1);
+                        var r= Math.max(a,b)/2;
+                        tempCtx.arc((x+mouseX)/2, (y+mouseY)/2, r, 0, 360,false);//(clockwise)
+                      
+                    }
+                    else if(selectedform=="forms_elypse"){
+                      var mouseX = event.clientX - canvas.offsetLeft;
+                      var mouseY = event.clientY - canvas.offsetTop;
+
+                        tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+                        tempCtx.beginPath();
+                        //mathe abschaffen?
+                        var a = mouseX-x;
+                        var b = mouseY-y;
+                        if(a<0)a=a*(-1);
+                        if(b<0)b=b*(-1);
+                        tempCtx.ellipse((x+mouseX)/2, (y+mouseY)/2, a/2, b/2, 0, 0, 360);
+                      
+                    }
+                    else if(selectedform=="forms_polygon"){
+                      var mouseX = event.clientX - canvas.offsetLeft;
+                      var mouseY = event.clientY - canvas.offsetTop;
+                      changecorners(event);
+                      tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+                      var a = mouseX-x;
+                      var b = mouseY-y;
+                      if(a<0)a=a*(-1);
+                      if(b<0)b=b*(-1);
+                      var r= Math.max(a,b)/2;
+                      tempCtx.beginPath();
+                      tempCtx.moveTo(clicks[0]._x,clicks[0]._y);//(clockwise)
+                      for(var i=1; i < clicks.length; i++) { 
+                        tempCtx.lineTo(clicks[i]._x,clicks[i]._y);
+                      }
+                      f_x2=mouseX;
+                      f_y2=mouseY;
+                      
+                    }
+                    else if(selectedform=="forms_heart"){
+                      var mouseX = event.clientX - canvas.offsetLeft;
+                      var mouseY = event.clientY - canvas.offsetTop;
+
+                        tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
+                        var a = mouseX-x;
+                        var b = mouseY-y;
+                        var k =x;
+                        var d=b;//height
+                        var v = a;//width
+                        tempCtx.beginPath();
+                        tempCtx.moveTo(k, k + d / 4);
+                        tempCtx.quadraticCurveTo(k        , k        , k + v / 4  , k);
+                        tempCtx.quadraticCurveTo(k + v / 2, k        , k + v / 2  , k + d / 4);
+                        tempCtx.quadraticCurveTo(k + v / 2, k        , k + v * 3/4, k);
+                        tempCtx.quadraticCurveTo(k + v    , k        , k + v      , k + d / 4);
+                        tempCtx.quadraticCurveTo(k + v    , k + d / 2, k + v * 3/4, k + d * 3/4);
+                        tempCtx.lineTo(			     k + v / 2, k + d);
+                        tempCtx.lineTo(			     k + v / 4, k + d * 3/4);
+                        tempCtx.quadraticCurveTo(k        , k + d / 2, k          , k + d / 4);
+                      
+                    }
+                    tempCtx.closePath();
+                    tempCtx.fill();
+                    tempCtx.stroke();
+
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    layers.forEach((layer, index) => {
+                      const layerCtx = layer.getContext('2d');
+                      const layerCheckbox = document.querySelector(`#layer-${index}-checkbox`);
+                      if (layerCheckbox.checked&&index==currentLayerIndex) {
+                        layerCtx.drawImage(tempCanvas,0,0);
+                      }
+                    });
+                    const layerPreviewImage = document.querySelector(`#layer-${currentLayerIndex}-preview`);
+                      layerPreviewImage.src = layers[currentLayerIndex].toDataURL();
+                      drawCurrentCanvas();
                   }
                 }
-                else if(selectedform=="forms_heart"){
-                  var mouseX = event.clientX - tempCanvas.offsetLeft;
-                  var mouseY = event.clientY - tempCanvas.offsetTop;
-                  if (isResizing) {
-                    tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
-                    tempCtx.drawImage(canvas, 0, 0);
-                    var a = mouseX-x;
-                    var b = mouseY-y;
-                    var k =x;
-                    var d=b;//height
-                    var v = a;//width
-                    tempCtx.beginPath();
-                    tempCtx.moveTo(k, k + d / 4);
-                    tempCtx.quadraticCurveTo(k        , k        , k + v / 4  , k);
-                    tempCtx.quadraticCurveTo(k + v / 2, k        , k + v / 2  , k + d / 4);
-                    tempCtx.quadraticCurveTo(k + v / 2, k        , k + v * 3/4, k);
-                    tempCtx.quadraticCurveTo(k + v    , k        , k + v      , k + d / 4);
-                    tempCtx.quadraticCurveTo(k + v    , k + d / 2, k + v * 3/4, k + d * 3/4);
-                    tempCtx.lineTo(			     k + v / 2, k + d);
-                    tempCtx.lineTo(			     k + v / 4, k + d * 3/4);
-                    tempCtx.quadraticCurveTo(k        , k + d / 2, k          , k + d / 4);
-                  }
-                }
-                tempCtx.closePath();
-                tempCtx.fill();
-                tempCtx.stroke();
-              }
+
             }
 
             function draw(e) {
               if (!isDrawing) return;
               if(isEraseMode){
-                ctx.save(); 
-                ctx.beginPath();
-                ctx.arc(e.offsetX, e.offsetY, brushSize/2, 0, 2*Math.PI); 
-                ctx.clip();
-                ctx.clearRect(0, 0, canvas.width, canvas.height); 
-                ctx.restore(); 
+                const currentLayer = layers[currentLayerIndex];
+                if (!currentLayer) return;
+                const layerCtx = currentLayer.getContext('2d');
+                layerCtx.save(); 
+                layerCtx.beginPath();
+                layerCtx.arc(e.offsetX, e.offsetY, brushSize/2, 0, 2*Math.PI); 
+                layerCtx.clip();
+                layerCtx.clearRect(0, 0, canvas.width, canvas.height); 
+                layerCtx.restore(); 
+                [lastX, lastY] = [e.offsetX, e.offsetY];
+                const layerPreviewImage = document.querySelector(`#layer-${currentLayerIndex}-preview`);
+                layerPreviewImage.src = currentLayer.toDataURL();
+                drawCurrentCanvas();
               }
               else{
                 if (isRainbowMode) {
@@ -1204,54 +1608,23 @@
                 else {
                   ctx.strokeStyle = selectedColor;
                 }
-                ctx.lineJoin = 'round';
-                ctx.lineCap = 'round';
-                ctx.lineWidth = brushSize;
-                ctx.globalAlpha = brushOpacity/255;
-                if (lastX !== 0 && lastY !== 0) {
-                  ctx.beginPath();
-                  ctx.moveTo(lastX, lastY);
-                  ctx.lineTo(e.offsetX, e.offsetY);
-                  ctx.stroke();
-                }
+                const currentLayer = layers[currentLayerIndex];
+                if (!currentLayer) return;
+                const layerCtx = currentLayer.getContext('2d');
+                layerCtx.strokeStyle = ctx.strokeStyle;
+                layerCtx.lineJoin = 'round';
+                layerCtx.lineCap = 'round';
+                layerCtx.lineWidth = brushSize;
+                layerCtx.beginPath();
+                layerCtx.globalAlpha = brushOpacity/255;
+                layerCtx.moveTo(lastX, lastY);
+                layerCtx.lineTo(e.offsetX, e.offsetY);
+                layerCtx.stroke();
                 [lastX, lastY] = [e.offsetX, e.offsetY];
+                const layerPreviewImage = document.querySelector(`#layer-${currentLayerIndex}-preview`);
+                layerPreviewImage.src = currentLayer.toDataURL();
+                drawCurrentCanvas();
               }
-            }
-
-            function undo() {
-              if (pointer > 0) {
-                pointer--;
-                const state = actions[pointer-1];
-                canvas.width = state.width;
-                canvas.height = state.height;
-                ctx.putImageData(state.data, 0, 0);
-              }
-            }
-
-            function redo() {
-              if (pointer === actions.length ) return;
-              pointer++;
-              const state = actions[pointer-1];
-              canvas.width = state.width;
-              canvas.height = state.height;
-              ctx.putImageData(state.data, 0, 0);
-            }
-
-            function cancel(){
-              ctx.drawImage(tempCanvas,0,0);
-              tempCtx.clearRect(0, 0, tempCanvas.width, tempCanvas.height);
-              selectMenuDraw();
-              resetFilters();
-              clicks = null;
-			        clicks = [];
-            }
-
-            function create(){
-              ctx.clearRect(0, 0, canvas.width, canvas.height);
-              ctx.drawImage(tempCanvas,0,0);
-              addAction();
-              selectMenuDraw();
-              resetFilters();
             }
 
             function resetFilters(){
@@ -1280,11 +1653,26 @@
               const contrast = document.getElementById("contrast").value;
               const adjustedBrightness = brightness * Math.pow(2, exposure);
               const adjustedContrast = parseInt(contrast) + (exposure * 10);
-              tempCtx.clearRect(0, 0, canvas.width, canvas.height);
-              tempcanvas.width=cWidth;
-              tempcanvas.height=cHeight;
+              tempCtx.clearRect(0,0,cWidth,cHeight);
               tempCtx.filter = `hue-rotate(${hue}deg) saturate(${saturation}%) brightness(${adjustedBrightness}%) contrast(${adjustedContrast}%) blur(${blur}px) grayscale(${grayscale}%) invert(${invert}%)`;
-              tempCtx.drawImage(canvas, 0, 0);
+              tempCtx.drawImage(curserCanvas,0,0);
+
+              ctx.clearRect(0, 0, canvas.width, canvas.height);
+              layers.forEach((layer, index) => {
+                const layerCtx = layer.getContext('2d');
+                const layerCheckbox = document.querySelector(`#layer-${index}-checkbox`);
+                if (layerCheckbox.checked) {
+
+                  if(index==currentLayerIndex){
+                    layerCtx.clearRect(0, 0, canvas.width, canvas.height);
+                    layerCtx.drawImage(tempCanvas,0,0);
+                  }
+                  
+                }
+              });
+              const layerPreviewImage = document.querySelector(`#layer-${currentLayerIndex}-preview`);
+                layerPreviewImage.src = layers[currentLayerIndex].toDataURL();
+                drawCurrentCanvas();
             }
 
             function downloadCanvas() {
@@ -1294,16 +1682,18 @@
               link.click();
             }
             
-            //algorithm from https://ben.akrin.com/an-html5-canvas-flood-fill-that-doesnt-kill-the-browser/  #4 
+          //algorithm from https://ben.akrin.com/an-html5-canvas-flood-fill-that-doesnt-kill-the-browser/  #4 
             function flood_fill( original_x, original_y, color ) {
-                original_color = ctx.getImageData( original_x, original_y, 1, 1 ).data ;
+                const currentLayer = layers[currentLayerIndex];
+                const currentLayerCtx = currentLayer.getContext('2d');
+                original_color = currentLayerCtx.getImageData( original_x, original_y, 1, 1 ).data ;
                 original_color = { r:original_color[0],
                                    g:original_color[1],
                                    b:original_color[2],
                                    a:original_color[3] } ;
                 x = original_x ;
                 y = original_y ;
-                boundary_pixels = ctx.getImageData( 0, 0, canvas.width, canvas.height ) ;
+                boundary_pixels = currentLayerCtx.getImageData( 0, 0, canvas.width, canvas.height ) ;
                 linear_cords = (y * canvas.width + x) * 4 ;
                 var done = false ;
                 while( y>=0 && !done ) {
@@ -1390,37 +1780,37 @@
                         path.push( {x:x, y:y} ) ;
                     }
                 }
-                draw_quadratic_curve( path, ctx, color, 1, color ) ;
+                draw_quadratic_curve( path, currentLayerCtx, color, 1, color ) ;
             }
-            function draw_quadratic_curve( path, ctx, color, thickness, fill_color ) {
+            function draw_quadratic_curve( path, currentLayerCtx, color, thickness, fill_color ) {
                 color = "rgba( " + color.r + "," + color.g + ","+ color.b + ","+ color.a + ")" ;
                 fill_color = "rgba( " + fill_color.r + "," + fill_color.g + ","+ fill_color.b + ","+ fill_color.a + ")" ;
-                ctx.strokeStyle = color ;
-                ctx.fillStyle = fill_color ;
-                ctx.lineWidth = thickness ;
-                ctx.lineJoin = "round" ;
-                ctx.lineCap = "round" ;
+                currentLayerCtx.strokeStyle = color ;
+                currentLayerCtx.fillStyle = fill_color ;
+                currentLayerCtx.lineWidth = thickness ;
+                currentLayerCtx.lineJoin = "round" ;
+                currentLayerCtx.lineCap = "round" ;
                 if( path.length>0 ) { // just in case
                     if( path.length<3 ) {
                         var b = path[0] ;
-                        ctx.beginPath() ;
-                        ctx.arc( b.x, b.y, ctx.lineWidth / 2, 0, Math.PI * 2, !0 ) ;
-                        ctx.fill() ;
-                        ctx.closePath();
+                        currentLayerCtx.beginPath() ;
+                        currentLayerCtx.arc( b.x, b.y, currentLayerCtx.lineWidth / 2, 0, Math.PI * 2, !0 ) ;
+                        currentLayerCtx.fill() ;
+                        currentLayerCtx.closePath();
                     } else {
-                        ctx.beginPath() ;
-                        ctx.moveTo( path[0].x, path[0].y ) ;
+                      currentLayerCtx.beginPath() ;
+                      currentLayerCtx.moveTo( path[0].x, path[0].y ) ;
                         for( var i = 1; i<path.length-2; i++ ) {
                             var c = (path[i].x + path[i + 1].x) / 2 ;
                             var d = (path[i].y + path[i + 1].y) / 2 ;
-                            ctx.quadraticCurveTo( path[i].x, path[i].y, c, d ) ;
+                            currentLayerCtx.quadraticCurveTo( path[i].x, path[i].y, c, d ) ;
                         }
-                        ctx.quadraticCurveTo( path[i].x, path[i].y, path[i + 1].x, path[i + 1].y ) ;
-                        ctx.stroke() ;
+                        currentLayerCtx.quadraticCurveTo( path[i].x, path[i].y, path[i + 1].x, path[i + 1].y ) ;
+                        currentLayerCtx.stroke() ;
                     }
                 }
                 if( fill_color!==false ) {
-                    ctx.fill() ;
+                  currentLayerCtx.fill() ;
                 }
             }
             function color_to_rgba( color ) {
@@ -1454,6 +1844,27 @@
                             a:0} ;
                 }
             }
-        </script>
+          //dark-mode
+          function changecolor(){
+            document.body.classList.toggle("dark-mode");
+            var element = document.getElementById("myDIV1");
+            element.classList.toggle("background-1-dark");
+            element=document.getElementById("myDIV2");
+            element.classList.toggle("text-other-dark")
+            const toggle = document.getElementById('toggle-mode');
+
+
+            localStorage.setItem('mode', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+
+          }
+          window.onload = function() {
+              const toggle = document.getElementById('toggle-mode');
+              const mode = localStorage.getItem('mode');
+              toggle.checked = mode === 'dark';
+              if (mode === 'dark') {
+                  changecolor();
+              }
+          };
+          </script>
     </body>
 </html>
