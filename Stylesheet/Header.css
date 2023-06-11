@@ -1,0 +1,102 @@
+.ball{
+    position: absolute;
+    height: 400px;
+    z-index: 2;
+    float: left;
+    filter: drop-shadow(2px 2px 2px rgba(78, 78, 82, 0.24));
+
+}
+
+.shell{
+    position: absolute;
+    height: 650px;
+    z-index: 1;
+    float: left;
+    right: 30px;
+    filter: drop-shadow(2px 2px 2px rgb(96, 51, 62));
+
+}
+
+.wave{
+    position: relative;
+    height: 400px;
+    z-index: 2;
+    float: right;
+    filter: drop-shadow(2px 2px 2px rgba(78, 78, 82, 0.24));
+
+}
+
+.title .flowers img{
+    position: relative;
+    height: 300px;
+    float: right;
+    padding: 40px;
+    left: 500px;
+    z-index: 6 ;
+    filter: drop-shadow(2px 2px 2px rgba(78, 78, 82, 0.44));
+
+    animation: rotate 1s linear infinite;
+    animation-play-state: paused;
+    animation-delay: calc(var(--scroll) * -1s);
+
+    animation-iteration-count: 1;
+    animation-fill-mode: both;
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+body {
+
+}
+
+.title{
+
+    background-image:  linear-gradient( rgba(255, 255, 255, 0.69), rgba(21, 19, 19, 0)), url("/Deco/wavyBG.png");
+    height: 270px;
+
+}
+
+.brand-image{
+    position: absolute;
+    height: 250px;
+    z-index: 2;
+    padding: 30px;
+   left: 10px;
+    color: #cc126c;
+    filter:
+            drop-shadow(2px 2px 2px rgb(192, 28, 68))
+
+
+    /*filter: drop-shadow(1px 1px 0px white)
+    drop-shadow(-1px 1px 0 white)
+    drop-shadow(1px -1px 0 white)
+    drop-shadow(-1px -1px 0 white);*/
+
+}
+
+
+
+/*header*/
+.sticky{
+    position: fixed;
+    width: 100%;
+    background: linear-gradient(to bottom, #8b65ad, rgba(255, 0, 0, 0));
+    height: 110px;
+}
+
+.sticky .brand{
+    filter: drop-shadow(2px 2px 2px #ffffff);
+    height: 100px;
+    width: 289px;
+    margin: 0 auto;
+    display: block;
+    position: absolute;
+    left: calc((100% - 289px) / 2);
+    z-index: 100000;
+
+
+}

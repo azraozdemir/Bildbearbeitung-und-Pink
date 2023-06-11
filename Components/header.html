@@ -6,10 +6,29 @@
     <!-- links -->
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/Stylesheet/Header.css">
 
+    <!-- scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rellax/1.12.1/rellax.min.js" integrity="sha512-f5HTYZYTDZelxS7LEQYv8ppMHTZ6JJWglzeQmr0CVTS70vJgaJiIO15ALqI7bhsracojbXkezUIL+35UXwwGrQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js" integrity="sha512-/6TZODGjYL7M8qb7P6SflJB/nTGE79ed1RfJk3dfm/Ib6JwCT4+tOfrrseEHhxkIhwG8jCl+io6eaiWLS/UX1w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
-<div class="sticky">
+
+<div class="title">
+    <img class="ball" src="/Deco/pinkball.png" alt="pinkBall">
+    <img class="wave" src="/Deco/wave.png" alt="wave">
+    <img class="shell rellax" data-rellax-speed ="3" src="/Deco/bluediamond.png" alt="blue">
+    <a href="/index.html"><img class="brand-image" src="/pics/logo_schrift.png" alt=""></a>
+    <div class="flowers " id="flower-spin"  >
+        <img src="/Deco/flora.png" alt="flower">
+    </div>
+
+</div>
+
+
+
+
+<!-- <div class="sticky">
 
     <img class="brand" src="/pics/logo_schrift.png" alt="logo-text">
 
@@ -33,5 +52,22 @@
     </ul>
 
 </div>
+-->
 </body>
+<script>
+
+    var rellax = new Rellax('.rellax');
+
+    window.addEventListener(
+        "scroll",
+        () => {
+            document.body.style.setProperty(
+                "--scroll",
+                window.pageYOffset / (document.body.offsetHeight - window.innerHeight)
+            );
+        },
+        false
+    );
+</script>
+
 </html>
