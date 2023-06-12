@@ -1,29 +1,45 @@
-1. Mitglieder
+
+![This is a alt text.](/pics/uwuheader.png)
+# 1. Mitglieder
 Caroline Hornhuber, Azra Nohut, Lejla Music
 
+# 2. Auftrag
+wir haben im sinne des faches wmc von den professoren Schrammel, Kern und auch Klewein den auftrag erhalt eine webseite zu erstellen zu einem technischen thema.
+# 3. Thema
+Wir wollen eine Website erstellen die einen Schwerpunkt auf Bildbearbeitung, Grafikdesign und Pink Hat.
+Wir wollen erklährung was bildbearbeitung ist, mit was an das machen kann und wir wollen wir oben erwaent die Farbe Pink praeziser vorstellen.
+Auch haben wir geplant unsere eigene Bildbearbeitungssoftware zu entwickeln.
+## 3.1 Warum ist das Thema interessant? 
+Fotografie vor allem Bildbearbeitung interessiert uns. Die Farbe Pink finden wir attraktiv und anziehend, deswegen wollen wir auch die Farbe detaliert bearbeiten.  
 
-2. Thema
-Wir wollen eine Website erstellen die einen Schwerpunkt auf Bildbearbeitung, verschiedene Farbtoene der Farbe Pink hat. 
-Als Bildbearbeitung meinen wir Photoshop. Zum Beispiel wir wollen Bilder die verschwommen sind, schaerfer stellen. 
-Hier wird die Grafiksoftware angesprochen. Bei Computergrafiken untescheidet man zwischen Vektor- und Rastergrafiken. 
-Jedoch wird beide Bildarten auf unsere verfuegbar sein. 
-Wir wollen wir oben erwaent die Farbe Pink praeziser vorstellen.
+# 4. Aufbau
+Wir wollen eine haupseite, eine seite über die farbe pink, eine über grafikdesign und eine über photoshop erstellen plus unser eigenes programm was unser dynamischer teil wird.
 
-2. 1 Dynamischer Teil
 Um die Programmierung unserer Website fortzusetzen, planen wir, sie in verschiedene Teile zu unterteilen und diese entsprechend zu erfüllen. 
-Hier sind einige Vorschläge:
 
-Farbanpassung und Farbkorrektur
-Helligkeit, Kontrast und Belichtung anpassen
-Schärfe und Unschärfeeffekte hinzufügen
-Filter und Effekte anwenden
-Textelemente hinzufügen 
+# 4.1 genauer aufbau bildbearbeitungprogramm
+####Tabs: Drawing, Filters, Forms, Text, Image, AI(beta)
+####Layers: man hat layers  und kann diese bearbeiten
+####undo/redo: wir haben ein undo/redo sytsme eingebaut mit einem stack das den fortschritt der layers speichert
 
-Natürlich setzen wir unsere Website kontinuierlich fort und haben viele neue Funktionen hinzugefügt, darunter auch Layers. Nun ist es möglich, mehrere Bilder gleichzeitig zu zeichnen und zu speichern. Darüber hinaus finden Sie auf unserer Website detaillierte Beschreibungen, die Ihnen helfen, alle Funktionen optimal zu nutzen. Insbesondere im JavaScript-Bereich haben wir uns intensiv mit der Farbgebung der Bilder beschäftigt.
+drawing: ja man kann halt zeichen mit farben verschiden grose pinsel und verschidene deckkraft
 
-3. Warum ist das Thema interessant? 
-Fotografie vor allem Bildbearbeitung interessiert uns. Die Farbe Pink finden wir attraktiv und anziehend, deswegen wollen wir auch die Farbe detaliert bearbeiten. 
+filters: Farbanpassung und Farbkorrektur, Helligkeit, Kontrast und Belichtung anpassen, Schärfe und Unschärfeeffekte hinzufügen
 
-4. Ist es Dynamisch oder Statisch?
-Unsere Website wird Statisch sein und etwas Dynamisch
+forms: man kannfarbe auswählen und ob nur umrandung, nur füllung oder beides und dann verschidene formen wie kreise, dreiecke, polygons oder herzen zeichen
 
+text: Textelemente hinzufügen mit verschidenne grösen/farben/schriftarten
+
+image: bilder up/downloaden
+
+ai: neues feature image generation mit artificial inteligence, wir haben mit fortrainierten modellen gearbeitet, ist aber noch in der beta
+\
+\
+Natürlich setzen wir unsere Website kontinuierlich fort und haben viele neue Funktionen hinzugefügt,  Darüber hinaus finden Sie auf unserer Website detaillierte Beschreibungen, die Ihnen helfen, alle Funktionen optimal zu nutzen. Insbesondere im JavaScript-Bereich haben wir uns intensiv mit der dokumentation  beschäftigt.
+
+*Es kann derzeit natürlich noch zu bugs kommen*
+
+\
+\
+![This is a alt text.](/pics/uwuheader.png)
+danke fürs lesen und viel spass beim ausprobieren ~Lina, Azra, Lejla
