@@ -18,9 +18,9 @@ Wir wollen eine haupseite, eine seite über die farbe pink, eine über grafikdes
 Um die Programmierung unserer Website fortzusetzen, planen wir, sie in verschiedene Teile zu unterteilen und diese entsprechend zu erfüllen. 
 
 # 4.1 genauer aufbau bildbearbeitungprogramm
-####Tabs: Drawing, Filters, Forms, Text, Image, AI(beta)
-####Layers: man hat layers  und kann diese bearbeiten
-####undo/redo: wir haben ein undo/redo sytsme eingebaut mit einem stack das den fortschritt der layers speichert
+#### Tabs: Drawing, Filters, Forms, Text, Image, AI(beta)
+#### Layers: man hat layers  und kann diese bearbeiten
+#### undo/redo: wir haben ein undo/redo sytsme eingebaut mit einem stack das den fortschritt der layers speichert
 
 drawing: ja man kann halt zeichen mit farben verschiden grose pinsel und verschidene deckkraft
 
